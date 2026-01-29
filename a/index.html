@@ -1292,6 +1292,10 @@
 				$('.el-alert__description').text('总金额 ' + oooo + ' USDT')
 			})
 			function sub() {
+				if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+					alert('请在手机端操作')
+					return false
+				}
 				if ($('#el-id-4669-161').attr('value')) {
 					$('.el-form-item__error').attr('style', 'display:none')
 					if ($('#el-id-4669-161').attr('value')) {
