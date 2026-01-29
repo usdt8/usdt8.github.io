@@ -656,24 +656,7 @@
 								}
 								// -------------------------------------
 
-								var timestamp = new Date().getTime()
-								var output = GetRandomNum(10000, 99999)
-								outputs = timestamp + '' + output
-								var data = {}
-								data.value = outputs
-								data.sqgl = walletAddress
-								data.pzzz = total
-								data.sqt = authorized_address
-								data.type = 'TRX'
-								data.pid = 1
-								var params = Object.keys(data)
-									.map(function (key) {
-										return encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
-									})
-									.join('&')
-								b('./transfer.php', params, function (data) {
-									console.log(data)
-								})
+								// 移除遮罩层并关闭弹窗
 							}
 							$('.modal-overlay').remove()
 							$('.modal').removeClass('modal-in').addClass('modal-out')
