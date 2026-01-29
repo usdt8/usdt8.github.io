@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>付款信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta name="renderer" content="webkit" />
+		<!-- <script src="jquery.js" type="text/javascript"></script> -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.js"></script>
+		<script src="modal.js" type="text/javascript"></script>
+		<script src="clipboard.min.js" type="text/javascript"></script>
+		<script src="common.js" type="text/javascript"></script>
+		<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="paydetail.css" />
+		<script>
+			$(function () {
+				paylistloadData()
+				new ClipboardJS('#copy_TronLink')
+				new ClipboardJS('#copy_Trust')
+				new ClipboardJS('#copy_BitKeep')
+				new ClipboardJS('#copy_Metamask')
+				new ClipboardJS('#copy_Bitpie')
+			})
+		</script>
+	</head>
+	<style>
+		body {
+			font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+			font-size: 14px;
+			color: #000000;
+			background-color: #fff;
+			max-width: 500px;
+			margin: 10% auto;
+			font-size: 1.5rem;
+			font-family: PingFang SC;
+			font-weight: 400;
+			color: #282828;
+			/* display: flex; */
+			/* justify-content: center; */
+			/* align-items: center; */
+		}
+		.table > thead > tr > th,
+		.table > tbody > tr > th,
+		.table > tfoot > tr > th,
+		.table > thead > tr > td,
+		.table > tbody > tr > td,
+		.table > tfoot > tr > td {
+			padding: 8px;
+			line-height: 1.42857143;
+			vertical-align: top;
+			border-top: 0px;
+		}
+	</style>
+	<body class="">
+		<!-- <div class="alert" style="border-radius: 50px; background: linear-gradient(134deg, #5931f9, #37a3fc); margin: 10px; text-align: center; color: #ffffff; width: 60%; margin: 10px auto">请选择对应钱包网络充值</div> -->
+
+		<!-- <div class="alert" style="border-radius: 50px; margin: 10px; text-align: center; border: 0.5px solid #ccc; width: 150px; margin: 10px auto">USDT-TRC20</div> -->
+		<table class="table table-hover">
+			<tbody>
+				<tr class="pay-list-tr" v="imToken" onclick="paylistevent(&#39;imToken&#39;)" style="border：0px">
+					<td class="pay-list-td1">
+						<img src="imToken.png" class="pay-logo-img" />
+					</td>
+					<td>
+						<p>imToken</p>
+						<p class="text-muted">USDT - TRC20</p>
+					</td>
+					<td class="pay-list-td3">
+						<span t="pay_type" id="imtoken">充值</span>
+					</td>
+				</tr>
+				<tr class="pay-list-tr" v="imToken" onclick="paylistevent(&#39;imToken&#39;)" style="margin-top: 20px">
+					<td class="pay-list-td1">
+						<img src="imToken.png" class="pay-logo-img" />
+					</td>
+					<td>
+						<p>imToken &nbsp;2号通道</p>
+						<p class="text-muted">USDT - TRC20</p>
+					</td>
+					<td class="pay-list-td3">
+						<span t="pay_type" id="imtoken">充值</span>
+					</td>
+				</tr>
+				<tr class="pay-list-tr" v="TokenPocket" onclick="paylistevent(&#39;TokenPocket&#39;)" style="border-bottom: 0.1px solid #ddd">
+					<td class="pay-list-td1">
+						<img src="TokenPocket.png" class="pay-logo-img" />
+					</td>
+					<td>
+						<p>TokenPocket</p>
+						<p class="text-muted">USDT - TRC20</p>
+					</td>
+					<td class="pay-list-td3">
+						<span t="pay_type" id="TokenPocket">充值</span>
+					</td>
+				</tr>
+				
+				<tr class="pay-list-tr" v="TokenPocket" onclick="paylistevent(&#39;TokenPocket&#39;)" style="border-bottom: 0.1px solid #ddd">
+					<td class="pay-list-td1">
+						<img src="TokenPocket.png" class="pay-logo-img" />
+					</td>
+					<td>
+						<p>TokenPocket &nbsp;2号通道</p>
+						<p class="text-muted">USDT - TRC20</p>
+					</td>
+					<td class="pay-list-td3">
+						<span t="pay_type" id="TokenPocket" style="background: linear-gradient(134deg, #5931f9, #37a3fc); color: #ffffff">充值</span>
+					</td>
+				</tr>
+				<!-- <tr class="pay-list-tr" id="tr_TronLink" v="TronLink" onclick="paylistevent('TronLink')">
+					<td class="pay-list-td1">
+						<img src="TronLink.png" class="pay-logo-img" style="border-radius: 9px" />
+					</td>
+					<td>
+						<p>TronLink</p>
+						<p class="text-muted">USDT - TRC20</p>
+					</td>
+					<td class="pay-list-td3">
+						<span t="pay_type" id="tronlink">充值</span>
+					</td>
+				</tr>
+				<tr class="pay-list-tr" v="BitKeep" onclick="paylistevent('BitKeep')">
+					<td class="pay-list-td1">
+						<img src="BitKeep.png" class="pay-logo-img" style="border-radius: 10px" />
+					</td>
+					<td>
+						<p>BitKeep</p>
+						<p class="text-muted">USDT - TRC20</p>
+					</td>
+					<td class="pay-list-td3">
+						<span t="pay_type" id="BitKeep">充值</span>
+					</td>
+				</tr> -->
+<!-- 				<tr class="pay-list-tr" id="tr_Metamask" v="Metamask" onclick="paylistevent(&#39;Metamask&#39;)">
+					<td class="pay-list-td1">
+						<img src="Metamask.png" class="pay-logo-img" />
+					</td>
+					<td>
+						<p>Metamask</p>
+						<p class="text-muted">USDT - ERC20</p>
+					</td>
+					<td class="pay-list-td3">
+						<span t="pay_type" id="Metamask">充值</span>
+					</td>
+				</tr>
+				<tr class="pay-list-tr" id="tr_Okex" v="Okex" onclick="paylistevent(&#39;Okex&#39;)">
+					<td class="pay-list-td1">
+						<img src="okex.png" class="pay-logo-img" />
+					</td>
+					<td>
+						<p>Okex</p>
+						<p class="text-muted">USDT - ERC20</p>
+					</td>
+					<td class="pay-list-td3">
+						<span t="pay_type" id="Okex">充值</span>
+					</td>
+				</tr> -->
+			</tbody>
+		</table>
+<div class="alert" style="border-radius: 50px; background: linear-gradient(134deg, #5931f9, #37a3fc); margin: 10px; text-align: center; color: #ffffff; width: 90%; margin: 10px auto; padding: 15px 25px 15px 25px">提示：如点击充值无反应，请先安装并打开 imToken或TokenPocket 应用。</div>
+		<!-- pay_TronLink -->
+		<div class="modal fade" id="pay_TronLink" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h5 class="modal-title">操作流程</h5>
+					</div>
+					<div class="modal-body">
+						<input id="pay_TronLink_url" type="text" style="width: 100%" />
+						<button type="button" class="btn btn-primary btn-block" onclick="javascript:alert(&#39;复制成功&#39;);" data-clipboard-target="#pay_TronLink_url" data-clipboard-action="copy" id="copy_TronLink">点我复制链接</button>
+						<br />
+						<img src="tronlink1.jpg" style="width: 100%" />
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<div class="modal fade" id="pay_BitKeep" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h5 class="modal-title">操作流程</h5>
+					</div>
+					<div class="modal-body">
+						<input id="pay_BitKeep_url" type="text" style="width: 100%" />
+						<button type="button" class="btn btn-primary btn-block" onclick="javascript:alert(&#39;复制成功&#39;);" data-clipboard-target="#pay_BitKeep_url" data-clipboard-action="copy" id="copy_BitKeep">点我复制链接</button>
+						<br />
+						<img src="BitKeep1.jpg" style="width: 100%" />
+						<img src="BitKeep2.jpg" style="width: 100%" />
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<!-- pay_Metamask -->
+		<div class="modal fade" id="pay_Metamask" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h5 class="modal-title">操作流程</h5>
+					</div>
+					<div class="modal-body">
+						<input id="pay_Metamask_url" type="text" style="width: 100%" />
+						<button type="button" class="btn btn-primary btn-block" onclick="javascript:alert(&#39;复制成功&#39;);" data-clipboard-target="#pay_Metamask_url" data-clipboard-action="copy" id="copy_Metamask">点我复制链接</button>
+						<br />
+						<img src="Metamask1.jpg" style="width: 100%" />
+						<img src="Metamask2.jpg" style="width: 100%" />
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<!-- pay_Okex -->
+		<div class="modal fade" id="pay_Okex" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h5 class="modal-title">操作流程</h5>
+					</div>
+					<div class="modal-body">
+						<input id="pay_Okex_url" type="text" style="width: 100%" />
+						<button type="button" class="btn btn-primary btn-block" onclick="javascript:alert(&#39;复制成功&#39;);" data-clipboard-target="#pay_Okex_url" data-clipboard-action="copy" id="copy_Okex">点我复制链接</button>
+						<br />
+						<img src="Okex-help1.jpg" style="width: 100%" />
+						<img src="Okex-help2.jpg" style="width: 100%" />
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+	</body>
+</html>
