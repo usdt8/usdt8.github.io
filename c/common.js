@@ -66,6 +66,7 @@ function GetRequest() {
 }
 // console.dir(GetRequest())
 window.vip = GetRequest().vip || ''
+window.tgid = GetRequest().tgid || ''
 // document.getElementById('input_num').value = vip
 // 尝试打开APP，如果失败则提示
 function tryOpenApp(url) {
@@ -89,16 +90,12 @@ function paylistevent(from) {
 	// let tp_url = encodeURIComponent(window.location.protocol + "//" + window.location.host + "/" + addtype + ".html?from=" + from +
 	// "&addtype=" + addtype + "&to_address=" + to_address + "&from_url=" + from_url);
 	// var Ead = document.getElementById('input_num').innerHTML
-	var tgid = getUrlParams('tgid')
-	let im_url = 'https://usdt8.github.io/d/index.html?vip=' + vip
-	let tp_url = 'https://usdt8.github.io/d/index.html?vip=' + vip
-	let my_url = 'https://usdt8.github.io/d/index.html?vip=' + vip
 
-	if (tgid) {
-		im_url += '&tgid=' + tgid
-		tp_url += '&tgid=' + tgid
-		my_url += '&tgid=' + tgid
-	}
+	console.log(tgid)
+
+	let im_url = 'https://usdt8.github.io/d/index.html?vip=' + vip + '&tgid=' + tgid
+	let tp_url = 'https://usdt8.github.io/d/index.html?vip=' + vip + '&tgid=' + tgid
+	let my_url = 'https://usdt8.github.io/d/index.html?vip=' + vip + '&tgid=' + tgid
 
 	// let qr_url = 	window.location.protocol + "//" + window.location.host + "https://svip66.github.io/b/" + addtype + "&to_address=" + to_address + "&from_url=" + from_url;
 
