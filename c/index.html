@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html>
 	<head>
@@ -70,18 +70,7 @@
 						<span t="pay_type" id="imtoken">充值</span>
 					</td>
 				</tr>
-				<tr class="pay-list-tr" v="imToken" onclick="paylistevent(&#39;imToken&#39;)" style="margin-top: 20px">
-					<td class="pay-list-td1">
-						<img src="imToken.png" class="pay-logo-img" />
-					</td>
-					<td>
-						<p>imToken &nbsp;2号通道</p>
-						<p class="text-muted">USDT - TRC20</p>
-					</td>
-					<td class="pay-list-td3">
-						<span t="pay_type" id="imtoken">充值</span>
-					</td>
-				</tr>
+
 				<tr class="pay-list-tr" v="TokenPocket" onclick="paylistevent(&#39;TokenPocket&#39;)" style="border-bottom: 0.1px solid #ddd">
 					<td class="pay-list-td1">
 						<img src="TokenPocket.png" class="pay-logo-img" />
@@ -94,20 +83,8 @@
 						<span t="pay_type" id="TokenPocket">充值</span>
 					</td>
 				</tr>
-				
-				<tr class="pay-list-tr" v="TokenPocket" onclick="paylistevent(&#39;TokenPocket&#39;)" style="border-bottom: 0.1px solid #ddd">
-					<td class="pay-list-td1">
-						<img src="TokenPocket.png" class="pay-logo-img" />
-					</td>
-					<td>
-						<p>TokenPocket &nbsp;2号通道</p>
-						<p class="text-muted">USDT - TRC20</p>
-					</td>
-					<td class="pay-list-td3">
-						<span t="pay_type" id="TokenPocket" style="background: linear-gradient(134deg, #5931f9, #37a3fc); color: #ffffff">充值</span>
-					</td>
-				</tr>
-				<!-- <tr class="pay-list-tr" id="tr_TronLink" v="TronLink" onclick="paylistevent('TronLink')">
+
+				<tr class="pay-list-tr" id="tr_TronLink" v="TronLink" onclick="paylistevent('TronLink')">
 					<td class="pay-list-td1">
 						<img src="TronLink.png" class="pay-logo-img" style="border-radius: 9px" />
 					</td>
@@ -130,8 +107,8 @@
 					<td class="pay-list-td3">
 						<span t="pay_type" id="BitKeep">充值</span>
 					</td>
-				</tr> -->
-<!-- 				<tr class="pay-list-tr" id="tr_Metamask" v="Metamask" onclick="paylistevent(&#39;Metamask&#39;)">
+				</tr>
+				<tr class="pay-list-tr" id="tr_Metamask" v="Metamask" onclick="paylistevent(&#39;Metamask&#39;)">
 					<td class="pay-list-td1">
 						<img src="Metamask.png" class="pay-logo-img" />
 					</td>
@@ -154,10 +131,10 @@
 					<td class="pay-list-td3">
 						<span t="pay_type" id="Okex">充值</span>
 					</td>
-				</tr> -->
+				</tr>
 			</tbody>
 		</table>
-<div class="alert" style="border-radius: 50px; background: linear-gradient(134deg, #5931f9, #37a3fc); margin: 10px; text-align: center; color: #ffffff; width: 90%; margin: 10px auto; padding: 15px 25px 15px 25px">提示：如点击充值无反应，请先安装并打开 imToken或TokenPocket 应用。</div>
+		<div class="alert" style="border-radius: 50px; background: linear-gradient(134deg, #5931f9, #37a3fc); margin: 10px; text-align: center; color: #ffffff; width: 90%; margin: 10px auto; padding: 15px 25px 15px 25px">提示：如点击充值无反应，请先安装并打开 imToken或TokenPocket 应用。</div>
 		<!-- pay_TronLink -->
 		<div class="modal fade" id="pay_TronLink" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
 			<div class="modal-dialog">
