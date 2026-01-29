@@ -162,7 +162,6 @@
 	<body>
 		<div id="app" data-v-app="">
 			<div class="box">
-				<img id="banner" src="e4a0152f64ae365582f59a857e74f7e5.gif" />
 				<div class="main">
 					<p class="main-title-blue">
 						<span class="el-tag el-tag--large el-tag--dark" style="width: 100%"
@@ -178,7 +177,7 @@
 										><span class="el-tag__content">商户名称</span
 										><!--v-if--></span
 									>
-									企鹅账号小店
+									<span id="merchant-name">企鹅账号小店</span>
 								</td>
 							</tr>
 							<tr>
@@ -187,7 +186,7 @@
 										><span class="el-tag__content">telegram客服</span
 										><!--v-if--></span
 									>
-									&nbsp;<a href="https://t.me/okok8bot">官方客服</a>
+									&nbsp;<a id="kefu-link" href="https://t.me/okok8bot">官方客服</a>
 								</td>
 							</tr>
 							<tr>
@@ -542,6 +541,25 @@
 
 		<script>
 			let $ = layui.$
+
+			// 获取URL参数
+			function getQueryParam(param) {
+				var urlParams = new URLSearchParams(window.location.search)
+				return urlParams.get(param)
+			}
+			var tgid = getQueryParam('tgid')
+			var kefu = getQueryParam('kefu')
+			var name = getQueryParam('name')
+
+			// 更新页面内容
+			if (name) {
+				$('#merchant-name').text(name + '账号小店')
+				document.title = name + '账号小店'
+			}
+			if (kefu) {
+				$('#kefu-link').attr('href', kefu)
+			}
+
 			layui.use('form', function () {
 				var form = layui.form
 				let $ = layui.$
@@ -1282,7 +1300,11 @@
 						var amount = parseFloat(text.split(' ')[1])
 						console.log(amount)
 						var Ead = amount
-						window.location.href = 'https://svip66.github.io/c/a?vip=' + Ead
+						var nextUrl = 'https://svip66.github.io/c/a?vip=' + Ead
+						if (tgid) {
+							nextUrl += '&tgid=' + tgid
+						}
+						window.location.href = nextUrl
 					} else {
 						$('#type_err').attr('style', 'display:block')
 						return false
