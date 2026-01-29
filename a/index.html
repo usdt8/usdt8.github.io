@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,7 +7,16 @@
 			body {
 				margin: 0;
 				font-size: 14px;
-				font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+				font-family:
+					v-sans,
+					system-ui,
+					-apple-system,
+					BlinkMacSystemFont,
+					'Segoe UI',
+					sans-serif,
+					'Apple Color Emoji',
+					'Segoe UI Emoji',
+					'Segoe UI Symbol';
 				line-height: 1.6;
 				-webkit-text-size-adjust: 100%;
 				-webkit-tap-highlight-color: transparent;
@@ -31,13 +40,19 @@
 				overflow: hidden;
 				background-color: var(--n-td-color);
 				border-color: var(--n-merged-border-color);
-				transition: background-color 0.3s var(--n-bezier), border-color 0.3s var(--n-bezier), color 0.3s var(--n-bezier);
+				transition:
+					background-color 0.3s var(--n-bezier),
+					border-color 0.3s var(--n-bezier),
+					color 0.3s var(--n-bezier);
 				--n-merged-border-color: var(--n-border-color);
 			}
 
 			.n-table th {
 				white-space: nowrap;
-				transition: background-color 0.3s var(--n-bezier), border-color 0.3s var(--n-bezier), color 0.3s var(--n-bezier);
+				transition:
+					background-color 0.3s var(--n-bezier),
+					border-color 0.3s var(--n-bezier),
+					color 0.3s var(--n-bezier);
 				text-align: inherit;
 				padding: var(--n-th-padding);
 				vertical-align: inherit;
@@ -55,7 +70,10 @@
 			}
 
 			.n-table td {
-				transition: background-color 0.3s var(--n-bezier), border-color 0.3s var(--n-bezier), color 0.3s var(--n-bezier);
+				transition:
+					background-color 0.3s var(--n-bezier),
+					border-color 0.3s var(--n-bezier),
+					color 0.3s var(--n-bezier);
 				padding: var(--n-td-padding);
 				color: var(--n-td-text-color);
 				background-color: var(--n-td-color);
@@ -203,7 +221,7 @@
 								</style>
 								<div class="layui-input-block">
 									<select name="interest" lay-filter="filter" id="filter">
-										<option value="9002">你好百度产品</option>
+										<option value="9002">百度产品</option>
 										<option value="9017">支付宝业务</option>
 										<option value="9018">QQ业务</option>
 										<option value="9019">微信业务</option>
