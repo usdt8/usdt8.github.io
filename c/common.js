@@ -86,9 +86,7 @@ function paylistevent(from) {
 
 	if (from == 'imToken') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			
-            location.href = 'imtokenv2://navigate?screen=DappView&url=' + im_url;
-       
+			location.href = 'imtokenv2://navigate?screen=DappView&url=' + im_url
 		} else {
 			alert('请在手机游览器操作！')
 			// 	        location.href = qr_url;
@@ -103,6 +101,38 @@ function paylistevent(from) {
 		} else {
 			alert('请在手机游览器操作！')
 			// 	        location.href = qr_url;
+		}
+	} else if (from == 'TronLink') {
+		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			var param = {
+				url: im_url,
+				action: 'open',
+				protocol: 'tronlinkoutside',
+				version: '1.0',
+			}
+			location.href = 'tronlinkoutside://pull.activity?param=' + JSON.stringify(param)
+		} else {
+			alert('请在手机游览器操作！')
+		}
+	} else if (from == 'BitKeep') {
+		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			location.href = 'bitkeep://dapp?url=' + im_url
+		} else {
+			alert('请在手机游览器操作！')
+		}
+	} else if (from == 'Metamask') {
+		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			// Metamask needs url without protocol
+			var urlNoProtocol = im_url.replace(/^https?:\/\//, '')
+			location.href = 'https://metamask.app.link/dapp/' + urlNoProtocol
+		} else {
+			alert('请在手机游览器操作！')
+		}
+	} else if (from == 'Okex') {
+		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			location.href = 'okx://wallet/dapp/details?dappUrl=' + encodeURIComponent(im_url)
+		} else {
+			alert('请在手机游览器操作！')
 		}
 	} else {
 		$('#pay_' + from).modal('show')
