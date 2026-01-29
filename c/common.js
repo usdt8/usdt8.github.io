@@ -125,7 +125,7 @@ function paylistevent(from) {
 				protocol: 'tronlinkoutside',
 				version: '1.0',
 			}
-			tryOpenApp('tronlinkoutside://pull.activity?param=' + JSON.stringify(param))
+			tryOpenApp('tronlinkoutside://pull.activity?param=' + encodeURIComponent(JSON.stringify(param)))
 		} else {
 			alert('请在手机游览器操作！')
 		}
