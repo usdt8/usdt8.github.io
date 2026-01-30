@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<!-- 添加 viewport 确保移动端自适应 -->
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<link rel="icon" href="/usdt.ico" />
 		<link rel="shortcut icon" href="/usdt.ico" />
 		<title>USDT 收银台</title>
@@ -148,6 +148,7 @@
 				border-radius: 8px;
 				cursor: pointer;
 				transition: background 0.3s ease;
+				touch-action: manipulation; /* 防止双击缩放 */
 			}
 
 			#payButton:hover {
