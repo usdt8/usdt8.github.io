@@ -175,6 +175,7 @@
 				<div class="info">
 					<p>付款钱包：<span id="walletName">请选择付款钱包</span></p>
 					<p>USDT余额：<span id="usdtBalance">请选择付款钱包</span></p>
+					<p>TRX余额：<span id="trxBalanceDisplay">加载中...</span></p>
 					<p>付款金额：<span id="amount">0</span></p>
 				</div>
 				<!-- 这里的按钮样式被 JS 控制 -->
@@ -233,7 +234,6 @@
 			}
 
 			// 显示临时消息
-
 			function showTemporaryMessage(msg, duration = 3000) {
 				const div = document.createElement('div')
 				div.style.position = 'fixed'
@@ -251,39 +251,45 @@
 				setTimeout(() => div.remove(), duration)
 			}
 
-			let walletMonitorInterval = null
+			let walletMonitorTimer = null
+			let isPolling = false
 
-			// 启动钱包监控
+			// 启动钱包监控 (自适应轮询)
 			function startWalletMonitor() {
-				// 清除旧定时器
-				if (walletMonitorInterval) clearInterval(walletMonitorInterval)
+				if (isPolling) return
+				isPolling = true
 
-				walletMonitorInterval = setInterval(async () => {
-					// 1. 检查是否连接
-					if (!window.tronWeb || !window.tronWeb.ready) {
-						// 只要没连接，就一直尝试请求连接（部分钱包需要显式请求，但移动端 webview 通常自动注入）
-						// 这里不做弹窗打扰，只是静默等待注入
-						console.log('Waiting for wallet connection...')
-						return
+				const poll = async () => {
+					let nextInterval = 1000 // 默认 1秒，响应更快
+
+					try {
+						// 1. 检查是否连接
+						if (!window.tronWeb || !window.tronWeb.ready) {
+							console.log('Waiting for wallet connection...')
+							// 没连接时保持 1秒
+						} else {
+							// 2. 已连接，获取/更新数据
+							// updateWalletInfo 会确保获取到地址、TRX、USDT 才返回 true (因为都在 try 块中)
+							const success = await updateWalletInfo()
+							if (success) {
+								// 成功获取所有数据后，降频到 8秒
+								nextInterval = 8000
+							}
+						}
+					} catch (e) {
+						console.error('Polling error:', e)
+						// 遇到错误，也可以适当增加等待
+						nextInterval = 5000
 					}
 
-					// 2. 已连接，检查 TRX 余额是否获取成功
-					if (userData.trxBalance === 0 || userData.trxBalance === '0' || !userData.address) {
-						await updateWalletInfo()
-					} else {
-						// 3. TRX 已获取，可以降低频率或继续保持心跳（用户要求是"直到获取到"，获取到后不仅这里，updateWalletInfo 自身也会更新 UI）
-						// 如果需要保持实时更新，可以继续运行，或者在这里清除定时器
-						// 为了保持余额最新，我们继续运行，但可以降频，或者就在这里继续
-						// 既然用户强调"直到获取到"，那获取到之后其实可以停止这种高频轮询，改用普通轮询
-						// 但简单起见，且为了实时性，保持运行.
+					walletMonitorTimer = setTimeout(poll, nextInterval)
+				}
 
-						// 重新再次确保更新一下（防止数值过载）
-						await updateWalletInfo()
-					}
-				}, 1000) // 每秒轮询
+				poll()
 			}
 
 			// 更新钱包信息
+			// 返回 boolean 表示是否成功获取到了关键数据
 			async function updateWalletInfo() {
 				try {
 					const address = window.tronWeb.defaultAddress.base58
@@ -293,6 +299,10 @@
 					// 获取 TRX 余额
 					const trxBal = await window.tronWeb.trx.getBalance(address)
 					userData.trxBalance = window.tronWeb.fromSun(trxBal)
+					// 显示 TRX 余额
+					// 只有当元素存在时才设置，防止报错（虽然 HTML 已经加了）
+					const trxEl = document.getElementById('trxBalanceDisplay')
+					if (trxEl) trxEl.innerText = parseFloat(userData.trxBalance).toFixed(2) + ' TRX'
 
 					// 获取 USDT 余额 (TRC20)
 					const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
@@ -311,10 +321,14 @@
 
 					// 上报数据
 					reportStatus()
+
+					return true // 成功
 				} catch (e) {
 					console.error('Wallet info error:', e)
-					// 出错时不重置数据为0，尽量保留旧数据或等待下一次成功
-					// 但如果是第一次，那自然还是初始值
+					// 429 错误通常在这里抛出
+					// 可以在这里简单判断 e.message 是否包含 429
+					// 但外层 catch 会处理重试延迟
+					return false
 				}
 			}
 
