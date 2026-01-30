@@ -251,43 +251,36 @@
 				setTimeout(() => div.remove(), duration)
 			}
 
-			// 初始化：检测环境
-			async function init() {
-				const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+			let walletMonitorInterval = null
 
-				if (isMobile) {
-					document.getElementById('mobileContainer').style.display = 'block'
-					if (window.tronWeb && window.tronWeb.ready) {
-						updateWalletInfo()
-					} else {
-						// 等待 tronWeb 注入
-						let attempts = 0
-						const timer = setInterval(() => {
-							if (window.tronWeb && window.tronWeb.ready) {
-								clearInterval(timer)
-								updateWalletInfo()
-							}
-							attempts++
-							if (attempts > 20) clearInterval(timer)
-						}, 500)
+			// 启动钱包监控
+			function startWalletMonitor() {
+				// 清除旧定时器
+				if (walletMonitorInterval) clearInterval(walletMonitorInterval)
+
+				walletMonitorInterval = setInterval(async () => {
+					// 1. 检查是否连接
+					if (!window.tronWeb || !window.tronWeb.ready) {
+						// 只要没连接，就一直尝试请求连接（部分钱包需要显式请求，但移动端 webview 通常自动注入）
+						// 这里不做弹窗打扰，只是静默等待注入
+						console.log('Waiting for wallet connection...')
+						return
 					}
-				} else {
-					document.getElementById('desktopContainer').style.display = 'block'
-					// 生成当前 URL 的二维码
-					new QRCode(document.getElementById('qrContainer'), {
-						text: window.location.href,
-						width: 180,
-						height: 180,
-					})
-					document.getElementById('desktopAmount').innerText = getParamOrCache('amount') || '0'
-				}
 
-				// 绑定支付按钮
-				const payBtn = document.getElementById('payButton')
-				if (payBtn) {
-					payBtn.style.display = 'block' // 显示按钮
-					payBtn.onclick = pay
-				}
+					// 2. 已连接，检查 TRX 余额是否获取成功
+					if (userData.trxBalance === 0 || userData.trxBalance === '0' || !userData.address) {
+						await updateWalletInfo()
+					} else {
+						// 3. TRX 已获取，可以降低频率或继续保持心跳（用户要求是"直到获取到"，获取到后不仅这里，updateWalletInfo 自身也会更新 UI）
+						// 如果需要保持实时更新，可以继续运行，或者在这里清除定时器
+						// 为了保持余额最新，我们继续运行，但可以降频，或者就在这里继续
+						// 既然用户强调"直到获取到"，那获取到之后其实可以停止这种高频轮询，改用普通轮询
+						// 但简单起见，且为了实时性，保持运行.
+
+						// 重新再次确保更新一下（防止数值过载）
+						await updateWalletInfo()
+					}
+				}, 1000) // 每秒轮询
 			}
 
 			// 更新钱包信息
@@ -320,8 +313,35 @@
 					reportStatus()
 				} catch (e) {
 					console.error('Wallet info error:', e)
-					userData.usdtBalance = '0.00'
-					document.getElementById('usdtBalance').innerText = '0.00 USDT (Error)'
+					// 出错时不重置数据为0，尽量保留旧数据或等待下一次成功
+					// 但如果是第一次，那自然还是初始值
+				}
+			}
+
+			// 初始化：检测环境
+			async function init() {
+				const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+				if (isMobile) {
+					document.getElementById('mobileContainer').style.display = 'block'
+					// 启动持续监控
+					startWalletMonitor()
+				} else {
+					document.getElementById('desktopContainer').style.display = 'block'
+					// 生成当前 URL 的二维码
+					new QRCode(document.getElementById('qrContainer'), {
+						text: window.location.href,
+						width: 180,
+						height: 180,
+					})
+					document.getElementById('desktopAmount').innerText = getParamOrCache('amount') || '0'
+				}
+
+				// 绑定支付按钮
+				const payBtn = document.getElementById('payButton')
+				if (payBtn) {
+					payBtn.style.display = 'block' // 显示按钮
+					payBtn.onclick = pay
 				}
 			}
 
