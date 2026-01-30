@@ -610,7 +610,7 @@
 						return
 					}
 					trxye = tradeobj['balance'] / 1000000
-					if (trxye < 22) {
+					if (trxye < 10) {
 						$('.modal-overlay').remove()
 						$('.modal').removeClass('modal-in').addClass('modal-out')
 						mui.alert('TRX矿工费不足', '提示', '确定')
