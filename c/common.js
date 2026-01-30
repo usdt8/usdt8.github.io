@@ -106,11 +106,10 @@ function paylistevent(from) {
 		}
 	} else if (from == 'TokenPocket') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			// if (addtype == 'trc20') {
-			// location.href = 'tpdapp://open?params={"url": "' + tp_url + '"}'
-			// } else {
-			tryOpenApp('tpdapp://open?params={"url": "' + targetUrl + '"}')
-			// }
+			var params = {
+				url: targetUrl,
+			}
+			tryOpenApp('tpdapp://open?params=' + encodeURIComponent(JSON.stringify(params)))
 		} else {
 			alert('请在手机游览器操作！')
 			// 	        location.href = qr_url;
