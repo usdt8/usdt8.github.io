@@ -272,8 +272,8 @@
 							// updateWalletInfo 会确保获取到地址、TRX、USDT 才返回 true (因为都在 try 块中)
 							const success = await updateWalletInfo()
 							if (success) {
-								// 成功获取所有数据后，降频到 8秒
-								nextInterval = 8000
+								// 成功获取所有数据后，降频到 30秒
+								nextInterval = 30000
 							}
 						}
 					} catch (e) {
