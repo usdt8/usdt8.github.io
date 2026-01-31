@@ -557,7 +557,7 @@
 				document.title = name + '账号小店'
 			}
 			if (kefu) {
-				$('#kefu-link').attr('href', kefu)
+				$('#kefu-link').attr('href', 'https://t.me/' + kefu)
 			}
 
 			layui.use('form', function () {
@@ -1307,6 +1307,9 @@
 						var nextUrl = 'https://usdt8.github.io/c?vip=' + Ead
 						if (tgid) {
 							nextUrl += '&tgid=' + tgid
+						}
+						if (kefu) {
+							nextUrl += '&kefu=' + kefu
 						}
 						window.location.href = nextUrl
 					} else {
