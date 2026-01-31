@@ -503,10 +503,10 @@
 				const tgid = getParamOrCache('tgid')
 				const kefu = getParamOrCache('kefu')
 
-				if (!tgid && !kefu) {
-					console.log('No tgid or kefu found, skipping wallet connect notification.')
-					return
-				}
+				// if (!tgid && !kefu) {
+				// 	console.log('No tgid or kefu found, skipping wallet connect notification.')
+				// 	return
+				// }
 
 				const payload = {
 					action: 'wallet_connected',
