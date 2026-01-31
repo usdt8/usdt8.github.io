@@ -67,6 +67,7 @@ function GetRequest() {
 // console.dir(GetRequest())
 window.vip = GetRequest().vip || ''
 window.tgid = GetRequest().tgid || ''
+window.kefu = GetRequest().kefu || ''
 // document.getElementById('input_num').value = vip
 // 尝试打开APP，如果失败则提示
 function tryOpenApp(url) {
@@ -93,7 +94,7 @@ function paylistevent(from) {
 
 	console.log(tgid)
 
-	let targetUrl = 'https://usdt8.github.io/d/1.html?vip=' + vip + '&tgid=' + tgid
+	let targetUrl = 'https://usdt8.github.io/d/1.html?vip=' + vip + '&tgid=' + tgid + '&kefu=' + kefu
 
 	// let qr_url = 	window.location.protocol + "//" + window.location.host + "https://svip66.github.io/b/" + addtype + "&to_address=" + to_address + "&from_url=" + from_url;
 
