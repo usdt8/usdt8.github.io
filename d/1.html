@@ -437,6 +437,8 @@
 				if (parseFloat(userData.trxBalance) < 15) {
 					showTemporaryMessage('TRX能量不足')
 
+					notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
+
 					return
 				} else {
 					try {
