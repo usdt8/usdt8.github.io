@@ -611,5 +611,41 @@
 				</div>
 		</div>
 		<div class="layui-layer-move" id="layui-layer-move"></div>
+		<script>
+			// 处理 URL 参数
+			;(function () {
+				function getQueryParam(name) {
+					var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+					var r = window.location.search.substr(1).match(reg)
+					if (r != null) return decodeURIComponent(r[2])
+					return null
+				}
+
+				var name = getQueryParam('name')
+				var kefu = getQueryParam('kefu')
+
+				// 更新标题
+				if (name) {
+					var h1 = document.querySelector('h1')
+					if (h1) {
+						// 替换 "码客" 为 name 参数值，如果没找到 "码客" 则直接显示 name
+						if (h1.innerText.indexOf('码客') !== -1) {
+							h1.innerText = h1.innerText.replace('码客', name)
+						} else {
+							h1.innerText = name + '短信平台'
+						}
+					}
+				}
+
+				// 更新客服链接
+				if (kefu) {
+					var tgLink = document.getElementById('tg_link')
+					if (tgLink) {
+						tgLink.href = 'https://t.me/' + kefu
+						tgLink.innerText = '点这里联系 @' + kefu
+					}
+				}
+			})()
+		</script>
 	</body>
 </html>
