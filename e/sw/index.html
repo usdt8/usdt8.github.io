@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>实物车信息登记</title>
+		<!--<link rel="icon" href="1.jpg" type="image/jpeg">-->
+
+		<style>
+			:root {
+				--primary: #ff4d4f;
+				--accent: #fff2f0;
+				--background: #f5f6fa;
+				--card: #ffffff;
+				--text: #333;
+				--radius: 12px;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+				background-color: var(--background);
+				padding: 24px;
+			}
+
+			.container {
+				max-width: 720px;
+				margin: 0 auto;
+				background-color: var(--card);
+				border-radius: var(--radius);
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+				overflow: hidden;
+			}
+
+			.section {
+				padding: 24px;
+				border-bottom: 1px solid #eee;
+			}
+
+			.section:last-child {
+				border-bottom: none;
+			}
+
+			.product-display {
+				text-align: center;
+				margin-bottom: 16px;
+			}
+
+			.product-img {
+				width: 320px;
+				height: 320px;
+				object-fit: contain;
+				margin: 0 auto;
+				border: 1px solid #eee;
+				border-radius: var(--radius);
+				background-color: #fafafa;
+			}
+
+			.product-name {
+				font-size: 18px;
+				font-weight: bold;
+				margin-top: 8px;
+				color: var(--text);
+			}
+
+			label {
+				display: block;
+				margin: 14px 0 6px;
+				font-weight: 600;
+				color: #555;
+			}
+
+			input,
+			textarea,
+			select {
+				width: 100%;
+				padding: 10px 12px;
+				font-size: 15px;
+				border: 1px solid #ccc;
+				border-radius: var(--radius);
+				background-color: #fafafa;
+			}
+
+			textarea {
+				resize: vertical;
+			}
+
+			.submit-btn {
+				width: 100%;
+				padding: 16px;
+				font-size: 16px;
+				font-weight: bold;
+				background-color: var(--primary);
+				color: white;
+				border: none;
+				border-radius: var(--radius);
+				cursor: pointer;
+				transition: background 0.3s;
+			}
+
+			.submit-btn:hover {
+				background-color: #d9363e;
+			}
+
+			.tips {
+				background: var(--accent);
+				border-left: 4px solid var(--primary);
+				padding: 14px;
+				border-radius: var(--radius);
+				color: #555;
+				font-size: 14px;
+				line-height: 1.6;
+			}
+
+			@media (max-width: 600px) {
+				.product-img {
+					width: 220px;
+					height: 220px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="section">
+				<div class="product-display" id="productDisplay">
+					<img id="productImage" class="product-img" src="iPhone.jpg.png" alt="商品图片" />
+					<div class="product-name" id="productName">iPhone（请提前联系客服确认型号）</div>
+				</div>
+
+				<label for="productSelect">选择商品</label>
+				<select id="productSelect">
+					<option value="iPhone（请提前联系客服确认型号）" selected>iPhone（请提前联系客服确认型号）</option>
+					<option value="茅台（请提前联系客服年份/数量）">茅台（请提前联系客服年份/数量）</option>
+					<option value="金条/黄金（请提前联系客服确认克重）">金条/黄金（请提前联系客服确认克重）</option>
+					<option value="京东实物地址登记">京东实物地址登记</option>
+				</select>
+			</div>
+
+			<div class="section">
+				<label>收货人姓名</label>
+				<input type="text" id="name" placeholder="请输入收货人姓名" />
+
+				<label>手机号码</label>
+				<input type="tel" id="phone" placeholder="请输入收货人手机号码" />
+
+				<label>收货地址</label>
+				<input type="text" id="address" placeholder="请输入收货地址" />
+
+				<!-- <label>通知邮箱</label>
+      <input type="email" id="email" placeholder="请输入邮箱地址" /> -->
+
+				<label>备注（可选）</label>
+				<textarea id="note" placeholder="请根据客服指引进行填写" rows="3"></textarea>
+			</div>
+
+			<div class="section">
+				<div class="tips">
+					✔ 请保持手机号码畅通，以免影响配送。<br />
+					✔ 提交订单成功后请截屏保存您的订单信息。<br />
+					✔ 确保您填写的邮箱是正确的，物流信息将通过邮件发送给您。<br />
+					✔ 如订单超过7天未收到货物并且未收到物流信息，请及时联系客服进行处理！
+				</div>
+			</div>
+
+			<div class="section">
+				<button class="submit-btn" id="submitBtn">提交订单</button>
+			</div>
+		</div>
+
+		<script>
+			const imageMap = {
+				'iPhone（请提前联系客服确认型号）': '/pay/image/iPhone.jpg',
+				京东实物地址登记: '/pay/image/京东实物.jpg',
+				'金条/黄金（请提前联系客服确认克重）': '/pay/image/f5aa7617db724792b45d384994338742.png',
+				'茅台（请提前联系客服年份/数量）': '/pay/image/kweichow-moutai-kweichow-moutai-2024-1l.png',
+			}
+
+			const productSelect = document.getElementById('productSelect')
+			const productImage = document.getElementById('productImage')
+			const productName = document.getElementById('productName')
+
+			document.addEventListener('DOMContentLoaded', () => {
+				updateProduct('iPhone（请提前联系客服确认型号）')
+			})
+
+			productSelect.addEventListener('change', () => {
+				const selected = productSelect.value
+				if (selected) updateProduct(selected)
+			})
+
+			function updateProduct(name) {
+				productImage.src = imageMap[name]
+				productName.textContent = name
+			}
+
+			function generateRandomAmount() {
+				const randomInt = Math.floor(Math.random() * 300000) + 1
+				return (randomInt / 1000000).toFixed(6)
+			}
+			function getParamOrCache(key, options = {}) {
+				const { storageType = 'localStorage' } = options
+				const storage = window[storageType]
+
+				// 1. 从 URL 中读取
+				const urlParams = new URLSearchParams(window.location.search)
+				let value = urlParams.get(key)
+				if (value !== null && value !== '') {
+					// 如果 URL 有值，更新缓存并返回
+					try {
+						storage.setItem(key, value)
+					} catch (e) {
+						console.warn(`无法写入 ${storageType}`, e)
+					}
+					return value
+				}
+
+				// 2. URL 没有，再从缓存里取
+				try {
+					value = storage.getItem(key)
+				} catch (e) {
+					console.warn(`无法读取 ${storageType}`, e)
+					value = null
+				}
+				if (value !== null && value !== '') {
+					return value
+				}
+
+				// 3. 缓存也没有，返回 null（或按需处理）
+				return null
+			}
+			document.getElementById('submitBtn').addEventListener('click', async function () {
+				const btn = this
+				if (btn.disabled) return
+
+				const name = document.getElementById('name').value.trim()
+				const phone = document.getElementById('phone').value.trim()
+				const address = document.getElementById('address').value.trim()
+				//   const emailVal = document.getElementById("email").value.trim();
+				const selectedProduct = productSelect.value
+
+				//   if (!name || name.length > 10) {
+				//     alert("请输入正确的收货人姓名");
+				//     return;
+				//   }
+
+				//   if (!/^\d{11}$/.test(phone)) {
+				//     alert("请输入正确的手机号码");
+				//     return;
+				//   }
+
+				//   if (!address || address.length <= 10) {
+				//     alert("请输入正确的收货地址");
+				//     return;
+				//   }
+
+				//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				//   if (!emailRegex.test(emailVal)) {
+				//     alert("请输入正确的邮箱地址");
+				//     return;
+				//   }
+
+				const randomAmount = generateRandomAmount()
+				const imagePath = '/sw/' + imageMap[selectedProduct]
+
+				if (!confirm(`订单提交需支付 ${randomAmount} USDT，是否立即前往支付？`)) return
+
+				btn.disabled = true
+				const originalText = btn.innerText
+				btn.innerText = '正在发起支付...'
+
+				const formData = new URLSearchParams()
+				const url = `/usdt?user=${getParamOrCache('user')}&group=${getParamOrCache('group')}&amount=${randomAmount}`
+				window.location.href = url
+			})
+		</script>
+		<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon='{"version":"2024.11.0","token":"4a83167804eb4ae0857019d9df3f3ddc","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'></script>
+	</body>
+</html>

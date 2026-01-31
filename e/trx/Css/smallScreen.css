@@ -1,0 +1,621 @@
+/* 小屏样式处理 */
+@media (max-width: 768px) {
+         .header {
+                  padding-left: 0;
+                  padding-right: 0;
+         }
+
+         .menu {
+                  width: auto !important;
+         }
+
+         .logo {
+                  width: 30%;
+                  display: flex;
+                  justify-content: center;
+         }
+
+         .logo_size {
+                  width: 32vw;
+                  height: 22vw;
+                  margin-left: 2vw;
+         }
+
+         .nav {
+                  width: 70%;
+                  font-size: 4.8vw;
+                  margin-top: 3vw;
+                  line-height: 12vw;
+         }
+
+         .nav ul {
+                  flex-wrap: wrap;
+                  justify-content: center;
+         }
+
+         .selectTimeAndPrice select {
+                  font-size: 4.6vw;
+         }
+
+         .title {
+                  margin-top: 10vw;
+                  width: auto !important;
+                  text-align: center;
+                  color: #ffffff;
+         }
+
+         .energyRentalDiv {
+                  margin-top: 0vw;
+
+         }
+
+         .energyRentalDiv h2,
+         .exchangeDiv h2,
+         .prestoreDiv h2,
+         .apiDiv h2 {
+                  font-size: 7vw;
+         }
+
+         .title h1 {
+                  font-size: 10vw;
+         }
+
+         .notice {
+                  margin-top: 12vw;
+                  padding: 0 1.5vw;
+                  width: 99%;
+                  line-height: 8vw;
+                  font-size: 4.4vw;
+                  text-align: left;
+                  text-align: justify;
+         }
+
+         .title p {
+                  font-size: 6vw;
+         }
+
+         .energyRentalDiv {
+                  width: 99%;
+                  flex-direction: column;
+         }
+
+         .exchangeDiv {
+                  width: 99%;
+                  flex-direction: column;
+         }
+
+         .prestoreDiv {
+                  width: 99%;
+                  flex-direction: column;
+         }
+
+         .apiDiv {
+                  width: 99%;
+                  flex-direction: column;
+         }
+
+         .exchangePrompt {
+                  font-size: 4.4vw;
+         }
+
+         .SelectPrompt {
+                  font-size: 4.4vw;
+         }
+
+         .descriptionDiv ul li {
+                  font-size: 4.4vw;
+         }
+
+         .addressTitle {
+                  margin-bottom: 0px;
+         }
+
+         .bishuPublick {
+                  width: 100%;
+                  padding: 3.5vw 0;
+         }
+
+         .bishucenter {
+                  border-left: none;
+                  border-bottom: 1px solid #dbdbdb;
+         }
+
+         #energyAddress,
+         #exchangeAddress,
+         #copyPrestoreAddress {
+                  font-size: 4.2vw;
+                  display: inline-block;
+                  width: 99%;
+         }
+
+         #rqCodeicon2,
+         #rqCodeicon3,
+         #rqCodeicon4 {
+                  width: 7vw;
+                  height: 7vw;
+                  margin-left: 2.5vw;
+         }
+
+         .conversion {
+                  width: 33vw;
+                  margin-bottom: 2vw;
+         }
+
+         .conversion span {
+                  font-size: 4.5vw;
+                  line-height: 9.4vw;
+         }
+
+         #price {
+                  font-size: 9.5vw;
+         }
+
+         .addressDiv {
+                  margin: 8vw 0 5vw 0;
+         }
+
+         .setpNumberSytle {
+                  font-size: 5.4vw;
+         }
+
+         .addressTitle {
+                  font-size: 4.6vw;
+         }
+
+         .bishuleft {
+                  order: 2;
+         }
+
+         .bishuleft ul li {
+                  line-height: 11vw;
+                  font-size: 4.4vw;
+         }
+
+         .bishuright {
+                  /* display: none; */
+                  border-left: none;
+                  border-bottom: 1px solid #dbdbdb;
+         }
+
+         #exchangeAddress {
+                  margin-top: 3.8vw;
+         }
+
+         .priceSpan {
+                  margin-bottom: 2.2vw;
+                  font-size: 5.8vw;
+                  line-height: 12vw;
+         }
+
+         .convertSpan {
+                  font-size: 4.4vw;
+         }
+
+         .selectTimeAndPrice {
+                  margin: 8vw 0 4vw 0;
+         }
+
+         .exchangeRateP,
+         .exchangeutRate {
+                  display: block;
+                  font-size: 4.8vw;
+         }
+
+         #iconName1,
+         #iconName2,
+         .iconName3,
+         .selectTitle {
+                  font-size: 5.8vw;
+         }
+
+         .exchangeItem1 {
+                  width: 40%;
+         }
+
+         .exchangeItem2 {
+                  margin: 0 4vw;
+                  width: 10%;
+         }
+
+         .iconFont1,
+         .iconFont2 {
+                  width: 10vw;
+                  height: 10vw;
+         }
+
+         .descriptionDiv span,
+         .calculatorTitle {
+                  font-size: 6vw;
+         }
+
+         .exchangeItem3 {
+                  width: 40%;
+         }
+
+         .exchangeItem4 {
+                  margin-left: 0px;
+                  border-left: none;
+                  width: 100%;
+                  padding: 5.4vw 0;
+         }
+
+         #exchangeInput1 {
+                  width: 100%;
+         }
+
+         #getCount {
+                  width: 100%;
+                  font-size: 4.5vw;
+         }
+
+         .prestoreLeft {
+                  flex-direction: column;
+                  width: 100%;
+                  padding: 0;
+         }
+
+         .selectMethod {
+                  font-size: 3.5vw;
+         }
+
+         .calculatorGetCount {
+                  font-size: 3.5vw;
+         }
+
+         .calculatoricon {
+                  width: 8vw;
+                  height: 8vw;
+         }
+
+         #selectAddrBtn {
+                  font-size: 4.6vw;
+         }
+
+         .prestoreRight {
+                  width: 100%;
+                  padding: 4vw 0 0 0;
+         }
+
+         #calculatorText {
+                  height: 12.6vw;
+                  font-size: 5.8vw;
+                  padding: 0 2vw;
+                  line-height: 12.6vw;
+         }
+
+         .calculator>input {
+                  height: 12vw;
+                  padding: 0 2vw;
+                  font-size: 5.5vw;
+                  line-height: 12vw;
+         }
+
+         .selectText {
+                  font-size: 4vw;
+                  line-height: 5.5vw;
+                  text-align: justify;
+         }
+
+         .descriptionDiv {
+                  width: 100%;
+                  padding: 4vw 0;
+         }
+
+         .prestoreAddress {
+                  width: 100%;
+                  padding: 4vw 0;
+         }
+
+         #copyPrestoreAddress {
+                  width: 100%;
+                  margin-top: 5vw;
+         }
+
+         .SelectDiv {
+                  width: 100%;
+                  padding: 4vw 0;
+                  margin-top: 4vw;
+         }
+
+         .apiTitleDiv {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  margin-top: 16px;
+         }
+
+         .apiTitleItem1,
+         .apiTitleItem2,
+         .apiTitleItem3 {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  padding: 16px;
+         }
+
+         .apiTitleItem1 {
+                  padding-top: 0px;
+         }
+
+         .apiTitleItem2 {
+                  border-left: none;
+                  border-right: none;
+                  border-top: 1px solid #dbdbdb;
+                  border-bottom: 1px solid #dbdbdb;
+         }
+
+         .aboutIndexPage,
+         .joinUsIndexPage,
+         .faqDiv {
+                  width: 100%;
+         }
+
+         .aboutIndexPage h3 {
+                  font-size: 8vw;
+         }
+
+         .aboutUl {
+                  margin-top: 10vw;
+         }
+
+         .aboutIndexPage>div {
+                  margin-top: 10vw;
+                  font-size: 4.9vw;
+                  text-align: justify;
+         }
+
+         .aboutUl li img {
+                  width: 16vw;
+                  height: 16vw;
+         }
+
+         .aboutUl li span {
+                  font-size: 5vw;
+         }
+
+         .aboutList {
+                  flex-direction: column;
+                  justify-content: space-between;
+                  align-items: flex-start;
+                  margin-top: 10vw;
+         }
+
+         .aboutList li {
+                  margin-bottom: 8vw;
+                  width: 100%;
+         }
+
+         .aboutList li img {
+                  width: 8vw;
+                  height: 8vw;
+         }
+
+         .aboutList li span {
+                  font-size: 4.5vw;
+                  color: #7a7d9e;
+                  text-align: justify;
+         }
+
+         .joinUsIndexPage h3 {
+                  font-size: 8vw;
+         }
+
+         .joinUsUl {
+                  flex-direction: column;
+                  margin-top: 10vw;
+         }
+
+         .joinUsUl li {
+                  width: 100%;
+                  padding: 0;
+                  margin-bottom: 9vw;
+         }
+
+         .joinUsUl li span {
+                  font-size: 4.9vw;
+                  color: #7a7d9e;
+         }
+
+         .joinUsUl li span i {
+                  font-weight: normal;
+         }
+
+         .joinUsUl li:nth-child(even) {
+                  padding-left: 0vw;
+         }
+
+         .joinUsUl li img {
+                  width: 10vw;
+                  height: 10vw;
+         }
+
+         .faqDiv h3 {
+                  font-size: 8vw;
+                  margin: 10vw 0 8vw 0;
+         }
+
+         .faqTitle img {
+                  width: 7.8vw;
+                  height: 7.8vw;
+                  margin-right: 1vw;
+         }
+
+         .faqTitle h4 {
+                  line-height: 8vw;
+                  font-size: 5vw;
+         }
+
+         .faqItem p {
+                  padding-left: 8.8vw;
+                  font-size: 4.9vw;
+                  text-align: justify;
+         }
+
+         .footDiv {
+                  flex-direction: column;
+                  flex-wrap: wrap;
+                  padding: 2vw 0;
+         }
+
+         .safeAuthentication img {
+                  width: 7vw;
+                  height: 7vw;
+         }
+
+         .safeAuthentication {
+                  margin-bottom: 2vw;
+         }
+
+         .safeAuthentication span,
+         .footDiv a {
+                  font-size: 4.4vw;
+         }
+
+         .footDiv a {
+                  font-size: 4.5vw;
+         }
+
+         #backTop,
+         #kefuIcon {
+                  width: 13vw;
+                  height: 13vw;
+         }
+
+         #backTop {
+                  bottom: 20vw;
+         }
+
+         #kefuIcon {
+                  bottom: 3vw;
+         }
+
+         #backTop img,
+         #kefuIcon img {
+                  width: 10vw;
+                  height: 10vw;
+         }
+
+         #telegramID {
+                  width: 80vw;
+                  padding: 5vw;
+                  box-shadow: 0px 2vw 3vw rgba(0, 0, 0, 0.5);
+         }
+
+         #addressQrcode {
+                  box-shadow: 0px 2vw 3vw rgba(0, 0, 0, 0.5);
+         }
+
+         .telegramTitle>span:first-of-type {
+                  font-size: 5vw;
+         }
+
+         .telegramTitle>span:nth-of-type(2) {
+                  font-size: 7vw;
+         }
+
+         .telegramDiv img {
+                  width: 20vw;
+                  height: 20vw;
+         }
+
+         .telegramDiv>p:first-of-type {
+                  margin: 10vw 0;
+                  font-size: 7vw;
+         }
+
+         #copyTelegram,
+         .telegramButton a {
+                  width: 28vw;
+                  height: 12vw;
+                  font-size: 4.5vw;
+                  line-height: 12vw;
+         }
+
+         #qrcodeTitle {
+                  font-size: 5vw;
+         }
+
+         #qrcodeImg {
+                  width: 60vw;
+                  height: 60vw;
+         }
+
+         #saveLocal,
+         #closeQrcode {
+                  padding: 8px 6px;
+                  font-size: 4.4vw;
+                  font-weight: bold;
+         }
+
+         .addressBalanceDiv {
+                  width: 80%;
+                  height: 80%;
+         }
+
+         .balanceTitle {
+                  font-size: 3.3vw;
+                  line-height: 8vw;
+         }
+
+         .meingxiText {
+                  font-size: 4vw;
+                  margin: 2vw 0;
+         }
+
+         #balance {
+                  font-size: 4.8vw;
+         }
+
+         .balanceList p {
+                  font-size: 3.5vw;
+                  padding: 2vw 0;
+                  line-height: 6vw;
+         }
+
+         .balanceList {
+                  top: 54%;
+                  left: 50%;
+                  width: 95%;
+                  height: 76%;
+         }
+
+         .closeBalance {
+                  width: 11vw;
+                  height: 11vw;
+                  font-size: 7vw;
+                  line-height: 11vw;
+         }
+
+         .agentsDiv {
+                  width: 99%;
+         }
+
+         .agentsDiv h2 {
+                  font-size: 7vw;
+         }
+
+         .ourResources,
+         .agentsRequirements {
+                  margin: 2.8vw 0;
+                  width: 100%;
+         }
+
+         .agentsSalaryDiv {
+                  flex-direction: column;
+         }
+
+         .ourResources>span,
+         .agentsRequirements>span {
+                  font-size: 3.9vw;
+                  font-weight: 400;
+         }
+
+         .agentsSalary>p,
+         .agentsRequire>p {
+                  font-size: 6vw;
+         }
+
+         .agentsText {
+                  font-size: 5vw;
+         }
+}

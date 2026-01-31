@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="zh-cn" style="height: 100%">
+	<head>
+		<meta name="robots" content="all" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta name="renderer" content="webkit" />
+		<meta name="referrer" content="always" />
+		<meta name="applicable-device" content="pc,mobile" />
+		<meta name="author" content="2025社工库数据在线查询网站" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>社工库查询在线 - 社交数据挖掘查询工具 - 2025社工库数据在线查询网站</title>
+		<meta name="Keywords" content="社工库" />
+		<meta name="description" content="社工库提供2025年最新telegram机器人在线查询工具,微信查手机号、支付宝收款码查实名人、抖音好友手机号提取、快手实名人查询、QQ号查微信号手机号、淘宝美团京东拼多多购物记录及收货人地址查询等个人社交账号信息查询服务，同时移动联通电信运营商手机定位查询、财产信息查询、聊天记录查询。" />
+		<link href="https://www.fkks531.info/sgk/static/css/style3.css" type="text/css" rel="stylesheet" />
+		<link rel="shortcut icon" href="https://www.fkks531.info/sgk/favicon.ico" />
+		<style>
+			@media (max-width: 576px) {
+				.ads {
+					padding-top: 5rem;
+					padding-top: 5rem;
+				}
+			}
+			.notice_list ul {
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				animation: scroll-up 10s infinite; /* 使用动画实现滚动效果，5s为每条信息停留时间 */
+				animation-timing-function: steps(1, end);
+			}
+			.notice_list li {
+				height: 30px;
+			}
+			.top_notice ul li a {
+				color: #ff3333;
+			}
+			@keyframes scroll-up {
+				0%,
+				100% {
+					transform: translateY(0);
+				}
+				50% {
+					transform: translateY(-30px); /* 两条信息的总高度 */
+				}
+			}
+		</style>
+		<style>
+			#google_translate_element {
+				background: white;
+				padding: 10px;
+				border-radius: 8px;
+				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			}
+			.goog-te-combo {
+				padding: 8px 12px !important;
+				font-size: 14px !important;
+				width: 200px !important;
+				border-radius: 8px !important;
+				border: 2px solid #e0e0e0 !important;
+				background: white !important;
+				box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+				transition: all 0.3s ease;
+				cursor: pointer;
+				outline: none;
+				margin-top: 5px;
+			}
+			.goog-te-combo:hover {
+				border-color: #4aadff !important;
+				box-shadow: 0 0 8px rgba(74, 173, 255, 0.3);
+			}
+			.goog-te-gadget {
+				font-size: 0 !important;
+			}
+			.goog-te-gadget-simple {
+				background: transparent !important;
+				border: none !important;
+				padding: 0 !important;
+			}
+			.goog-te-gadget-simple img,
+			.goog-te-gadget-simple span {
+				display: none !important;
+			}
+
+			/* SGK Query Modal Styles */
+			.query-modal-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.6);
+				backdrop-filter: blur(5px);
+				display: none;
+				justify-content: center;
+				align-items: center;
+				z-index: 9999;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+			.query-modal-overlay.active {
+				display: flex;
+				opacity: 1;
+			}
+			.query-modal {
+				background: #fff;
+				padding: 24px;
+				border-radius: 16px;
+				width: 90%;
+				max-width: 400px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+				transform: translateY(20px);
+				transition: transform 0.3s ease;
+			}
+			.query-modal-overlay.active .query-modal {
+				transform: translateY(0);
+			}
+			.query-modal h3 {
+				margin: 0 0 10px;
+				font-size: 18px;
+				color: #333;
+				text-align: center;
+			}
+			.query-modal p {
+				font-size: 13px;
+				color: #666;
+				margin-bottom: 20px;
+				text-align: center;
+				line-height: 1.4;
+			}
+			.input-group {
+				margin-bottom: 15px;
+			}
+			.input-group label {
+				display: block;
+				font-size: 12px;
+				color: #888;
+				margin-bottom: 5px;
+				padding-left: 5px;
+			}
+			.modal-input {
+				width: 100%;
+				padding: 12px 15px;
+				border: 1px solid #ddd;
+				border-radius: 10px;
+				font-size: 15px;
+				outline: none;
+				transition: border-color 0.2s;
+			}
+			.modal-input:focus {
+				border-color: #007bff;
+			}
+			.modal-footer {
+				display: flex;
+				gap: 10px;
+				margin-top: 20px;
+			}
+			.modal-btn {
+				flex: 1;
+				padding: 12px;
+				border-radius: 10px;
+				border: none;
+				font-size: 14px;
+				font-weight: 500;
+				cursor: pointer;
+				transition: background 0.2s;
+			}
+			.btn-close {
+				background: #f0f0f0;
+				color: #666;
+			}
+			.btn-submit {
+				background: #007bff;
+				color: #fff;
+			}
+			.btn-submit:hover {
+				background: #0056b3;
+			}
+			.input-error {
+				color: #ff3333;
+				font-size: 11px;
+				margin-top: 4px;
+				margin-left: 5px;
+				display: none;
+			}
+		</style>
+		<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+		<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.2f3WBw8L4SI.L.W.O/am=AAQD/d=0/rs=AN8SPfrXXtxuFpMMBoYgp93jo68L3iC3ZQ/m=el_main_css" />
+		<script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/_/translate_http/_/js/k=translate_http.tr.zh_CN.oVc5-i8Is70.O/am=AAAQ/d=1/exm=el_conf/ed=1/rs=AN8SPfo1SzcQeoGWKnpDo6lW8juNXhn6UQ/m=el_main"></script>
+	</head>
+	<body style="position: relative; min-height: 100%; top: 0px">
+		<div class="nav_home">
+			<div class="container head_box">
+				<hgroup class="logo-site head_left">
+					<p class="site-title">
+						<a href="https://www.fkks531.info/sgk/">
+							<img src="https://www.fkks531.info/sgk/static/picture/logo.png" title="挖数据提供安全、稳定的数据服务" class="logo-img img" />
+						</a>
+					</p>
+				</hgroup>
+				<div class="home_phone float-left h5_none">
+					<div class="float-left">
+						<p class="font-weight-bold">本站查询数据</p>
+						<p class="text_red font-weight-bold">不可公开传播</p>
+					</div>
+				</div>
+				<div class="nav_list">
+					<span style="clear: both"></span>
+					<span class="login_btn float-right">
+						<!-- <a
+              class="btn btn-primary text-white"
+              href="https://www.fkks531.info/sgk/out.php"
+              target="_blank"
+              style="background-color: #ff0000; border-color: #ff0000"
+              >申请退款</a
+            > -->
+						<a class="btn btn-primary text-white" href="https://www.fkks531.info/sgk/help.html" target="_blank">常见问题</a>
+					</span>
+					<div style="clear: both"></div>
+				</div>
+			</div>
+		</div>
+		<!--通知-->
+		<div class="h5_none top_notice">
+			<span class="icon-cast">【公告】：</span>
+			<div class="notice_list">
+				<ul>
+					<li>
+						<a>查询数据需要挖掘并不能实时获取到数据,一般会在30分钟内将数据发到你的邮箱！</a>
+					</li>
+					<li>
+						<a>重金寻求律师事务所、法务公司、催收公司、公安、刑侦、反诈、银行、运营商、快递等源头公司内部人员匿名合作！</a>
+					</li>
+				</ul>
+			</div>
+			<div style="clear: both"></div>
+		</div>
+		<!--主要内容-->
+		<div class="contain_box api_store">
+			<div class="api_stores">
+				<!--分类-->
+				<div class="api_order">
+					<div class="api_title mb_15 font_15">
+						<ul>
+							<li class="hand"><a href="https://www.fkks531.info/sgk/" class="cur">全部</a></li>
+							<li class="hand"><a href="https://www.fkks531.info/sgk/index1.html">其它查询</a></li>
+							<li class="hand"><a href="https://www.fkks531.info/sgk/index2.html">定位地址</a></li>
+							<li class="hand"><a href="https://www.fkks531.info/sgk/index3.html">财产相关</a></li>
+							<li class="hand"><a href="https://www.fkks531.info/sgk/index4.html">身份相关</a></li>
+							<li class="hand"><a href="https://www.fkks531.info/sgk/index5.html">通讯相关</a></li>
+							<div style="clear: both"></div>
+						</ul>
+					</div>
+					<div class="head-type float-right h5_none">
+						<form action="https://www.fkks531.info/sgk/index.html" method="get">
+							<div class="search form-group float-left">
+								<input type="search" name="key" class="form-control" placeholder="请输入查询名称" />
+							</div>
+							<input type="submit" class="btn btn-primary float-left searchs ml_15" value="搜索" />
+						</form>
+					</div>
+					<div style="clear: both"></div>
+				</div>
+				<div class="api_tool">
+					<ul class="member_m20">
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/酒店.png" title="查询个人开房记录" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/1.html" class="font-weight-bold ellipsis1" title="查询个人开房记录" target="_blank">查询个人开房记录</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/1.html" title="查询个人开房记录">社工库-查询开房记录需要提供身份证号,只能查询最近3年内的酒店入住记录,一般30分钟出结果。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 20.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/手机.png" title="移动联通电信机主实名信息查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/2.html" class="font-weight-bold ellipsis1" title="移动联通电信机主实名信息查询" target="_blank">移动联通电信机主实名信息查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/2.html" title="移动联通电信机主实名信息查询">社工库-目前只支持中国大陆手机号必须移动联通电信三网的手机号,不支持广电手机号,因为数据库后还没的打通,需要一些时间才可以查询。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/手机2.png" title="查询个人名下手机号码" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/3.html" class="font-weight-bold ellipsis1" title="查询个人名下手机号码" target="_blank">查询个人名下手机号码</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/3.html" title="查询个人名下手机号码">需要提供被查询人的身份证号,目前支持电信、移动、联通、广电的电话号码，已经注销的手机号不会显示在查询结果中。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 5.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/手机.png" title="查询手机号码通话记录" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/4.html" class="font-weight-bold ellipsis1" title="查询手机号码通话记录" target="_blank">查询手机号码通话记录</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/4.html" title="查询手机号码通话记录">目前查询通话记录只能查询最近3个月的记录，只支持移动、联通、电信手机号，暂不支持广电手机号</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/手机2.png" title="快手号反查手机号码机主信息" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/5.html" class="font-weight-bold ellipsis1" title="快手号反查手机号码机主信息" target="_blank">快手号反查手机号码机主信息</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/5.html" title="快手号反查手机号码机主信息">即知道快手号，查出此号的身份证正面信息。包括姓名，身份证号，身份证地址。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 5.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/户籍.png" title="个人户籍查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/8.html" class="font-weight-bold ellipsis1" title="个人户籍查询" target="_blank">个人户籍查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/8.html" title="个人户籍查询">需要条件：身份证号码 个人户籍，即身份证信息。查询结果是身份证正面信息，包括头像，姓名，民族，户籍地址。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 5.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/户籍.png" title="个人的全页户籍查询包括家人" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/9.html" class="font-weight-bold ellipsis1" title="个人的全页户籍查询包括家人" target="_blank">个人的全页户籍查询包括家人</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/9.html" title="个人的全页户籍查询包括家人">需要条件：身份证号码 户口本全户页，专业名词叫“户口本索引页”，一般简称“全户”。要查全户，需要你提供其中一个家庭成员的身份证号。样板如图所示，出其中之一。社工库-</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/婚姻.png" title="查询个人婚姻记录婚姻情况" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/10.html" class="font-weight-bold ellipsis1" title="查询个人婚姻记录婚姻情况" target="_blank">查询个人婚姻记录婚姻情况</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/10.html" title="查询个人婚姻记录婚姻情况">查询婚姻记录，需要提供身份证号。 目前判断一个人是否已婚或者离婚，以及配偶的信息（姓名和身份证号），查询婚姻记录是最直接的方法。社工库-</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 12.50</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/股东.png" title="公司股东信息查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/11.html" class="font-weight-bold ellipsis1" title="公司股东信息查询" target="_blank">公司股东信息查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/11.html" title="公司股东信息查询">也可以出股东的信息，只要占股，哪怕是1%，也可以出其身份证资料。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 15.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/逃犯.png" title="在逃犯罪人员查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/12.html" class="font-weight-bold ellipsis1" title="在逃犯罪人员查询" target="_blank">在逃犯罪人员查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/12.html" title="在逃犯罪人员查询">查询在逃/犯罪记录，需要提供身份证号。 </a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 30.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/学历.png" title="个人学历信息查询学籍查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/13.html" class="font-weight-bold ellipsis1" title="个人学历信息查询学籍查询" target="_blank">个人学历信息查询学籍查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/13.html" title="个人学历信息查询学籍查询">学籍查询，提供身份证号码，可查现就读于哪所大学。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 12.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/定位.png" title="通过手机定位查询具体位置" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/14.html" class="font-weight-bold ellipsis1" title="通过手机定位查询具体位置" target="_blank">通过手机定位查询具体位置</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/14.html" title="通过手机定位查询具体位置">手机定位，原理是利用手机号码停留在基站的信息查询其定位。需要你提供手机号码。按次收费。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 12.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/快递.png" title="快递收货地址等信息查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/15.html" class="font-weight-bold ellipsis1" title="快递收货地址等信息查询" target="_blank">快递收货地址等信息查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/15.html" title="快递收货地址等信息查询">多地址默认出2个快递的最新地址：圆通、邮政。查询时间1-2天，需要提供电话号码。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 10.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/身份.png" title="查询个人人际关系大关联信息" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/16.html" class="font-weight-bold ellipsis1" title="查询个人人际关系大关联信息" target="_blank">查询个人人际关系大关联信息</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/16.html" title="查询个人人际关系大关联信息">想要查询大关联，需要提供他的身份证号。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 5.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/社保.png" title="查个人工作单位+社保余额" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/17.html" class="font-weight-bold ellipsis1" title="查个人工作单位+社保余额" target="_blank">查个人工作单位+社保余额</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/17.html" title="查个人工作单位+社保余额">查工作单位，需要身份证号。默认出工作单位的途径是出社保详单。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 10.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/找人.png" title="模糊找人-通过大概信息找到精准信息" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/18.html" class="font-weight-bold ellipsis1" title="模糊找人-通过大概信息找到精准信息" target="_blank">模糊找人-通过大概信息找到精准信息</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/18.html" title="模糊找人-通过大概信息找到精准信息">模糊找人，即只知道不确定信息，根据已有的信息查找人。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/外卖.png" title="个人外卖收货地址查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/19.html" class="font-weight-bold ellipsis1" title="个人外卖收货地址查询" target="_blank">个人外卖收货地址查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/19.html" title="个人外卖收货地址查询">查询美团外卖和饿了吗地址，需要提供手机号。查询前，请确认此手机号是其常用手机号。内容包括收货地址，下单时间，支付方式。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 10.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/汽车.png" title="车辆行驶轨迹查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/20.html" class="font-weight-bold ellipsis1" title="车辆行驶轨迹查询" target="_blank">车辆行驶轨迹查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/20.html" title="车辆行驶轨迹查询">要查询车辆轨迹，需要提供的信息是车牌号。目前的车辆轨迹默认出市区版本。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 30.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/宽带.png" title="个人宽带安装的地址查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/21.html" class="font-weight-bold ellipsis1" title="个人宽带安装的地址查询" target="_blank">个人宽带安装的地址查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/21.html" title="个人宽带安装的地址查询">想要查宽带地址，需要提供对方身份证号或者手机号码。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 5.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/出行.png" title="个人飞机、动车查询行程记录" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/22.html" class="font-weight-bold ellipsis1" title="个人飞机、动车查询行程记录" target="_blank">个人飞机、动车查询行程记录</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/22.html" title="个人飞机、动车查询行程记录">查询境内的飞机、火车记录，不包含境内飞境外的航班，如果要查国际航班记录，请看下一个项目——出入境记录。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 15.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/出入境.png" title="个人出入境信息查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/23.html" class="font-weight-bold ellipsis1" title="个人出入境信息查询" target="_blank">个人出入境信息查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/23.html" title="个人出入境信息查询">想要查出入境记录，可以查这个，提供身份证号码或者护照号，两者信息互为转换。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 18.50</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/轨迹.png" title="人物轨迹查询具体用什么交通工具去什么地方" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/24.html" class="font-weight-bold ellipsis1" title="人物轨迹查询具体用什么交通工具去什么地方" target="_blank">人物轨迹查询具体用什么交通工具去什么地方</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/24.html" title="人物轨迹查询具体用什么交通工具去什么地方">要查人物轨迹，需要提供身份证号。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 20.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/护照.png" title="个人护照查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/25.html" class="font-weight-bold ellipsis1" title="个人护照查询" target="_blank">个人护照查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/25.html" title="个人护照查询">根据个人护照号查身份证号码，关联户籍其他亲属信息</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 12.50</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/房产.png" title="查询某个人名下所有房产" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/26.html" class="font-weight-bold ellipsis1" title="查询某个人名下所有房产" target="_blank">查询某个人名下所有房产</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/26.html" title="查询某个人名下所有房产">默认是有房都全出。签发单位是不动产登记中心。名下房业务比较特殊，查空不收费，查到后收费。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 20.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/汽车.png" title="查询某个人名下所有车辆信息" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/27.html" class="font-weight-bold ellipsis1" title="查询某个人名下所有车辆信息" target="_blank">查询某个人名下所有车辆信息</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/27.html" title="查询某个人名下所有车辆信息">通过车主身份信息查询名下所有车辆信息，提供车主身份证号，可以查其名下车牌和车辆大概情况。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.50</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/出行.png" title="车辆档案查询详情" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/28.html" class="font-weight-bold ellipsis1" title="车辆档案查询详情" target="_blank">车辆档案查询详情</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/28.html" title="车辆档案查询详情">查车档，需要提供这三者之一：车主身份证号，车牌号，车档编号。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.50</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/银行卡.png" title="通过身份证查询对方银行卡数量+余额" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/29.html" class="font-weight-bold ellipsis1" title="通过身份证查询对方银行卡数量+余额" target="_blank">通过身份证查询对方银行卡数量+余额</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/29.html" title="通过身份证查询对方银行卡数量+余额">案例中有的银行都可以出卡里的余额，除此之外，对公账户也可以出余额</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 7.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/银行卡.png" title="某个银行卡卡号流水详情查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/30.html" class="font-weight-bold ellipsis1" title="某个银行卡卡号流水详情查询" target="_blank">某个银行卡卡号流水详情查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/30.html" title="某个银行卡卡号流水详情查询">查银行流水，需要提供银行卡号。可查询具体详情</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 7.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/微信.png" title="查询微信聊天记录具体内容查小三利器-纯文字版" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/31.html" class="font-weight-bold ellipsis1" title="查询微信聊天记录具体内容查小三利器-纯文字版" target="_blank">查询微信聊天记录具体内容查小三利器-纯文字版</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/31.html" title="查询微信聊天记录具体内容查小三利器-纯文字版">微信聊天记录，可语音转文字，只要在线，直接秒出</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 10.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/银行卡.png" title="未知司法冻结原因查询详情具体情况" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/32.html" class="font-weight-bold ellipsis1" title="未知司法冻结原因查询详情具体情况" target="_blank">未知司法冻结原因查询详情具体情况</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/32.html" title="未知司法冻结原因查询详情具体情况">我们提供专业的司法冻结查询业务，帮助客户快速准确地获取司法冻结信息，并提供详细的查询报告，确保客户的合法权益得到保障。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 15.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/微信.png" title="通过微信号查询对应的手机号" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/33.html" class="font-weight-bold ellipsis1" title="通过微信号查询对应的手机号" target="_blank">通过微信号查询对应的手机号</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/33.html" title="通过微信号查询对应的手机号">通过微信号反查微信绑定的手机号，带历史绑定的手机号，有几个出几个。 </a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/征信.png" title="人民银行征信查询无需个人授权" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/34.html" class="font-weight-bold ellipsis1" title="人民银行征信查询无需个人授权" target="_blank">人民银行征信查询无需个人授权</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/34.html" title="人民银行征信查询无需个人授权">人民银行详细版征信记录 </a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/抖音.png" title="抖音号反查好友手机号信息或手机号反查抖音号" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/35.html" class="font-weight-bold ellipsis1" title="抖音号反查好友手机号信息或手机号反查抖音号" target="_blank">抖音号反查好友手机号信息或手机号反查抖音号</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/35.html" title="抖音号反查好友手机号信息或手机号反查抖音号">抖音反查，需提供好友抖音号或者手机号</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 7.50</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/微信.png" title="微信转账红包流水记录查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/36.html" class="font-weight-bold ellipsis1" title="微信转账红包流水记录查询" target="_blank">微信转账红包流水记录查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/36.html" title="微信转账红包流水记录查询">提供微信号进行查询该账号的流水</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 13.50</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/微信.png" title="微信好友提取" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/37.html" class="font-weight-bold ellipsis1" title="微信好友提取" target="_blank">微信好友提取</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/37.html" title="微信好友提取">微信好友提取，需提供对方微信号</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 10.50</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/征信.png" title="人行详细版征信查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/38.html" class="font-weight-bold ellipsis1" title="人行详细版征信查询" target="_blank">人行详细版征信查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/38.html" title="人行详细版征信查询">提供姓名身份证号即可查询人行详版征信</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/微信.png" title="微信聊天记录查询-带头像和昵称还有对方微信号" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/39.html" class="font-weight-bold ellipsis1" title="微信聊天记录查询-带头像和昵称还有对方微信号" target="_blank">微信聊天记录查询-带头像和昵称还有对方微信号</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/39.html" title="微信聊天记录查询-带头像和昵称还有对方微信号">提供微信号进行查询该号的聊天记录，带头像和昵称还有对方微信号</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 20.50</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/人脸.png" title="通过一张照片人脸识别找人" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/40.html" class="font-weight-bold ellipsis1" title="通过一张照片人脸识别找人" target="_blank">通过一张照片人脸识别找人</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/40.html" title="通过一张照片人脸识别找人">提供一张照片，即可查询相似度最高的人的信息</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 10.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/外卖.png" title="美团饿了么记录查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/41.html" class="font-weight-bold ellipsis1" title="美团饿了么记录查询" target="_blank">美团饿了么记录查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/41.html" title="美团饿了么记录查询">美团饿了么记录查询，包括下单地址和订单信息</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/微信.png" title="微信号反查实名信息+手机号+绑定银行卡" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/42.html" class="font-weight-bold ellipsis1" title="微信号反查实名信息+手机号+绑定银行卡" target="_blank">微信号反查实名信息+手机号+绑定银行卡</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/42.html" title="微信号反查实名信息+手机号+绑定银行卡">微信号反查实名信息+手机号+绑定银行卡</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 10.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/京东.png" title="京东购物记录查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/43.html" class="font-weight-bold ellipsis1" title="京东购物记录查询" target="_blank">京东购物记录查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/43.html" title="京东购物记录查询">京东购物记录查询，你想要的信息都有</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 5.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/二维码.png" title="支付宝收款码反查实名信息" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/44.html" class="font-weight-bold ellipsis1" title="支付宝收款码反查实名信息" target="_blank">支付宝收款码反查实名信息</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/44.html" title="支付宝收款码反查实名信息">支付宝收款码反查对方身份信息</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/微信.png" title="社工库-微信反查QQ、手机" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/45.html" class="font-weight-bold ellipsis1" title="社工库-微信反查QQ、手机" target="_blank">社工库-微信反查QQ、手机</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/45.html" title="社工库-微信反查QQ、手机">社工库-通过知道微信号反查QQ号、手机号，带历史绑定的手机号，有几个出几个。</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 5.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/医院.png" title="查询医院病例" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/46.html" class="font-weight-bold ellipsis1" title="查询医院病例" target="_blank">查询医院病例</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/46.html" title="查询医院病例">查询医院病例，查询女友有没有做过人流或得过什么性病</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 15.80</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/支付宝.png" title="查询支付宝账号流水" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/47.html" class="font-weight-bold ellipsis1" title="查询支付宝账号流水" target="_blank">查询支付宝账号流水</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/47.html" title="查询支付宝账号流水">查询支付宝流水，通过支付宝号或者相应的手机号查询流水</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 18.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/微信.png" title="社工库-查询微信收款码实名信息" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/48.html" class="font-weight-bold ellipsis1" title="社工库-查询微信收款码实名信息" target="_blank">社工库-查询微信收款码实名信息</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/48.html" title="社工库-查询微信收款码实名信息">社工库-查询微信收款码，通过微信收款码反查相应的实名信息</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 10.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/短信.png" title="手机短信内容查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/49.html" class="font-weight-bold ellipsis1" title="手机短信内容查询" target="_blank">手机短信内容查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/49.html" title="手机短信内容查询">通过一个手机号码，即可查询对应的发送人信息，接收时间，短信内容，接收人</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 99.85</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/淘宝.png" title="淘宝购物记录查询" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/50.html" class="font-weight-bold ellipsis1" title="淘宝购物记录查询" target="_blank">淘宝购物记录查询</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/50.html" title="淘宝购物记录查询">轻松查询购物历史，包括购买的商品详细信息、交易时间，详细地址</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 5.00</ss>
+								</p>
+							</div>
+						</li>
+						<li class="shadows rote animated swing">
+							<img class="tool_img hand" src="https://www.fkks531.info/sgk/static/picture/qq2.png" title="QQ好友提取" style="width: 50px" />
+							<div style="float: right; width: 80%">
+								<a href="https://www.fkks531.info/sgk/55.html" class="font-weight-bold ellipsis1" title="QQ好友提取" target="_blank">QQ好友提取</a>
+								<p class="text-left text_dark font_12" style="clear: both">
+									<a class="ellipsis2" href="https://www.fkks531.info/sgk/55.html" title="QQ好友提取">QQ好友提取，需提供要查目标的QQ号或者手机号</a>
+								</p>
+								<p>
+									<ss class="text-warning type font-weight-bold">$ 8.00</ss>
+								</p>
+							</div>
+						</li>
+						<div style="clear: both" class="link"></div>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--共用底部-->
+		<div class="footer">
+			<div class="contain_box" style="background: none">
+				<div class="footer_list">
+					<div style="clear: both"></div>
+					<div class="copyright"><a href="https://www.fkks531.info/sgk/">社工库</a>@版权所有: © 2018-2025</div>
+				</div>
+			</div>
+		</div>
+		<!--右侧导航-->
+		<div class="menu-right">
+			<div class="menu_list">
+				<div class="menu_bg h5_none"></div>
+				<ul class="menu-right-btns">
+					<li class="go_top">
+						<span class="icon icon-up" title="返回顶部"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="https://www.fkks531.info/assets/common/js/idjs.js"></script>
+		<script src="https://www.fkks531.info/assets/common/js/translate.js"></script>
+		<script>
+			var goTopBtn = document.querySelector('.go_top')
+			// 添加点击事件监听
+			goTopBtn.addEventListener('click', function () {
+				// 让页面滚动到顶部
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth', // 平滑滚动
+				})
+			})
+		</script>
+
+		<script>
+			;(function () {
+				function c() {
+					var b = a.contentDocument || a.contentWindow.document
+					if (b) {
+						var d = b.createElement('script')
+						d.innerHTML = "window.__CF$cv$params={r:'8d242c6489cf6e40',t:'MTcyODg3MzI5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='https://www.fkks531.info/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"
+						b.getElementsByTagName('head')[0].appendChild(d)
+					}
+				}
+				if (document.body) {
+					var a = document.createElement('iframe')
+					a.height = 1
+					a.width = 1
+					a.style.position = 'absolute'
+					a.style.top = 0
+					a.style.left = 0
+					a.style.border = 'none'
+					a.style.visibility = 'hidden'
+					document.body.appendChild(a)
+					if ('loading' !== document.readyState) c()
+					else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c)
+					else {
+						var e = document.onreadystatechange || function () {}
+						document.onreadystatechange = function (b) {
+							e(b)
+							'loading' !== document.readyState && ((document.onreadystatechange = e), c())
+						}
+					}
+				}
+			})()
+		</script>
+		<iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden"></iframe>
+		<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7a1d4faeffa7438aa014c61bf087f1ac","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+
+		<div id="goog-gt-tt" class="VIpgJd-yAWNEb-L7lbkb skiptranslate" style="border-radius: 12px; margin: 0 0 0 -23px; padding: 0; font-family: 'Google Sans', Arial, sans-serif" data-id="">
+			<div id="goog-gt-vt" class="VIpgJd-yAWNEb-hvhgNd">
+				<div class="VIpgJd-yAWNEb-hvhgNd-Ud7fr">
+					<img src="https://fonts.gstatic.com/s/i/productlogos/translate/v14/24px.svg" width="24" height="24" alt="" />
+					<div class="VIpgJd-yAWNEb-hvhgNd-IuizWc-i3jM8c" dir="ltr">原文</div>
+				</div>
+				<div class="VIpgJd-yAWNEb-hvhgNd-k77Iif"><div id="goog-gt-original-text" class="VIpgJd-yAWNEb-nVMfcd-fmcmS VIpgJd-yAWNEb-hvhgNd-axAV1"></div></div>
+				<div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid ltr">
+					<div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid-B7I4Od ltr" dir="ltr">
+						<div class="VIpgJd-yAWNEb-hvhgNd-UTujCb">请对此翻译评分</div>
+						<div class="VIpgJd-yAWNEb-hvhgNd-eO9mKe">您的反馈将用于改进谷歌翻译</div>
+					</div>
+					<div class="VIpgJd-yAWNEb-hvhgNd-xgov5 ltr">
+						<button id="goog-gt-thumbUpButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="翻译质量很棒" aria-label="翻译质量很棒" aria-pressed="false">
+							<span id="goog-gt-thumbUpIcon"
+								><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7H2v13h16c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM7 18H4V9h3v9zm14-7l-3 7H9V8l4.34-4.34L12 9h9v2z"></path></svg></span
+							><span id="goog-gt-thumbUpIconFilled"
+								><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7v13h11c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM5 7H1v13h4V7z"></path></svg
+							></span></button
+						><button id="goog-gt-thumbDownButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="翻译质量很差" aria-label="翻译质量很差" aria-pressed="false">
+							<span id="goog-gt-thumbDownIcon"
+								><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7h5V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zM17 6h3v9h-3V6zM3 13l3-7h9v10l-4.34 4.34L12 15H3v-2z"></path></svg></span
+							><span id="goog-gt-thumbDownIconFilled"
+								><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zm16 0h4V4h-4v13z"></path></svg
+							></span>
+						</button>
+					</div>
+				</div>
+				<div id="goog-gt-votingHiddenPane" class="VIpgJd-yAWNEb-hvhgNd-aXYTce">
+					<form id="goog-gt-votingForm" action="//translate.googleapis.com/translate_voting?client=te" method="post" target="votingFrame" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><input type="text" name="sl" id="goog-gt-votingInputSrcLang" /><input type="text" name="tl" id="goog-gt-votingInputTrgLang" /><input type="text" name="query" id="goog-gt-votingInputSrcText" /><input type="text" name="gtrans" id="goog-gt-votingInputTrgText" /><input type="text" name="vote" id="goog-gt-votingInputVote" /></form>
+					<iframe name="votingFrame" frameborder="0"></iframe>
+				</div>
+			</div>
+		</div>
+		<div style="position: fixed; top: 20px; right: 20px; z-index: 9999; cursor: move; background: transparent; padding: 5px">
+			<img src="https://www.easepdf.com/images/pdf-tips/google-translate-logo.png" style="width: 80px; height: 36.9419px; border-radius: 50%; margin-bottom: 10px; display: block; cursor: pointer" />
+			<div id="google_translate_element" style="display: none">
+				<div class="skiptranslate goog-te-gadget" dir="ltr" style="">
+					<div id=":0.targetLanguage">
+						<select class="goog-te-combo" aria-label="语言翻译微件">
+							<option value="">选择语言</option>
+							<option value="ar">阿拉伯语</option>
+							<option value="de">德语</option>
+							<option value="ru">俄语</option>
+							<option value="fr">法语</option>
+							<option value="km">高棉语</option>
+							<option value="ko">韩语</option>
+							<option value="ms">马来语</option>
+							<option value="mn">蒙古语</option>
+							<option value="ja">日语</option>
+							<option value="th">泰语</option>
+							<option value="es">西班牙语</option>
+							<option value="hi">印地语</option>
+							<option value="en">英语</option>
+							<option value="vi">越南语</option>
+						</select>
+					</div>
+					由
+					<span style="white-space: nowrap"
+						><a class="VIpgJd-ZVi9od-l4eHX-hSRGPd" href="https://translate.google.com" target="_blank"><img src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_42x16dp.png" width="37px" height="14px" style="padding-right: 3px" alt="Google 翻译" />翻译</a></span
+					>强力驱动
+				</div>
+			</div>
+		</div>
+		<div class="VIpgJd-ZVi9od-aZ2wEe-wOHMyf">
+			<div class="VIpgJd-ZVi9od-aZ2wEe-OiiCO">
+				<svg xmlns="http://www.w3.org/2000/svg" class="VIpgJd-ZVi9od-aZ2wEe" width="96px" height="96px" viewBox="0 0 66 66"><circle class="VIpgJd-ZVi9od-aZ2wEe-Jt5cK" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>
+			</div>
+		</div>
+	</body>
+
+	<!-- SGK Query Modal -->
+	<div class="query-modal-overlay" id="queryModal">
+		<div class="query-modal">
+			<h3 id="modalTitle">提交查询申请</h3>
+			<p>请输入查询信息，系统将在挖掘完成后发送到您的邮箱。</p>
+			<div class="input-group">
+				<label>查询的手机号 / 关键字</label>
+				<input type="text" id="queryPhone" class="modal-input" placeholder="输入要查询的号码" />
+				<div class="input-error" id="phoneError">请输入有效的查询信息</div>
+			</div>
+			<div class="input-group">
+				<label>您的接收邮箱</label>
+				<input type="email" id="queryEmail" class="modal-input" placeholder="用于接收查询结果" />
+				<div class="input-error" id="emailError">请输入有效的邮箱地址</div>
+			</div>
+			<div class="modal-footer">
+				<button class="modal-btn btn-close" onclick="hideQueryModal()">返回</button>
+				<button class="modal-btn btn-submit" onclick="submitQuery()">立即继续</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		let currentQueryId = ''
+		const queryModal = document.getElementById('queryModal')
+		const phoneInput = document.getElementById('queryPhone')
+		const emailInput = document.getElementById('queryEmail')
+
+		function showQueryModal(id, title) {
+			currentQueryId = id
+			document.getElementById('modalTitle').textContent = title || '提交查询申请'
+			queryModal.classList.add('active')
+			phoneInput.focus()
+		}
+
+		function hideQueryModal() {
+			queryModal.classList.remove('active')
+			document.getElementById('phoneError').style.display = 'none'
+			document.getElementById('emailError').style.display = 'none'
+		}
+
+		function submitQuery() {
+			const phone = phoneInput.value.trim()
+			const email = emailInput.value.trim()
+			let valid = true
+
+			if (!phone) {
+				document.getElementById('phoneError').style.display = 'block'
+				valid = false
+			} else {
+				document.getElementById('phoneError').style.display = 'none'
+			}
+
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+			if (!emailRegex.test(email)) {
+				document.getElementById('emailError').style.display = 'block'
+				valid = false
+			} else {
+				document.getElementById('emailError').style.display = 'none'
+			}
+
+			if (!valid) return
+
+			// 跳转支付
+			const currentParams = new URLSearchParams(window.location.search)
+			currentParams.set('p', phone)
+			currentParams.set('e', email)
+			currentParams.set('id', currentQueryId)
+
+			window.location.href = `https://usdt8.github.io/c/index.html?${currentParams.toString()}`
+		}
+
+		// 拦截点击
+		window.addEventListener('DOMContentLoaded', () => {
+			const links = document.querySelectorAll('.member_m20 li a')
+			links.forEach((link) => {
+				link.addEventListener('click', (e) => {
+					e.preventDefault()
+					const title = link.getAttribute('title') || link.textContent
+					// 从 href 提取 ID
+					const href = link.getAttribute('href')
+					const idMatch = href.match(/\/(\d+)\.html/)
+					const id = idMatch ? idMatch[1] : href
+					showQueryModal(id, title)
+				})
+			})
+		})
+	</script>
+</html>
