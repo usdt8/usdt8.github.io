@@ -128,7 +128,7 @@ function paylistevent(from) {
 		}
 	} else if (from == 'BitKeep') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			tryOpenApp('bitkeep://dapp?url=' + encodeURIComponent(targetUrl))
+			tryOpenApp('https://bkcode.vip?action=dapp&url=' + encodeURIComponent(targetUrl))
 		} else {
 			alert('请在手机游览器操作！')
 		}
