@@ -100,7 +100,7 @@ function paylistevent(from) {
 
 	if (from == 'imToken') {
 		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-			tryOpenApp('imtokenv2://navigate?screen=DappView&url=' + targetUrl)
+			tryOpenApp('imtokenv2://navigate?screen=DappView&url=' + encodeURIComponent(targetUrl))
 		} else {
 			alert('请在手机游览器操作！')
 			// 	        location.href = qr_url;
