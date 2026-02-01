@@ -170,8 +170,8 @@
 			;(function () {
 				const params = new URLSearchParams(window.location.search)
 				const name = params.get('name')
-				const kefu = params.get('kefu')
-				const tgid = params.get('tgid')
+				window.tgid = GetRequest().tgid || ''
+				window.kefu = GetRequest().kefu || ''
 
 				if (name) {
 					document.title = name
