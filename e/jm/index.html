@@ -766,6 +766,7 @@
 				let price = parseFloat(priceText.replace('$', ''))
 
 				const payParams = new URLSearchParams(window.location.search)
+				payParams.delete('name')
 				payParams.set('tgid', tgid)
 				payParams.set('kefu', kefu)
 				payParams.set('vip', price.toFixed(2))
