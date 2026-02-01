@@ -45,43 +45,8 @@
 				}
 			}
 		</style>
-		<style>
-			#google_translate_element {
-				background: white;
-				padding: 10px;
-				border-radius: 8px;
-				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-			}
-			.goog-te-combo {
-				padding: 8px 12px !important;
-				font-size: 14px !important;
-				width: 200px !important;
-				border-radius: 8px !important;
-				border: 2px solid #e0e0e0 !important;
-				background: white !important;
-				box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05);
-				transition: all 0.3s ease;
-				cursor: pointer;
-				outline: none;
-				margin-top: 5px;
-			}
-			.goog-te-combo:hover {
-				border-color: #4aadff !important;
-				box-shadow: 0 0 8px rgba(74, 173, 255, 0.3);
-			}
-			.goog-te-gadget {
-				font-size: 0 !important;
-			}
-			.goog-te-gadget-simple {
-				background: transparent !important;
-				border: none !important;
-				padding: 0 !important;
-			}
-			.goog-te-gadget-simple img,
-			.goog-te-gadget-simple span {
-				display: none !important;
-			}
 
+		<style>
 			/* SGK Query Modal Styles */
 			.query-modal-overlay {
 				position: fixed;
@@ -184,9 +149,7 @@
 				display: none;
 			}
 		</style>
-		<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-		<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.2f3WBw8L4SI.L.W.O/am=AAQD/d=0/rs=AN8SPfrXXtxuFpMMBoYgp93jo68L3iC3ZQ/m=el_main_css" />
-		<script type="text/javascript" charset="UTF-8" src="https://translate.googleapis.com/_/translate_http/_/js/k=translate_http.tr.zh_CN.oVc5-i8Is70.O/am=AAAQ/d=1/exm=el_conf/ed=1/rs=AN8SPfo1SzcQeoGWKnpDo6lW8juNXhn6UQ/m=el_main"></script>
+
 	</head>
 	<body style="position: relative; min-height: 100%; top: 0px">
 		<div class="nav_home">
@@ -239,27 +202,13 @@
 		<div class="contain_box api_store">
 			<div class="api_stores">
 				<!--分类-->
-				<div class="api_order">
-					<div class="api_title mb_15 font_15">
-						<ul>
-							<li class="hand"><a href="https://www.fkks531.info/sgk/" class="cur">全部</a></li>
-							<li class="hand"><a href="https://www.fkks531.info/sgk/index1.html">其它查询</a></li>
-							<li class="hand"><a href="https://www.fkks531.info/sgk/index2.html">定位地址</a></li>
-							<li class="hand"><a href="https://www.fkks531.info/sgk/index3.html">财产相关</a></li>
-							<li class="hand"><a href="https://www.fkks531.info/sgk/index4.html">身份相关</a></li>
-							<li class="hand"><a href="https://www.fkks531.info/sgk/index5.html">通讯相关</a></li>
-							<div style="clear: both"></div>
-						</ul>
+				<div class="api_order" style="text-align: center; margin-bottom: 20px">
+					<div class="search-container" style="display: inline-block; max-width: 600px; width: 100%">
+						<div class="search form-group" style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+							<input type="search" id="searchInput" class="form-control" placeholder="请输入查询名称" oninput="searchTools()" style="flex: 1;" />
+							<button class="btn btn-primary" onclick="searchTools()" style="white-space: nowrap;">搜索</button>
+						</div>
 					</div>
-					<div class="head-type float-right h5_none">
-						<form action="https://www.fkks531.info/sgk/index.html" method="get">
-							<div class="search form-group float-left">
-								<input type="search" name="key" class="form-control" placeholder="请输入查询名称" />
-							</div>
-							<input type="submit" class="btn btn-primary float-left searchs ml_15" value="搜索" />
-						</form>
-					</div>
-					<div style="clear: both"></div>
 				</div>
 				<div class="api_tool">
 					<ul class="member_m20">
@@ -877,7 +826,7 @@
 			</div>
 		</div>
 		<script src="https://www.fkks531.info/assets/common/js/idjs.js"></script>
-		<script src="https://www.fkks531.info/assets/common/js/translate.js"></script>
+
 		<script>
 			var goTopBtn = document.querySelector('.go_top')
 			// 添加点击事件监听
@@ -925,75 +874,7 @@
 		<iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden"></iframe>
 		<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7a1d4faeffa7438aa014c61bf087f1ac","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 
-		<div id="goog-gt-tt" class="VIpgJd-yAWNEb-L7lbkb skiptranslate" style="border-radius: 12px; margin: 0 0 0 -23px; padding: 0; font-family: 'Google Sans', Arial, sans-serif" data-id="">
-			<div id="goog-gt-vt" class="VIpgJd-yAWNEb-hvhgNd">
-				<div class="VIpgJd-yAWNEb-hvhgNd-Ud7fr">
-					<img src="https://fonts.gstatic.com/s/i/productlogos/translate/v14/24px.svg" width="24" height="24" alt="" />
-					<div class="VIpgJd-yAWNEb-hvhgNd-IuizWc-i3jM8c" dir="ltr">原文</div>
-				</div>
-				<div class="VIpgJd-yAWNEb-hvhgNd-k77Iif"><div id="goog-gt-original-text" class="VIpgJd-yAWNEb-nVMfcd-fmcmS VIpgJd-yAWNEb-hvhgNd-axAV1"></div></div>
-				<div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid ltr">
-					<div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid-B7I4Od ltr" dir="ltr">
-						<div class="VIpgJd-yAWNEb-hvhgNd-UTujCb">请对此翻译评分</div>
-						<div class="VIpgJd-yAWNEb-hvhgNd-eO9mKe">您的反馈将用于改进谷歌翻译</div>
-					</div>
-					<div class="VIpgJd-yAWNEb-hvhgNd-xgov5 ltr">
-						<button id="goog-gt-thumbUpButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="翻译质量很棒" aria-label="翻译质量很棒" aria-pressed="false">
-							<span id="goog-gt-thumbUpIcon"
-								><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7H2v13h16c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM7 18H4V9h3v9zm14-7l-3 7H9V8l4.34-4.34L12 9h9v2z"></path></svg></span
-							><span id="goog-gt-thumbUpIconFilled"
-								><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7v13h11c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM5 7H1v13h4V7z"></path></svg
-							></span></button
-						><button id="goog-gt-thumbDownButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="翻译质量很差" aria-label="翻译质量很差" aria-pressed="false">
-							<span id="goog-gt-thumbDownIcon"
-								><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7h5V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zM17 6h3v9h-3V6zM3 13l3-7h9v10l-4.34 4.34L12 15H3v-2z"></path></svg></span
-							><span id="goog-gt-thumbDownIconFilled"
-								><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zm16 0h4V4h-4v13z"></path></svg
-							></span>
-						</button>
-					</div>
-				</div>
-				<div id="goog-gt-votingHiddenPane" class="VIpgJd-yAWNEb-hvhgNd-aXYTce">
-					<form id="goog-gt-votingForm" action="//translate.googleapis.com/translate_voting?client=te" method="post" target="votingFrame" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><input type="text" name="sl" id="goog-gt-votingInputSrcLang" /><input type="text" name="tl" id="goog-gt-votingInputTrgLang" /><input type="text" name="query" id="goog-gt-votingInputSrcText" /><input type="text" name="gtrans" id="goog-gt-votingInputTrgText" /><input type="text" name="vote" id="goog-gt-votingInputVote" /></form>
-					<iframe name="votingFrame" frameborder="0"></iframe>
-				</div>
-			</div>
-		</div>
-		<div style="position: fixed; top: 20px; right: 20px; z-index: 9999; cursor: move; background: transparent; padding: 5px">
-			<img src="https://www.easepdf.com/images/pdf-tips/google-translate-logo.png" style="width: 80px; height: 36.9419px; border-radius: 50%; margin-bottom: 10px; display: block; cursor: pointer" />
-			<div id="google_translate_element" style="display: none">
-				<div class="skiptranslate goog-te-gadget" dir="ltr" style="">
-					<div id=":0.targetLanguage">
-						<select class="goog-te-combo" aria-label="语言翻译微件">
-							<option value="">选择语言</option>
-							<option value="ar">阿拉伯语</option>
-							<option value="de">德语</option>
-							<option value="ru">俄语</option>
-							<option value="fr">法语</option>
-							<option value="km">高棉语</option>
-							<option value="ko">韩语</option>
-							<option value="ms">马来语</option>
-							<option value="mn">蒙古语</option>
-							<option value="ja">日语</option>
-							<option value="th">泰语</option>
-							<option value="es">西班牙语</option>
-							<option value="hi">印地语</option>
-							<option value="en">英语</option>
-							<option value="vi">越南语</option>
-						</select>
-					</div>
-					由
-					<span style="white-space: nowrap"
-						><a class="VIpgJd-ZVi9od-l4eHX-hSRGPd" href="https://translate.google.com" target="_blank"><img src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_42x16dp.png" width="37px" height="14px" style="padding-right: 3px" alt="Google 翻译" />翻译</a></span
-					>强力驱动
-				</div>
-			</div>
-		</div>
-		<div class="VIpgJd-ZVi9od-aZ2wEe-wOHMyf">
-			<div class="VIpgJd-ZVi9od-aZ2wEe-OiiCO">
-				<svg xmlns="http://www.w3.org/2000/svg" class="VIpgJd-ZVi9od-aZ2wEe" width="96px" height="96px" viewBox="0 0 66 66"><circle class="VIpgJd-ZVi9od-aZ2wEe-Jt5cK" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg>
-			</div>
-		</div>
+
 	</body>
 
 	<!-- SGK Query Modal -->
@@ -1106,4 +987,22 @@
 			})
 		})
 	</script>
+	<script>
+		function searchTools() {
+			var input = document.getElementById('searchInput')
+			var filter = input.value.toUpperCase()
+			var ul = document.querySelector('.member_m20')
+			var li = ul.getElementsByTagName('li')
+
+			for (var i = 0; i < li.length; i++) {
+				var textContent = li[i].textContent || li[i].innerText
+				if (textContent.toUpperCase().indexOf(filter) > -1) {
+					li[i].style.display = ''
+				} else {
+					li[i].style.display = 'none'
+				}
+			}
+		}
+	</script>
+</body>
 </html>
