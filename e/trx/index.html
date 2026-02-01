@@ -495,8 +495,8 @@
 			// 重写下单逻辑
 			window.redeemNow = function () {
 				const params = new URLSearchParams(window.location.search)
-				const tgid = params.get('tgid') || '5866891166'
-				const kefu = params.get('kefu') || 'okk13'
+				const tgid = params.get('tgid')
+				const kefu = params.get('kefu')
 
 				let price = '0'
 				const event = window.event

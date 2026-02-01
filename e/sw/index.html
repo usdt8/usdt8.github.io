@@ -270,8 +270,8 @@
 
 				// 跳转支付
 				const currentParams = new URLSearchParams(window.location.search)
-				const tgid = currentParams.get('tgid') || '5866891166'
-				const kefu = currentParams.get('kefu') || 'okk13'
+				const tgid = currentParams.get('tgid')
+				const kefu = currentParams.get('kefu')
 
 				const payParams = new URLSearchParams(window.location.search)
 				// 移除 name 参数，不传递给支付页面
