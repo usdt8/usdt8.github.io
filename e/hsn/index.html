@@ -79,7 +79,8 @@
 			;(function () {
 				const params = new URLSearchParams(window.location.search)
 				const name = params.get('name')
-				const kefu = params.get('kefu') || 'caishen2024168'
+				window.tgid = GetRequest().tgid || ''
+				window.kefu = GetRequest().kefu || ''
 
 				if (name) {
 					document.title = name
@@ -106,6 +107,22 @@
 							link.setAttribute('href', href)
 						})
 					}
+
+					// 给所有跳转到 dx.html 的链接添加 tgid 和 kefu 参数
+					const links = document.querySelectorAll('a[href*="dx.html"]')
+					links.forEach((link) => {
+						let href = link.getAttribute('href')
+						const separator = href.indexOf('?') > -1 ? '&' : '?'
+
+						const params = []
+						if (window.tgid) params.push(`tgid=${window.tgid}`)
+						if (window.kefu) params.push(`kefu=${window.kefu}`)
+
+						if (params.length > 0) {
+							href += separator + params.join('&')
+							link.setAttribute('href', href)
+						}
+					})
 				}
 
 				const link = document.getElementById('kefu-link')
