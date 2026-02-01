@@ -560,6 +560,9 @@
 				const kefu = currentParams.get('kefu')
 
 				const payParams = new URLSearchParams(window.location.search)
+				// 移除 name 参数，不传递给支付页面
+				payParams.delete('name')
+
 				// payParams.set('email', email)
 				// payParams.set('id', selectedProductId)
 				payParams.set('tgid', tgid)

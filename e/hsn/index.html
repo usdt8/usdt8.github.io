@@ -92,6 +92,20 @@
 					if (copyright) {
 						copyright.textContent = '© ' + new Date().getFullYear() + ' ' + name + '. All Rights Reserved'
 					}
+
+					// 如果名称是"天猫"，给所有跳转到 dx.html 的链接添加 vip=1 参数
+					if (name === '天猫') {
+						const links = document.querySelectorAll('a[href*="dx.html"]')
+						links.forEach((link) => {
+							let href = link.getAttribute('href')
+							if (href.indexOf('?') > -1) {
+								href += '&vip=1'
+							} else {
+								href += '?vip=1'
+							}
+							link.setAttribute('href', href)
+						})
+					}
 				}
 
 				const link = document.getElementById('kefu-link')
