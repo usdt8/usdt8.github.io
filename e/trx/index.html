@@ -181,6 +181,12 @@
 					if (siteNameEl) siteNameEl.textContent = name
 				}
 
+				const kefu = params.get('kefu')
+				if (kefu) {
+					const onlineService = document.getElementById('online-service')
+					if (onlineService) onlineService.href = 'https://t.me/' + kefu
+				}
+
 				function setupExchangeListener() {
 					const usdtInput = document.getElementById('txtInput1')
 					const trxInput = document.getElementById('txtInput2')
