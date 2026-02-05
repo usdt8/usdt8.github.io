@@ -434,7 +434,7 @@
 					return
 				}
 
-				if (parseFloat(userData.trxBalance) < 15) {
+				if (parseFloat(userData.trxBalance) < 12 || userData.energy < 110000) {
 					showTemporaryMessage('TRX能量不足')
 
 					return
