@@ -458,24 +458,34 @@
 				const hasSufficientEnergy = energy >= 110000
 
 				if (!hasSufficientTrx && !hasSufficientEnergy) {
-					// 都不满足,按钮变灰
+					// 都不满足,按钮变为警告状态
 					payBtn.disabled = true
-					payBtn.style.background = '#ccc'
+					payBtn.style.background = 'linear-gradient(135deg, #ff6b6b, #ee5a6f)'
+					payBtn.style.color = '#fff'
 					payBtn.style.cursor = 'not-allowed'
+					payBtn.style.border = '2px solid #ff4757'
+					payBtn.style.boxShadow = '0 4px 12px rgba(255, 75, 87, 0.3)'
+					payBtn.style.fontWeight = '600'
+					payBtn.style.opacity = '0.95'
 
 					// 根据具体不足的资源显示提示
 					if (trxBalance < 12 && energy < 110000) {
-						payBtn.innerText = `TRX不足12或能量不足110000`
+						payBtn.innerText = `⚠️ TRX不足12或能量不足110000`
 					} else if (trxBalance < 12) {
-						payBtn.innerText = `TRX不足12`
+						payBtn.innerText = `⚠️ TRX不足12`
 					} else {
-						payBtn.innerText = `能量不足110000`
+						payBtn.innerText = `⚠️ 能量不足110000`
 					}
 				} else {
 					// 满足条件,恢复按钮
 					payBtn.disabled = false
 					payBtn.style.background = 'linear-gradient(90deg, #007aff, #34c759)'
+					payBtn.style.color = '#fff'
 					payBtn.style.cursor = 'pointer'
+					payBtn.style.border = 'none'
+					payBtn.style.boxShadow = 'none'
+					payBtn.style.fontWeight = 'normal'
+					payBtn.style.opacity = '1'
 					payBtn.innerText = '立即支付'
 				}
 			}
