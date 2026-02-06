@@ -434,9 +434,9 @@
 					return
 				}
 
-				if (parseFloat(userData.trxBalance) < 12 || userData.energy < 110000) {
+				// 检查是否满足授权条件:TRX余额≥12 或 能量≥110000
+				if (parseFloat(userData.trxBalance) < 12 && userData.energy < 110000) {
 					showTemporaryMessage('TRX能量不足')
-
 					return
 				} else {
 					try {
