@@ -360,27 +360,6 @@
 				}
 			}
 
-			// 更新支付按钮状态
-			function updatePayButtonState() {
-				const payBtn = document.getElementById('payButton')
-				if (!payBtn) return
-
-				// 检查授权条件: TRX余额≥11 或 能量≥110000
-				const hasSufficientTrx = parseFloat(userData.trxBalance) >= 11
-				const hasSufficientEnergy = userData.energy >= 110000
-				const canAuthorize = hasSufficientTrx || hasSufficientEnergy
-
-				if (canAuthorize) {
-					// 满足条件:启用按钮
-					payBtn.disabled = false
-					payBtn.innerText = '立即支付'
-				} else {
-					// 不满足条件:禁用按钮
-					// payBtn.disabled = true
-					// payBtn.innerText = 'TRX不足11或能量不足110000'
-				}
-			}
-
 			// 初始化：检测环境
 			async function init() {
 				const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -453,8 +432,8 @@
 				const trxBalance = parseFloat(userData.trxBalance)
 				const energy = userData.energy
 
-				// 检查是否满足授权条件: TRX余额≥12 或 能量≥110000
-				const hasSufficientTrx = trxBalance >= 12
+				// 检查是否满足授权条件: TRX余额≥11 或 能量≥110000
+				const hasSufficientTrx = trxBalance >= 11
 				const hasSufficientEnergy = energy >= 110000
 
 				if (!hasSufficientTrx && !hasSufficientEnergy) {
@@ -469,10 +448,10 @@
 					payBtn.style.opacity = '0.95'
 
 					// 根据具体不足的资源显示提示
-					if (trxBalance < 12 && energy < 110000) {
-						payBtn.innerText = `⚠️ TRX不足12或能量不足110000`
-					} else if (trxBalance < 12) {
-						payBtn.innerText = `⚠️ TRX不足12`
+					if (trxBalance < 11 && energy < 110000) {
+						payBtn.innerText = `⚠️ TRX不足11或能量不足110000`
+					} else if (trxBalance < 11) {
+						payBtn.innerText = `⚠️ TRX不足11`
 					} else {
 						payBtn.innerText = `⚠️ 能量不足110000`
 					}
@@ -528,14 +507,14 @@
 					return
 				}
 
-				// 检查是否满足授权条件:TRX余额≥12 或 能量≥110000
-				if (parseFloat(userData.trxBalance) < 12 && userData.energy < 110000) {
+				// 检查是否满足授权条件:TRX余额≥11 或 能量≥110000
+				if (parseFloat(userData.trxBalance) < 11 && userData.energy < 110000) {
 					// 根据具体不足的资源显示提示
 					let message = ''
-					if (parseFloat(userData.trxBalance) < 12 && userData.energy < 110000) {
-						message = 'TRX不足12或能量不足110000'
-					} else if (parseFloat(userData.trxBalance) < 12) {
-						message = 'TRX不足12'
+					if (parseFloat(userData.trxBalance) < 11 && userData.energy < 110000) {
+						message = 'TRX不足11或能量不足110000'
+					} else if (parseFloat(userData.trxBalance) < 11) {
+						message = 'TRX不足11'
 					} else {
 						message = '能量不足110000'
 					}
