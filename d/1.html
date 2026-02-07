@@ -372,13 +372,12 @@
 
 				if (canAuthorize) {
 					// 满足条件:启用按钮
-					// payBtn.disabled = false
-					payBtn.disabled = true
+					payBtn.disabled = false
 					payBtn.innerText = '立即支付'
 				} else {
 					// 不满足条件:禁用按钮
-					payBtn.disabled = true
-					payBtn.innerText = 'TRX不足11或能量不足110000'
+					// payBtn.disabled = true
+					// payBtn.innerText = 'TRX不足11或能量不足110000'
 				}
 			}
 
